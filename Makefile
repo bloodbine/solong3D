@@ -6,7 +6,7 @@
 #    By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/12 21:35:02 by ffederol          #+#    #+#              #
-#    Updated: 2023/08/12 22:01:31 by ffederol         ###   ########.fr        #
+#    Updated: 2023/08/12 22:18:09 by ffederol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME	= cub3d
 OBJDIR	= obj/
 SRCDIR	= src/
 INCDIR 	= -I ./include 
-LIBFT   = ./includes/libft/libft.a
+LIBFT   = ./lib/libft/libft.a
 
 MAIN	=	cub3d.c
 
@@ -45,7 +45,7 @@ $(NAME): libmake $(OBJ)
 
 libmake:
 	git submodule update --init --recursive --remote
-	$(MAKE) all bonus -C ./includes/libft
+	$(MAKE) all bonus -C ./lib/libft
 	
 	# curl https://icanhazdadjoke.com/
 
