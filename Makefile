@@ -6,18 +6,20 @@
 #    By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/12 21:35:02 by ffederol          #+#    #+#              #
-#    Updated: 2023/08/12 22:18:09 by ffederol         ###   ########.fr        #
+#    Updated: 2023/08/12 23:26:53 by ffederol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= cub3d
+NAME	= cub3D
 
-OBJDIR	= obj/
-SRCDIR	= src/
+OBJDIR	= mandatory/obj/
+SRCDIR	= mandatory/src/
 INCDIR 	= -I ./include 
 LIBFT   = ./lib/libft/libft.a
+LIBMLX42_DIR = ./lib/MLX42/build/
+LIBMLX42 = $(LIBMLX42_DIR)libmlx42.a
 
-MAIN	=	cub3d.c
+MAIN	=	cup3d \
 
 PARSER		=	
 
@@ -33,30 +35,33 @@ CC		= cc
 RMF		= rm -f
 RMRF	= rm -rf
 RMDIR	= rmdir
-CFLAGS	= -Wall -Wextra -Werror
-FFLAGS	= -glfw 
+CFLAGS	= #-Wall -Wextra -Werror
+FFLAGS	= -lglfw 
 
 $(OBJDIR)%.o: $(SRCDIR)%.c
 	mkdir -p $(@D)
 	$(CC) $(CFLAGS) $(INCDIR) -c $< -o $@
 
 $(NAME): libmake $(OBJ)
-	$(CC) $(OBJ) $(CFLAGS) $(LIBFT) -o $(NAME) $(FFLAGS)
+	$(CC) $(OBJ) $(CFLAGS) $(LIBFT) $(LIBMLX42) -o $(NAME) $(FFLAGS)
 
 libmake:
 	git submodule update --init --recursive --remote
 	$(MAKE) all bonus -C ./lib/libft
-	
+	@cd lib/MLX42 && cmake -B build && cmake --build build -j4
 	# curl https://icanhazdadjoke.com/
 
 clean:
 	$(RMRF) $(OBJ)
 	$(RMRF) $(OBJDIR)
+	@rm -rf lib/MLX42
+	@make clean -C ./lib/libft
 
 fclean: clean
 	$(RMF) $(NAME)
-	make fclean -C ./includes/libft
-
+	make fclean -C ./lib/libft
+	@rm -f ./lib/MLX42/build/libmlx42.a
+	
 re: fclean all
 
 all: $(NAME)
