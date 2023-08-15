@@ -6,7 +6,7 @@
 #    By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/12 21:35:02 by ffederol          #+#    #+#              #
-#    Updated: 2023/08/12 23:26:53 by ffederol         ###   ########.fr        #
+#    Updated: 2023/08/15 03:22:28 by ffederol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,9 @@ LIBFT   = ./lib/libft/libft.a
 LIBMLX42_DIR = ./lib/MLX42/build/
 LIBMLX42 = $(LIBMLX42_DIR)libmlx42.a
 
-MAIN	=	cup3d \
-
+MAIN	=	cub3d \
+			ray_calculations \
+			
 PARSER		=	
 
 RAYCASTER	=	

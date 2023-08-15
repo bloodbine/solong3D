@@ -6,7 +6,7 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 22:38:40 by ffederol          #+#    #+#             */
-/*   Updated: 2023/08/13 04:06:05 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/08/15 02:56:39 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,19 @@
 # include <math.h>
 # include <stdio.h>
 # include <fcntl.h>
+# include "player.h"
 
-typedef struct s_vector
-{
-	double	x;
-	double	y;
-}			t_vector;
+#define mapWidth 24
+#define mapHeight 24
+#define screenWidth 960
+#define screenHeight 640
 
-typedef struct s_player 
+extern int worldMap[mapHeight][mapWidth];
+typedef struct s_cupData
 {
-	t_vector	*pos;
-	t_vector	*dir; // N = (0|1), O = (1|0), S = (0|-1), W = (-1|0)
-	t_vector	*cam_plane;
-	int			hp;
 	mlx_t		*mlx;
-}			t_player;
+	t_player	*player;
+	t_raycaster	*rc;
+}			t_cupData;
 
 #endif
