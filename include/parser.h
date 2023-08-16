@@ -6,7 +6,7 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 22:38:40 by ffederol          #+#    #+#             */
-/*   Updated: 2023/08/15 22:35:06 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/08/16 20:03:36 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ typedef struct	s_parse
 	char			**worldMap; // or int[][]
 	t_int_vector	playerPos;
 	t_int_vector	playerDir; // (x|y)  N = (0|-1), O = (1|0), S = (0|1), W = (-1|0)
+	uint32_t		floor;
+	uint32_t		ceiling;
 }				t_parse;
 
 #endif
