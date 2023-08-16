@@ -6,7 +6,7 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 22:38:40 by ffederol          #+#    #+#             */
-/*   Updated: 2023/08/15 01:36:24 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/08/16 07:36:12 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ typedef struct s_raycaster
 	double 			camPlane2wallDist;
 	double			planeScaling;
 	double			tilePos;
-	mlx_texture_t* 	texture;
+	uint32_t		floor;
+	uint32_t		ceiling;
 }				t_raycaster;
 
 void	ft_raycast(void* param);
 void	calc_dist_next_side(t_player *player, t_raycaster *rc);
-void	calc_rayDist_euclidean(t_raycaster *rc);
+void	calc_raydist_euclidean(t_raycaster *rc);
 void	calc_raydist_perp(t_raycaster *rc);
-void	get_tilePos(t_player *player, t_raycaster *rc);
-
+void	get_tilepos(t_player *player, t_raycaster *rc);
 
 #endif

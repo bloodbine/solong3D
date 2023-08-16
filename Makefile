@@ -6,7 +6,7 @@
 #    By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/12 21:35:02 by ffederol          #+#    #+#              #
-#    Updated: 2023/08/15 03:22:28 by ffederol         ###   ########.fr        #
+#    Updated: 2023/08/16 05:59:50 by ffederol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,14 +20,17 @@ LIBMLX42_DIR = ./lib/MLX42/build/
 LIBMLX42 = $(LIBMLX42_DIR)libmlx42.a
 
 MAIN	=	cub3d \
-			ray_calculations \
+			movement \
 			
 PARSER		=	
 
-RAYCASTER	=	
+RAYCASTER	=	raycaster/raycaster \
+				raycaster/ray_calculations
 
+GRAPHICS	=	graphics/graphics \
+				graphics/draw_texture \
 
-SOURCE		= $(MAIN) $(PARSER) $(RAYCASTER)
+SOURCE		= $(MAIN) $(PARSER) $(RAYCASTER) $(GRAPHICS)
 
 SRC	= $(addprefix $(SRCDIR), $(addsuffix .c, $(SOURCE)))
 OBJ	= $(addprefix $(OBJDIR), $(addsuffix .o, $(SOURCE)))
@@ -36,7 +39,7 @@ CC		= cc
 RMF		= rm -f
 RMRF	= rm -rf
 RMDIR	= rmdir
-CFLAGS	= #-Wall -Wextra -Werror
+CFLAGS	= -Wall -Wextra -Werror -Ofast 
 FFLAGS	= -lglfw 
 
 $(OBJDIR)%.o: $(SRCDIR)%.c
