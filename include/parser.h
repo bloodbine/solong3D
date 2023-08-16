@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 22:38:40 by ffederol          #+#    #+#             */
-/*   Updated: 2023/08/15 22:35:06 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/08/16 16:19:44 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,23 @@
 
 # include "vector.h"
 
+typedef struct	s_rgb
+{
+	u_int8_t	r;
+	u_int8_t	g;
+	u_int8_t	b;
+}				t_rgb;
+
 typedef struct	s_parse
 {
-	char			**textures; //{./path_to_the_north_texture,./path_to_the_east_texture,./path_to_the_s_texture,./path_to_the_w_texture,./path_to_the_door_texture, NULL}
-	char			**worldMap; // or int[][]
+	char			*textures[5]; //{./path_to_the_north_texture,./path_to_the_east_texture,./path_to_the_s_texture,./path_to_the_w_texture,./path_to_the_door_texture, NULL}
+	char			**worldMap;
+	t_rgb			floor;
+	t_rgb			roof;
 	t_int_vector	playerPos;
 	t_int_vector	playerDir; // (x|y)  N = (0|-1), O = (1|0), S = (0|1), W = (-1|0)
 }				t_parse;
+
+t_parse	*parse(int argc, char **argv);
 
 #endif

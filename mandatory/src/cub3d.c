@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/16 04:38:19 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/08/16 16:45:44 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,15 @@ void	init_cupData(t_cupData *data, t_player *player, t_raycaster *rc)
 	init_textures(data);
 }
 
-int main(void)
+int main(int argc, char **argv)
 {
 	t_cupData	data;
 	t_player	player;
 	t_raycaster rc;
-	
-	//data.parser = parse(argc, argv);
+
+	argv = NULL;
+	argc = 0;
+	// data.parser = parse(argc, argv);
 	init_cupData(&data, &player, &rc);
 	
 	if (manage_graphics(&data))

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+         #
+#    By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/12 21:35:02 by ffederol          #+#    #+#              #
-#    Updated: 2023/08/16 08:17:43 by ffederol         ###   ########.fr        #
+#    Updated: 2023/08/16 16:03:45 by gpasztor         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ LIBMLX42 = $(LIBMLX42_DIR)libmlx42.a
 MAIN	=	cub3d \
 			movement \
 			
-PARSER		=	
+PARSER		=	parser/parser
 
 RAYCASTER	=	raycaster/raycaster \
 				raycaster/ray_calculations
@@ -39,7 +39,7 @@ CC		= cc
 RMF		= rm -f
 RMRF	= rm -rf
 RMDIR	= rmdir
-CFLAGS	= -Wall -Wextra -Werror -Ofast 
+CFLAGS	= -Wall -Wextra -Werror -g -fsanitize=address -Ofast 
 FFLAGS	= -lglfw 
 
 $(OBJDIR)%.o: $(SRCDIR)%.c
