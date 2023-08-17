@@ -6,7 +6,7 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 22:38:40 by ffederol          #+#    #+#             */
-/*   Updated: 2023/08/16 07:23:27 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/08/17 04:01:35 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "parser.h"
 # include "raycaster.h"
 # include "movement.h"
+# include "graphics.h"
 
 #define mapWidth 24
 #define mapHeight 24
@@ -31,7 +32,7 @@ extern int worldMap[mapHeight][mapWidth];
 typedef struct s_cupData
 {
 	mlx_t			*mlx;
-	mlx_image_t		*image;
+	mlx_image_t		*image[2];
 	t_parse			*parser;
 	t_player		*player;
 	t_raycaster		*rc;
@@ -51,7 +52,5 @@ typedef struct s_lineData
 	
 }			t_lineData;
 
-int		manage_graphics(t_cupData *data);
-void	draw_line(t_cupData *data);
 
 #endif

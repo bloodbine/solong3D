@@ -6,7 +6,7 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/16 07:13:14 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/08/17 04:04:55 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,25 @@ int	init_graphics(t_cupData *data)
 	printf("width %d	height %d\n", data->mlx->width, data->mlx->height);
 	mlx_set_window_pos(data->mlx, data->mlx->width / 6, data->mlx->height / 6);
 	//segfault when trying to resize window with mouse
-	if (!(data->image = mlx_new_image(data->mlx, data->mlx->width, data->mlx->height)))
+	if (!(data->image[0] = mlx_new_image(data->mlx, data->mlx->width, data->mlx->height)) || \
+		!(data->image[1] = mlx_new_image(data->mlx, data->mlx->width / 8, data->mlx->height / 4.5)))
 		return(mlx_close_window(data->mlx), puts(mlx_strerror(mlx_errno)), EXIT_FAILURE);
-	if (mlx_image_to_window(data->mlx, data->image, 0, 0) == -1)
+	if (mlx_image_to_window(data->mlx, data->image[0], 0, 0) == -1 || \
+		mlx_image_to_window(data->mlx, data->image[1], 10, 10) == -1)
 		return(mlx_close_window(data->mlx), puts(mlx_strerror(mlx_errno)), EXIT_FAILURE);
+	
 	return (EXIT_SUCCESS);
 }
 
-int	manage_graphics(t_cupData *data)
+int	manage_graphics(void *param)
 {
+	t_cupData *data;
+
+	data = (t_cupData *)param;
 	if (init_graphics(data))
 		return (EXIT_FAILURE);
 	mlx_loop_hook(data->mlx, ft_raycast, data);
+	mlx_loop_hook(data->mlx, ft_minimap, data);
 	mlx_loop_hook(data->mlx, ft_hook, data);
 	mlx_loop(data->mlx);
 	mlx_terminate(data->mlx);
