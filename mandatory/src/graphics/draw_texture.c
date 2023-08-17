@@ -6,7 +6,7 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/17 05:22:54 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/08/17 05:27:53 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	put_line(t_cupData *data, t_lineData *l, t_raycaster *rc)
 void	init_line(t_cupData *data, t_lineData *l, t_raycaster *rc)
 {
 	l->lineHeight = (int)(data->mlx->height / rc->camPlane2wallDist);
-	l->drawStart = (-l->lineHeight + data->mlx->height) / 2;
-	l->drawEnd = (l->lineHeight + data->mlx->height) / 2;
+	l->drawStart = -l->lineHeight / 2 + data->mlx->height / 2;
+	l->drawEnd = l->lineHeight / 2 + data->mlx->height / 2;
 	if (l->drawStart < 0)
 	{
 		l->drawStart = 0;
@@ -69,11 +69,8 @@ void	init_line(t_cupData *data, t_lineData *l, t_raycaster *rc)
 	l->x_tex = round(rc->tilePos * data->tex[rc->side]->width);
 	if (rc->side < 2)
 		l->x_tex = round((1 - rc->tilePos) * data->tex[rc->side]->width);
-	l->yinc = (double) data->tex[rc->side]->height \
-				/ (l->drawEnd - l->drawStart + 1);
-	if (l->yinc < 1)
-		l->yinc = 1/l->yinc;
-	l->y = -l->yinc;
+	l->yinc = (double)data->tex[rc->side]->height / (l->lineHeight + 1);
+	l->y = (l->drawStart - data->mlx->height / 2 + l->lineHeight / 2) * l->yinc;
 }
 
 void	draw_line(void *param)
