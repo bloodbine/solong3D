@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/16 16:45:44 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/08/18 12:56:18 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,19 +91,17 @@ void	init_cupData(t_cupData *data, t_player *player, t_raycaster *rc)
 int main(int argc, char **argv)
 {
 	t_cupData	data;
-	t_player	player;
-	t_raycaster rc;
+	// t_player	player;
+	// t_raycaster rc;
 
-	argv = NULL;
-	argc = 0;
-	// data.parser = parse(argc, argv);
-	init_cupData(&data, &player, &rc);
+	data.parser = parse(argc, argv);
+	// init_cupData(&data, &player, &rc);
 	
-	if (manage_graphics(&data))
-	{
-		//free stuff
-		return (EXIT_FAILURE);
-	}
-	else //free stuff
-		return (EXIT_SUCCESS);
+	// if (manage_graphics(&data))
+	// {
+	// 	//free stuff
+	// 	return (EXIT_FAILURE);
+	// }
+	// else //free stuff
+	// 	return (EXIT_SUCCESS);
 }

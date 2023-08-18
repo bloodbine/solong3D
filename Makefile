@@ -6,7 +6,7 @@
 #    By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/12 21:35:02 by ffederol          #+#    #+#              #
-#    Updated: 2023/08/16 16:03:45 by gpasztor         ###   ########.fr        #
+#    Updated: 2023/08/18 16:01:40 by gpasztor         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,6 @@ libmake:
 clean:
 	$(RMRF) $(OBJ)
 	$(RMRF) $(OBJDIR)
-	@rm -rf lib/MLX42
 	@make clean -C ./lib/libft
 
 fclean: clean

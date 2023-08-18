@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:26:50 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/16 17:33:15 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/08/18 15:57:55 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ char	**read_file(int fd)
 	while (1)
 	{
 		buff = get_next_line(fd);
-		ft_fprintf(2, "%s", buff);
 		if (buff != NULL)
 			line = ft_frstrjoin(line, buff, 1);
 		else
@@ -43,45 +42,55 @@ char	**read_file(int fd)
 	return (free(line), file);
 }
 
-t_rgb	sort_rgb(char *line)
+uint32_t	rgbtohex(int r, int g, int b, int a)
 {
-	t_rgb	rgb_val;
-	char	**split;
+	return (((r & 0xff) << 24) + ((g & 0xff) << 16) + ((b & 0xff) << 8) \
+	+ (a & 0xff));
+}
 
-	split = ft_split(line, ",");
-	free(line);
-	if (!split || !split[0] || !split[1] || !split[2])
-		parse_error("Invalid colour value");
-	rgb_val.r = ft_atoi(split[0]);
-	free(split[0]);
-	rgb_val.g = ft_atoi(split[1]);
-	free(split[1]);
-	rgb_val.b = ft_atoi(split[2]);
-	free(split[2]);
+uint32_t	sort_rgba(char	*line)
+{
+	char		**rgb;
+	uint32_t	rgba;
+	int			i;
+
+	rgb = ft_split(line + 1, ',');
+	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2] || rgb[3])
+		parse_error("Invalid value in RGB values");
+	rgba = rgbtohex(ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2]), 255);
+	i = 0;
+	while (rgb[i] != NULL)
+	{
+		free(rgb[i]);
+		i++;
+	}
+	free(rgb);
+	return (rgba);
 }
 
 void	sort_data(t_parse *data, char **file, int *found)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
 	while (file[i] != NULL)
 	{
 		if (ft_strncmp(file[i], "NO ", 3) == 0 && ++(*found))
 			data->textures[0] = ft_strtrim(file[i] + 2, " ");
-		if (ft_strncmp(file[i], "EA ", 3) == 0 && ++(*found))
+		else if (ft_strncmp(file[i], "EA ", 3) == 0 && ++(*found))
 			data->textures[1] = ft_strtrim(file[i] + 2, " ");
-		if (ft_strncmp(file[i], "SO ", 3) == 0 && ++(*found))
+		else if (ft_strncmp(file[i], "SO ", 3) == 0 && ++(*found))
 			data->textures[2] = ft_strtrim(file[i] + 2, " ");
-		if (ft_strncmp(file[i], "WE ", 3) == 0 && ++(*found))
+		else if (ft_strncmp(file[i], "WE ", 3) == 0 && ++(*found))
 			data->textures[3] = ft_strtrim(file[i] + 2, " ");
-		if (ft_strncmp(file[i], "F ", 3) == 0 && ++(*found))
-			
-		if (ft_strncmp(file[i], "C ", 3) == 0 && ++(*found))
-			
+		else if (ft_strncmp(file[i], "F ", 2) == 0 && ++(*found))
+			data->floor = sort_rgba(file[i]);
+		else if (ft_strncmp(file[i], "C ", 2) == 0 && ++(*found))
+			data->roof = sort_rgba(file[i]);
+		else if ((ft_strchr(file[i], '1') || ft_strchr(file[i], '0')) && *found == 6)
+			printf("Line: %d\n", i);
 		free(file[i]);
+		i++;
 	}
 }
 
@@ -92,6 +101,7 @@ t_parse	*parse(int argc, char **argv)
 	char	**file;
 	int		fd;
 
+	found = 0;
 	if (argc == 1)
 		parse_error("No map path given");
 	if (argc > 2)
@@ -105,5 +115,12 @@ t_parse	*parse(int argc, char **argv)
 		parse_error("Failed to open map file");
 	file = read_file(fd);
 	sort_data(&parsed_data, file, &found);
+	printf("TEST Found: %d\n", found);
+	printf("TEST NO: %s\n", parsed_data.textures[0]);
+	printf("TEST EA: %s\n", parsed_data.textures[1]);
+	printf("TEST SO: %s\n", parsed_data.textures[2]);
+	printf("TEST WE: %s\n", parsed_data.textures[3]);
+	printf("TEST F: 0x%06X\n", parsed_data.floor);
+	printf("TEST C: 0x%06X\n", parsed_data.roof);
 	return (NULL);
 }
