@@ -6,47 +6,11 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:26:50 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/18 15:57:55 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/08/20 11:31:45 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
-
-void	parse_error(char *error_message)
-{
-	write(STDERR_FILENO, "Error\n", 7);
-	write(STDERR_FILENO, error_message, ft_strlen(error_message));
-	write(STDERR_FILENO, "\n", 2);
-	exit(EXIT_FAILURE);
-}
-
-char	**read_file(int fd)
-{
-	char	**file;
-	char	*buff;
-	char	*line;
-
-	buff = ft_strdup("");
-	line = ft_strdup("");
-	while (1)
-	{
-		buff = get_next_line(fd);
-		if (buff != NULL)
-			line = ft_frstrjoin(line, buff, 1);
-		else
-			break ;
-		free(buff);
-	}
-	file = ft_split(line, '\n');
-	close(fd);
-	return (free(line), file);
-}
-
-uint32_t	rgbtohex(int r, int g, int b, int a)
-{
-	return (((r & 0xff) << 24) + ((g & 0xff) << 16) + ((b & 0xff) << 8) \
-	+ (a & 0xff));
-}
 
 uint32_t	sort_rgba(char	*line)
 {
@@ -68,37 +32,56 @@ uint32_t	sort_rgba(char	*line)
 	return (rgba);
 }
 
-void	sort_data(t_parse *data, char **file, int *found)
+void	sort_map(t_parse *data, int fd)
 {
-	int	i;
+	char	*map;
+	char	*buff;
 
-	i = 0;
-	while (file[i] != NULL)
+	buff = get_next_line(fd);
+	map = ft_strdup("");
+	while (buff != NULL)
 	{
-		if (ft_strncmp(file[i], "NO ", 3) == 0 && ++(*found))
-			data->textures[0] = ft_strtrim(file[i] + 2, " ");
-		else if (ft_strncmp(file[i], "EA ", 3) == 0 && ++(*found))
-			data->textures[1] = ft_strtrim(file[i] + 2, " ");
-		else if (ft_strncmp(file[i], "SO ", 3) == 0 && ++(*found))
-			data->textures[2] = ft_strtrim(file[i] + 2, " ");
-		else if (ft_strncmp(file[i], "WE ", 3) == 0 && ++(*found))
-			data->textures[3] = ft_strtrim(file[i] + 2, " ");
-		else if (ft_strncmp(file[i], "F ", 2) == 0 && ++(*found))
-			data->floor = sort_rgba(file[i]);
-		else if (ft_strncmp(file[i], "C ", 2) == 0 && ++(*found))
-			data->roof = sort_rgba(file[i]);
-		else if ((ft_strchr(file[i], '1') || ft_strchr(file[i], '0')) && *found == 6)
-			printf("Line: %d\n", i);
-		free(file[i]);
-		i++;
+		map = ft_frstrjoin(map, buff, 1);
+		map = ft_frstrjoin(map, "|", 1);
+		free(buff);
+		buff = get_next_line(fd);
 	}
+	data->worldMap = ft_split(map, '|');
+}
+
+void	sort_data(t_parse *data, int fd, int *found)
+{
+	char	*buff;
+
+	buff = get_next_line(fd);
+	while (buff != NULL)
+	{
+		if (*found == 6)
+			break ;
+		if (ft_strncmp(buff, "NO", 2) == 0 && ++(*found))
+			data->textures[0] = ft_strtrim(buff + 2, " \n");
+		else if (ft_strncmp(buff, "EA", 2) == 0 && ++(*found))
+			data->textures[1] = ft_strtrim(buff + 2, " \n");
+		else if (ft_strncmp(buff, "SO", 2) == 0 && ++(*found))
+			data->textures[2] = ft_strtrim(buff + 2, " \n");
+		else if (ft_strncmp(buff, "WE", 2) == 0 && ++(*found))
+			data->textures[3] = ft_strtrim(buff + 2, " \n");
+		else if (ft_strncmp(buff, "F", 1) == 0 && ++(*found))
+			data->floor = sort_rgba(buff);
+		else if (ft_strncmp(buff, "C", 1) == 0 && ++(*found))
+			data->roof = sort_rgba(buff);
+		free(buff);
+		buff = get_next_line(fd);
+	}
+	if (*found != 6)
+		parse_error("Missing required variables from file");
+	sort_map(data, fd);
 }
 
 t_parse	*parse(int argc, char **argv)
 {
 	t_parse	parsed_data;
 	int		found;
-	char	**file;
 	int		fd;
 
 	found = 0;
@@ -113,14 +96,14 @@ t_parse	*parse(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		parse_error("Failed to open map file");
-	file = read_file(fd);
-	sort_data(&parsed_data, file, &found);
-	printf("TEST Found: %d\n", found);
-	printf("TEST NO: %s\n", parsed_data.textures[0]);
-	printf("TEST EA: %s\n", parsed_data.textures[1]);
-	printf("TEST SO: %s\n", parsed_data.textures[2]);
-	printf("TEST WE: %s\n", parsed_data.textures[3]);
-	printf("TEST F: 0x%06X\n", parsed_data.floor);
-	printf("TEST C: 0x%06X\n", parsed_data.roof);
+	sort_data(&parsed_data, fd, &found);
 	return (NULL);
 }
+
+	// printf("TEST Found: %d\n", found);
+	// printf("TEST NO: %s\n", parsed_data.textures[0]);
+	// printf("TEST EA: %s\n", parsed_data.textures[1]);
+	// printf("TEST SO: %s\n", parsed_data.textures[2]);
+	// printf("TEST WE: %s\n", parsed_data.textures[3]);
+	// printf("TEST F: 0x%06X\n", parsed_data.floor);
+	// printf("TEST C: 0x%06X\n", parsed_data.roof);

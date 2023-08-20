@@ -6,7 +6,7 @@
 #    By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/12 21:35:02 by ffederol          #+#    #+#              #
-#    Updated: 2023/08/18 16:01:40 by gpasztor         ###   ########.fr        #
+#    Updated: 2023/08/20 11:13:21 by gpasztor         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ LIBMLX42 = $(LIBMLX42_DIR)libmlx42.a
 MAIN	=	cub3d \
 			movement \
 			
-PARSER		=	parser/parser
+PARSER		=	parser/parser \
+				parser/parser_utils
 
 RAYCASTER	=	raycaster/raycaster \
 				raycaster/ray_calculations
@@ -58,6 +59,7 @@ libmake:
 clean:
 	$(RMRF) $(OBJ)
 	$(RMRF) $(OBJDIR)
+	$(RMRF) $(LIBMLX42_DIR)
 	@make clean -C ./lib/libft
 
 fclean: clean

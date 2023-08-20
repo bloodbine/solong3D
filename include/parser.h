@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 22:38:40 by ffederol          #+#    #+#             */
-/*   Updated: 2023/08/18 11:13:34 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/08/20 11:03:40 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ typedef struct	s_parse
 	t_int_vector	playerDir; // (x|y)  N = (0|-1), O = (1|0), S = (0|1), W = (-1|0)
 }				t_parse;
 
-t_parse	*parse(int argc, char **argv);
+t_parse		*parse(int argc, char **argv);
+void		parse_error(char *error_message);
+uint32_t	rgbtohex(int r, int g, int b, int a);
 
 #endif
