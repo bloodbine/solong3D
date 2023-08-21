@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:26:50 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/20 11:31:45 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/08/20 15:23:28 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,28 @@ void	sort_map(t_parse *data, int fd)
 {
 	char	*map;
 	char	*buff;
+	int		currline;
+	int		maxline;
+	int		col;
 
 	buff = get_next_line(fd);
 	map = ft_strdup("");
+	maxline = 0;
+	col = 0;
 	while (buff != NULL)
 	{
+		currline = ft_strlen(buff);
+		if (currline > maxline)
+			maxline = currline;
 		map = ft_frstrjoin(map, buff, 1);
 		map = ft_frstrjoin(map, "|", 1);
 		free(buff);
 		buff = get_next_line(fd);
+		col++;
 	}
+	// printf("Line Test: %d %d\n", col, maxline);
 	data->worldMap = ft_split(map, '|');
+	padding(data, maxline, col);
 }
 
 void	sort_data(t_parse *data, int fd, int *found)
