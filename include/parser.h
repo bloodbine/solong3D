@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 22:38:40 by ffederol          #+#    #+#             */
-/*   Updated: 2023/08/20 15:12:06 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/08/21 15:42:31 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct	s_parse
 	t_int_vector	playerDir; // (x|y)  N = (0|-1), O = (1|0), S = (0|1), W = (-1|0)
 }				t_parse;
 
+int			character_check(char **map);
 void		padding(t_parse *data, size_t len, size_t col);
 t_parse		*parse(int argc, char **argv);
 void		parse_error(char *error_message);
