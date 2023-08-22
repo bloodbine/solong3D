@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 22:38:40 by ffederol          #+#    #+#             */
-/*   Updated: 2023/08/21 15:42:31 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/08/22 18:57:38 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,14 @@ typedef struct	s_parse
 	uint32_t		floor;
 	uint32_t		roof;
 	t_int_vector	playerPos;
-	t_int_vector	playerDir; // (x|y)  N = (0|-1), O = (1|0), S = (0|1), W = (-1|0)
+	t_int_vector	playerDir; // (x|y)  N = (0|-1), E = (1|0), S = (0|1), W = (-1|0)
 }				t_parse;
 
+uint32_t	sort_rgba(char	*line);
+void		sort_map(t_parse *data, int fd);
+void		sort_data(t_parse *data, int fd, int *found);
+void		find_player(t_parse *data);
+void		file_check(t_parse *data);
 int			character_check(char **map);
 void		padding(t_parse *data, size_t len, size_t col);
 t_parse		*parse(int argc, char **argv);

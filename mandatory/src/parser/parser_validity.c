@@ -6,11 +6,26 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:54:30 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/21 16:02:41 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/08/22 13:53:36 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
+
+void	file_check(t_parse *data)
+{
+	int	fd;
+	int	i;
+
+	i = -1;
+	while (++i < 4)
+	{
+		fd = open(data->textures[i], O_RDONLY);
+		if (fd == -1)
+			parse_error("Invalid texture file");
+		close(fd);
+	}
+}
 
 int	character_check(char **map)
 {

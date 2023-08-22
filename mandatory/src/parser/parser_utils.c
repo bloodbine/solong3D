@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:37:29 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/21 15:09:16 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/08/22 18:43:01 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	parse_error(char *error_message)
 
 uint32_t	rgbtohex(int r, int g, int b, int a)
 {
+	if ((r < 0 || r > 255) || (g < 0 || g > 255) || (b < 0 || b > 255))
+		parse_error("Invalid colour value, must be 0-255");
 	return (((r & 0xff) << 24) + ((g & 0xff) << 16) + ((b & 0xff) << 8) \
 	+ (a & 0xff));
 }

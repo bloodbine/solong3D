@@ -6,7 +6,7 @@
 #    By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/12 21:35:02 by ffederol          #+#    #+#              #
-#    Updated: 2023/08/21 15:53:10 by gpasztor         ###   ########.fr        #
+#    Updated: 2023/08/22 18:58:22 by gpasztor         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ MAIN	=	cub3d \
 			
 PARSER		=	parser/parser \
 				parser/parser_utils \
-				parser/parser_validity
+				parser/parser_validity \
+				parser/parser_sorting
 
 RAYCASTER	=	raycaster/raycaster \
 				raycaster/ray_calculations

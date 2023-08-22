@@ -6,96 +6,20 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:26:50 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/21 16:19:15 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/08/22 18:58:07 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
 
-uint32_t	sort_rgba(char	*line)
-{
-	char		**rgb;
-	uint32_t	rgba;
-	int			i;
-
-	rgb = ft_split(line + 1, ',');
-	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2] || rgb[3])
-		parse_error("Invalid value in RGB values");
-	rgba = rgbtohex(ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2]), 255);
-	i = 0;
-	while (rgb[i] != NULL)
-	{
-		free(rgb[i]);
-		i++;
-	}
-	free(rgb);
-	return (rgba);
-}
-
-void	sort_map(t_parse *data, int fd)
-{
-	char	*map;
-	char	*buff;
-	int		currline;
-	int		maxline;
-	int		col;
-
-	buff = get_next_line(fd);
-	map = ft_strdup("");
-	maxline = 0;
-	col = 0;
-	while (buff != NULL)
-	{
-		currline = ft_strlen(buff);
-		if (currline > maxline)
-			maxline = currline;
-		map = ft_frstrjoin(map, buff, 1);
-		map = ft_frstrjoin(map, "|", 1);
-		free(buff);
-		buff = get_next_line(fd);
-		col++;
-	}
-	// printf("Line Test: %d %d\n", col, maxline);
-	data->worldMap = ft_split(map, '|');
-	padding(data, maxline, col);
-}
-
-void	sort_data(t_parse *data, int fd, int *found)
-{
-	char	*buff;
-
-	buff = get_next_line(fd);
-	while (buff != NULL)
-	{
-		if (*found == 6)
-			break ;
-		if (ft_strncmp(buff, "NO", 2) == 0 && ++(*found))
-			data->textures[0] = ft_strtrim(buff + 2, " \n");
-		else if (ft_strncmp(buff, "EA", 2) == 0 && ++(*found))
-			data->textures[1] = ft_strtrim(buff + 2, " \n");
-		else if (ft_strncmp(buff, "SO", 2) == 0 && ++(*found))
-			data->textures[2] = ft_strtrim(buff + 2, " \n");
-		else if (ft_strncmp(buff, "WE", 2) == 0 && ++(*found))
-			data->textures[3] = ft_strtrim(buff + 2, " \n");
-		else if (ft_strncmp(buff, "F", 1) == 0 && ++(*found))
-			data->floor = sort_rgba(buff);
-		else if (ft_strncmp(buff, "C", 1) == 0 && ++(*found))
-			data->roof = sort_rgba(buff);
-		free(buff);
-		buff = get_next_line(fd);
-	}
-	if (*found != 6)
-		parse_error("Missing required variables from file");
-	sort_map(data, fd);
-}
-
 t_parse	*parse(int argc, char **argv)
 {
-	t_parse	parsed_data;
+	t_parse	*data;
 	int		found;
 	int		fd;
 
 	found = 0;
+	data = malloc(sizeof(t_parse));
 	if (argc == 1)
 		parse_error("No map path given");
 	if (argc > 2)
@@ -107,10 +31,12 @@ t_parse	*parse(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		parse_error("Failed to open map file");
-	sort_data(&parsed_data, fd, &found);
-	if (character_check(parsed_data.worldMap) == 1)
+	sort_data(data, fd, &found);
+	find_player(data);
+	if (character_check(data->worldMap) == 1)
 		parse_error("Invalid character in map");
-	return (parsed_data);
+	// file_check(data);
+	return (data);
 }
 
 	// printf("TEST Found: %d\n", found);
