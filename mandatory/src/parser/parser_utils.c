@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:37:29 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/22 18:43:01 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/08/23 01:53:17 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,10 @@ void	padding(t_parse *data, size_t len, size_t col)
 	while (ft_strlen(pad_line) < len + 5)
 		pad_line = ft_frstrjoin(pad_line, " ", 1);
 	pad_line = ft_frstrjoin(pad_line, "\n", 1);
-	new_map[col + 6] = NULL;
 	data->worldMap[col - 1] = ft_frstrjoin(data->worldMap[col - 1], "\n", 1);
 	i = 0;
 	j = 0;
-	while (new_map[i] != NULL)
+	while (i <= (col + 5))
 	{
 		if (i < 3 || i > col + 2)
 			new_map[i] = ft_strdup(pad_line);
@@ -77,5 +76,6 @@ void	padding(t_parse *data, size_t len, size_t col)
 			new_map[i] = ft_strjoin("   ", data->worldMap[j++]);
 		i++;
 	}
+	new_map[col + 6] = NULL;
 	padding_right(data, len, new_map);
 }
