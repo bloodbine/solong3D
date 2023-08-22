@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:54:30 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/22 13:53:36 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/08/22 21:04:52 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,54 @@ int	character_check(char **map)
 		i++;
 	}
 	return (0);
+}
+
+void	closed_check(t_parse *data, char **map, int y, int x)
+{
+	if (data->error == 1)
+		return ;
+	if (map[y][x] == ' ')
+	{
+		data->error = 1;
+		return ;
+	}
+	map[y][x] = 'X';
+	if (map[y][x + 1] != '1' && map[y][x + 1] != 'X')
+		closed_check(data, map, y, x + 1);
+	if (map[y][x - 1] != '1' && map[y][x - 1] != 'X')
+		closed_check(data, map, y, x - 1);
+	if (map[y + 1][x] != '1' && map[y + 1][x] != 'X')
+		closed_check(data, map, y + 1, x);
+	if (map[y - 1][x] != '1' && map[y - 1][x] != 'X')
+		closed_check(data, map, y - 1, x);
+	if (map[y + 1][x + 1] != '1' && map[y + 1][x + 1] != 'X')
+		closed_check(data, map, y + 1, x + 1);
+	if (map[y + 1][x - 1] != '1' && map[y + 1][x - 1] != 'X')
+		closed_check(data, map, y + 1, x - 1);
+	if (map[y - 1][x - 1] != '1' && map[y - 1][x - 1] != 'X')
+		closed_check(data, map, y - 1, x - 1);
+	if (map[y - 1][x + 1] != '1' && map[y - 1][x + 1] != 'X')
+		closed_check(data, map, y - 1, x + 1);
+}
+
+void	run_dfs(t_parse *data)
+{
+	char	**temp_map;
+	int		i;
+
+	i = 0;
+	while (data->worldMap[i] != NULL)
+		i++;
+	temp_map = malloc(i * sizeof(char *));
+	i = -1;
+	while (data->worldMap[++i] != NULL)
+		temp_map[i] = ft_strdup(data->worldMap[i]);
+	temp_map[i - 1] = NULL;
+	closed_check(data, temp_map, data->playerPos.y, data->playerPos.x);
+	i = -1;
+	while (temp_map[++i] != NULL)
+		free(temp_map[i]);
+	free(temp_map);
+	if (data->error == 1)
+		parse_error("Map is not closed");
 }

@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:26:50 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/22 18:58:07 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/08/22 20:40:53 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ t_parse	*parse(int argc, char **argv)
 	find_player(data);
 	if (character_check(data->worldMap) == 1)
 		parse_error("Invalid character in map");
+	data->error = 0;
+	run_dfs(data);
 	// file_check(data);
 	return (data);
 }
