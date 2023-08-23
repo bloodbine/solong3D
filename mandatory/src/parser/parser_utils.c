@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:37:29 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/23 03:23:49 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/08/23 03:28:10 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	padding_right(t_parse *data, size_t len, char **new_map)
 		printf("%s\n", new_map[i]);
 		i++;
 	}
-	data->map_lines = len + 6;
+	data->mapsizes.x = len + 6;
 	i = 0;
 	while (data->worldMap[i] != NULL)
 		free(data->worldMap[i++]);
@@ -75,7 +75,7 @@ void	padding(t_parse *data, size_t len, size_t col)
 	size_t		j;
 
 	new_map = malloc((col + 7) * sizeof(char *));
-	data->map_cols = col + 6;
+	data->mapsizes.y = col + 6;
 	pad_line = ft_strdup("");
 	while (ft_strlen(pad_line) < len + 5)
 		pad_line = ft_frstrjoin(pad_line, " ", 1);

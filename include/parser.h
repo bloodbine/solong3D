@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 22:38:40 by ffederol          #+#    #+#             */
-/*   Updated: 2023/08/23 03:22:47 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/08/23 03:27:41 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,10 @@ typedef struct	s_parse
 {
 	char			*textures[5]; //{./path_to_the_north_texture,./path_to_the_east_texture,./path_to_the_s_texture,./path_to_the_w_texture,./path_to_the_door_texture, NULL}
 	char			**worldMap;
-	int				map_cols;
-	int				map_lines;
 	int				error;
 	uint32_t		floor;
 	uint32_t		roof;
+	t_int_vector	mapsizes;
 	t_int_vector	playerPos;
 	t_int_vector	playerDir; // (x|y)  N = (0|-1), E = (1|0), S = (0|1), W = (-1|0)
 }				t_parse;
