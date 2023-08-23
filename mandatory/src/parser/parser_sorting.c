@@ -6,13 +6,13 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:47:29 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/23 05:15:15 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/08/23 06:42:39 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
 
-uint32_t	sort_rgba(char	*line)
+uint32_t	sort_rgba(t_parse *data, char *line)
 {
 	char		**rgb;
 	uint32_t	rgba;
@@ -20,8 +20,8 @@ uint32_t	sort_rgba(char	*line)
 
 	rgb = ft_split(line + 1, ',');
 	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2] || rgb[3])
-		parse_error("Invalid value in RGB values");
-	rgba = rgbtohex(ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2]), 255);
+		parse_error(data, "Invalid value in RGB values", 1);
+	rgba = rgbtohex(data, ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2]));
 	i = -1;
 	while (rgb[++i] != NULL)
 		free(rgb[i]);
@@ -74,15 +74,15 @@ void	sort_data(t_parse *data, int fd, int *found, char *buff)
 		else if (ft_strncmp(buff, "WE", 2) == 0 && ++(*found))
 			data->textures[3] = ft_strtrim(buff + 2, " \n");
 		else if (ft_strncmp(buff, "F", 1) == 0 && ++(*found))
-			data->floor = sort_rgba(buff);
+			data->floor = sort_rgba(data, buff);
 		else if (ft_strncmp(buff, "C", 1) == 0 && ++(*found))
-			data->roof = sort_rgba(buff);
+			data->roof = sort_rgba(data, buff);
 		free(buff);
 		buff = get_next_line(fd);
 	}
 	data->textures[4] = NULL;
-	if (*found != 6 || buff == NULL)
-		parse_error("Incorrect variables");
+	if (*found != 6 || buff == NULL || data->error == 1)
+		parse_error(data, "Incorrect variables", 1);
 	free(buff);
 	sort_map(data, fd);
 }
@@ -137,7 +137,7 @@ void	find_player(t_parse *data)
 			else if (data->worldMap[i][j] == 'S' && ++found)
 				sort_pos(data, 'S', i, j);
 			if (found > 1)
-				parse_error("More than one player found in map");
+				parse_error(data, "More than one player found in map", 2);
 		}
 		j = -1;
 	}

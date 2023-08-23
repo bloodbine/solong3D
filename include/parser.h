@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 22:38:40 by ffederol          #+#    #+#             */
-/*   Updated: 2023/08/23 03:27:41 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/08/23 06:16:47 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ typedef struct	s_parse
 	t_int_vector	playerDir; // (x|y)  N = (0|-1), E = (1|0), S = (0|1), W = (-1|0)
 }				t_parse;
 
-void		parse_free(t_parse *data);
+void		parse_free(t_parse *data, int type);
 void		run_dfs(t_parse *data);
-uint32_t	sort_rgba(char	*line);
+uint32_t	sort_rgba(t_parse *data, char *line);
 void		sort_map(t_parse *data, int fd);
 void		sort_data(t_parse *data, int fd, int *found, char *buff);
 void		find_player(t_parse *data);
@@ -37,7 +37,7 @@ void		file_check(t_parse *data);
 int			character_check(char **map);
 void		padding(t_parse *data, size_t len, size_t col);
 t_parse		*parse(int argc, char **argv);
-void		parse_error(char *error_message);
-uint32_t	rgbtohex(int r, int g, int b, int a);
+void		parse_error(t_parse *data, char *error_message, int type);
+uint32_t	rgbtohex(t_parse *data, int r, int g, int b);
 
 #endif
