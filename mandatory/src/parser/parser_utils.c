@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:37:29 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/23 01:53:17 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/08/23 03:23:49 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,20 @@ void	parse_error(char *error_message)
 	write(STDERR_FILENO, error_message, ft_strlen(error_message));
 	write(STDERR_FILENO, "\n", 2);
 	exit(EXIT_FAILURE);
+}
+
+void	parse_free(t_parse *data)
+{
+	int	i;
+
+	i = -1;
+	while (data->worldMap[++i] != NULL)
+		free(data->worldMap[i]);
+	free(data->worldMap);
+	i = -1;
+	while (data->textures[++i] != NULL)
+		free(data->textures[i]);
+	free(data);
 }
 
 uint32_t	rgbtohex(int r, int g, int b, int a)
@@ -45,6 +59,7 @@ void	padding_right(t_parse *data, size_t len, char **new_map)
 		printf("%s\n", new_map[i]);
 		i++;
 	}
+	data->map_lines = len + 6;
 	i = 0;
 	while (data->worldMap[i] != NULL)
 		free(data->worldMap[i++]);
@@ -59,8 +74,8 @@ void	padding(t_parse *data, size_t len, size_t col)
 	size_t		i;
 	size_t		j;
 
-	new_map = malloc((col + 8) * sizeof(char *));
-	pad_line = malloc((len + 7) * sizeof(char *));
+	new_map = malloc((col + 7) * sizeof(char *));
+	data->map_cols = col + 6;
 	pad_line = ft_strdup("");
 	while (ft_strlen(pad_line) < len + 5)
 		pad_line = ft_frstrjoin(pad_line, " ", 1);
@@ -70,12 +85,13 @@ void	padding(t_parse *data, size_t len, size_t col)
 	j = 0;
 	while (i <= (col + 5))
 	{
-		if (i < 3 || i > col + 2)
+		if (i < 3 || (i > col + 2 && i != col + 6))
 			new_map[i] = ft_strdup(pad_line);
 		else
 			new_map[i] = ft_strjoin("   ", data->worldMap[j++]);
 		i++;
 	}
 	new_map[col + 6] = NULL;
+	free(pad_line);
 	padding_right(data, len, new_map);
 }

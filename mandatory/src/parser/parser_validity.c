@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:54:30 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/22 21:04:52 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/08/23 02:42:07 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,11 @@ void	run_dfs(t_parse *data)
 	i = 0;
 	while (data->worldMap[i] != NULL)
 		i++;
-	temp_map = malloc(i * sizeof(char *));
+	temp_map = malloc((i + 1) * sizeof(char *));
 	i = -1;
 	while (data->worldMap[++i] != NULL)
 		temp_map[i] = ft_strdup(data->worldMap[i]);
-	temp_map[i - 1] = NULL;
+	temp_map[i] = NULL;
 	closed_check(data, temp_map, data->playerPos.y, data->playerPos.x);
 	i = -1;
 	while (temp_map[++i] != NULL)

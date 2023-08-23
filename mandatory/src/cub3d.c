@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/20 12:41:46 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/08/23 03:24:28 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,4 +104,6 @@ int main(int argc, char **argv)
 	// }
 	// else //free stuff
 	// 	return (EXIT_SUCCESS);
+	parse_free(data.parser);
+	return (0);
 }

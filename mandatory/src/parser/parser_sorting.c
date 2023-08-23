@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:47:29 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/22 19:02:18 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/08/23 02:54:58 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,9 @@ uint32_t	sort_rgba(char	*line)
 	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2] || rgb[3])
 		parse_error("Invalid value in RGB values");
 	rgba = rgbtohex(ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2]), 255);
-	i = 0;
-	while (rgb[i] != NULL)
-	{
+	i = -1;
+	while (rgb[++i] != NULL)
 		free(rgb[i]);
-		i++;
-	}
 	free(rgb);
 	return (rgba);
 }
@@ -55,15 +52,15 @@ void	sort_map(t_parse *data, int fd)
 		buff = get_next_line(fd);
 		col++;
 	}
+	close(fd);
 	// printf("Line Test: %d %d\n", col, maxline);
 	data->worldMap = ft_split(map, '|');
+	free(map);
 	padding(data, maxline, col);
 }
 
-void	sort_data(t_parse *data, int fd, int *found)
+void	sort_data(t_parse *data, int fd, int *found, char *buff)
 {
-	char	*buff;
-
 	buff = get_next_line(fd);
 	while (buff != NULL)
 	{
@@ -84,6 +81,7 @@ void	sort_data(t_parse *data, int fd, int *found)
 		free(buff);
 		buff = get_next_line(fd);
 	}
+	data->textures[4] = NULL;
 	if (*found != 6 || buff == NULL)
 		parse_error("Incorrect variables");
 	sort_map(data, fd);
