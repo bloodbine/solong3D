@@ -6,7 +6,7 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/17 04:04:55 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/08/23 02:44:32 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ void ft_hook(void* param)
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(data->mlx);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
-		move_straight(data->player, 1);
+		move_straight(data->player, 1, data->worldMap);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_S))
-		move_straight(data->player, -1);
+		move_straight(data->player, -1, data->worldMap);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_A))
-		move_side(data->player, 1);
+		move_side(data->player, 1, data->worldMap);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_D))
-		move_side(data->player, -1);
+		move_side(data->player, -1, data->worldMap);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
 		rotate(data->player, -1);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))

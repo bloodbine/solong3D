@@ -6,7 +6,7 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/17 05:10:53 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/08/23 02:43:35 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ void	ft_minimap(void *param)
 	ft_memset(data->image[1]->pixels, 0, data->image[1]->width * (data->image[1]->height) * sizeof(int32_t));
 	while (y < 24)
 	{
-		if ((y_start + y >= 0) && (x_start + x >= 0) && (y_start + y < 24) && (x_start + x < 24) && worldMap[y_start + y][x_start + x])
+		if ((y_start + y >= 0) && (x_start + x >= 0) && (y_start + y < 24) && (x_start + x < 24) && data->worldMap[y_start + y][x_start + x] == '1')
 			draw_wall(data, y, x, 0x00a0a0ff);
 		else if ((y_start + y >= 0) && (x_start + x >= 0) && (y_start + y < 24) && (x_start + x < 24))
 			draw_wall(data, y, x, 0xaff0f0ff);
 		while (x < x_start + 24)
 		{
-			if ((y_start + y >= 0) && (x_start + x >= 0) && (y_start + y < 24) && (x_start + x < 24) && worldMap[y_start + y][x_start + x])
+			if ((y_start + y >= 0) && (x_start + x >= 0) && (y_start + y < 24) && (x_start + x < 24) && data->worldMap[y_start + y][x_start + x] == '1')
 				draw_wall(data, y, x, 0x00a0a0ff);
 			else if ((y_start + y >= 0) && (x_start + x >= 0) && (y_start + y < 24) && (x_start + x < 24))
 				draw_wall(data, y, x, 0xaff0f0ff);

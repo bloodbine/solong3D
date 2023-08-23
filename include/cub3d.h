@@ -6,7 +6,7 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 22:38:40 by ffederol          #+#    #+#             */
-/*   Updated: 2023/08/17 04:01:35 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/08/23 02:43:08 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,8 @@
 # include "movement.h"
 # include "graphics.h"
 
-#define mapWidth 24
-#define mapHeight 24
 #define screenWidth 960
 #define screenHeight 640
-
-extern int worldMap[mapHeight][mapWidth];
 
 typedef struct s_cupData
 {
@@ -37,6 +33,7 @@ typedef struct s_cupData
 	t_player		*player;
 	t_raycaster		*rc;
 	mlx_texture_t	*tex[5]; //{N,E,S,W,D}
+	char			**worldMap;
 	int				x_mouse;
 	int				y_mouse;
 }			t_cupData;

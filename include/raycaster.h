@@ -6,7 +6,7 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 22:38:40 by ffederol          #+#    #+#             */
-/*   Updated: 2023/08/17 03:59:36 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/08/23 02:38:46 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 #include <math.h>
 #include "player.h"
-
 
 typedef struct s_raycaster
 {
@@ -37,7 +36,7 @@ typedef struct s_raycaster
 
 void	ft_raycast(void* param);
 void	calc_dist_next_side(t_player *player, t_raycaster *rc);
-void	calc_raydist(t_raycaster *rc);
+void	calc_raydist(void *param);
 void	calc_raydist_perp(t_raycaster *rc);
 void	get_tilepos(t_player *player, t_raycaster *rc);
 

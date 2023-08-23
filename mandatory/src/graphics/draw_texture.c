@@ -6,7 +6,7 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/17 05:27:53 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/08/20 02:33:18 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void	init_line(t_cupData *data, t_lineData *l, t_raycaster *rc)
 		l->drawStart = 0;
 		l->y = (l->lineHeight - data->mlx->height) / 2 / data->mlx->height * data->tex[rc->side]->height;
 	}
-	printf("lineheigth: %d ly: %f	l->yinc: \n", l->lineHeight, l->y);
 	if (l->drawEnd >= data->mlx->height)
 		l->drawEnd = data->mlx->height - 1;
 	l->x_tex = round(rc->tilePos * data->tex[rc->side]->width);

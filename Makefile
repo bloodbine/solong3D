@@ -6,7 +6,7 @@
 #    By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/12 21:35:02 by ffederol          #+#    #+#              #
-#    Updated: 2023/08/17 04:05:14 by ffederol         ###   ########.fr        #
+#    Updated: 2023/08/22 23:32:52 by ffederol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,14 +22,17 @@ LIBMLX42 = $(LIBMLX42_DIR)libmlx42.a
 MAIN	=	cub3d \
 			movement \
 			
-PARSER		=	
+PARSER		=	parser/parser \
+				parser/parser_utils \
+				parser/parser_validity \
+				parser/parser_sorting
 
 RAYCASTER	=	raycaster/raycaster \
 				raycaster/ray_calculations
 
 GRAPHICS	=	graphics/graphics \
 				graphics/draw_texture \
-				graphics/minimap
+				graphics/minimap \
 
 SOURCE		= $(MAIN) $(PARSER) $(RAYCASTER) $(GRAPHICS)
 
@@ -59,7 +62,7 @@ libmake:
 clean:
 	$(RMRF) $(OBJ)
 	$(RMRF) $(OBJDIR)
-	@rm -rf lib/MLX42
+	$(RMRF) $(LIBMLX42_DIR)
 	@make clean -C ./lib/libft
 
 fclean: clean
