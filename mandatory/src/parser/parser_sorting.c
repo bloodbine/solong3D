@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:47:29 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/23 02:54:58 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/08/23 05:15:15 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	sort_map(t_parse *data, int fd)
 	int		col;
 
 	buff = get_next_line(fd);
-	map = ft_strdup("");
+	map = NULL;
 	maxline = 0;
 	col = 0;
 	while (buff != NULL)
@@ -53,7 +53,6 @@ void	sort_map(t_parse *data, int fd)
 		col++;
 	}
 	close(fd);
-	// printf("Line Test: %d %d\n", col, maxline);
 	data->worldMap = ft_split(map, '|');
 	free(map);
 	padding(data, maxline, col);
@@ -84,6 +83,7 @@ void	sort_data(t_parse *data, int fd, int *found, char *buff)
 	data->textures[4] = NULL;
 	if (*found != 6 || buff == NULL)
 		parse_error("Incorrect variables");
+	free(buff);
 	sort_map(data, fd);
 }
 

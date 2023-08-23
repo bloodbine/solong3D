@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:37:29 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/23 03:28:10 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/08/23 05:07:34 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	padding(t_parse *data, size_t len, size_t col)
 
 	new_map = malloc((col + 7) * sizeof(char *));
 	data->mapsizes.y = col + 6;
-	pad_line = ft_strdup("");
+	pad_line = ft_strdup("   ");
 	while (ft_strlen(pad_line) < len + 5)
 		pad_line = ft_frstrjoin(pad_line, " ", 1);
 	pad_line = ft_frstrjoin(pad_line, "\n", 1);
