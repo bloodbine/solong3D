@@ -6,7 +6,7 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:26:50 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/23 01:42:02 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/08/23 04:38:27 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,14 @@ t_parse	*parse(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		parse_error("Failed to open map file");
-	sort_data(data, fd, &found);
+	sort_data(data, fd, &found, NULL);
 	find_player(data);
 	if (character_check(data->worldMap) == 1)
 		parse_error("Invalid character in map");
 	data->error = 0;
 	run_dfs(data);
 	// file_check(data);
+	data->worldMap[data->playerPos.y][data->playerPos.x] = '0';
 	return (data);
 }
 

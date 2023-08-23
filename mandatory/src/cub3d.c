@@ -6,7 +6,7 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/23 02:42:45 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/08/23 02:48:33 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	init_player(t_cupData *data)
 	data->player->pos.y = data->parser->playerPos.y;
 	data->player->dir.x = data->parser->playerDir.x;
 	data->player->dir.y = data->parser->playerDir.y;
-
 
 	data->player->cam_plane.x = -0.66 * (fabs(data->player->dir.x) - 1);
 	data->player->cam_plane.y = -0.66 * (fabs(data->player->dir.y) - 1);
