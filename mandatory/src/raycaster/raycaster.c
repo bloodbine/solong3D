@@ -6,7 +6,7 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/16 07:36:41 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/08/22 23:21:03 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,11 @@ void	ft_raycast(void *param)
 	{
 		init_raycaster(data);
 		calc_dist_next_side(data->player, data->rc);
-		calc_raydist_euclidean(data->rc);
+		calc_raydist(data);
 		calc_raydist_perp(data->rc);
 		get_tilepos(data->player, data->rc);
 		draw_line(data);
 		data->rc->x_cam++;
 	}
+	// ft_memset(data->image[1]->pixels, 255, data->image[1]->width * (data->image[1]->height) * sizeof(int32_t));
 }

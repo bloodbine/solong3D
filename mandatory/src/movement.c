@@ -6,7 +6,7 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/16 05:27:22 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/08/22 23:29:29 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,20 @@ void	rotate(t_player *player, int id)
   	player->cam_plane.y = oldPlaneX * sin(0.05 * id) + player->cam_plane.y * cos(0.05 * id);
 }
 
-void	move_straight(t_player *player, int id)
+void	move_straight(t_player *player, int id, char **worldMap)
 {
 	float movespeed = 0.1;
-	if (!worldMap[(int)(player->pos.y)][(int)(player->pos.x + player->dir.x * movespeed)])
+	if (worldMap[(int)(player->pos.y)][(int)(player->pos.x + player->dir.x * movespeed * id)] == '0')
 		player->pos.x += player->dir.x * movespeed * id;
-	if (!worldMap[(int)(player->pos.y + player->dir.y * movespeed)][(int)(player->pos.x)])
+	if (worldMap[(int)(player->pos.y + player->dir.y * movespeed * id)][(int)(player->pos.x)] == '0')
 		player->pos.y += player->dir.y * movespeed * id;
 }
 
-void	move_side(t_player *player, int id)
+void	move_side(t_player *player, int id, char **worldMap)
 {
 	float movespeed = 0.1;
-	if (!worldMap[(int)(player->pos.y)][(int)(player->pos.x + player->dir.y * movespeed)])
+	if (worldMap[(int)(player->pos.y)][(int)(player->pos.x + player->dir.y * movespeed * id)] == '0')
 		player->pos.x += player->dir.y * movespeed * id;
-	if (!worldMap[(int)(player->pos.y + player->dir.x * movespeed)][(int)(player->pos.x)])
+	if (worldMap[(int)(player->pos.y + player->dir.x * movespeed * -id)][(int)(player->pos.x)] == '0')
 		player->pos.y -= player->dir.x * movespeed * id;
 }

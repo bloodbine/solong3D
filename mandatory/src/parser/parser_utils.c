@@ -3,50 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:37:29 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/23 06:42:25 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/08/23 04:08:41 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
 
-void	parse_free(t_parse *data, int type)
-{
-	int	i;
-
-	if (type == 1 || type == 2)
-	{
-		i = -1;
-		while (data->textures[++i] != NULL)
-			free(data->textures[i]);
-	}
-	if (type == 2)
-	{
-		i = -1;
-		while (data->worldMap[++i] != NULL)
-			free(data->worldMap[i]);
-		free(data->worldMap);
-	}
-	free(data);
-}
-
-void	parse_error(t_parse *data, char *error_message, int type)
+void	parse_error(char *error_message)
 {
 	write(STDERR_FILENO, "Error\n", 7);
 	write(STDERR_FILENO, error_message, ft_strlen(error_message));
 	write(STDERR_FILENO, "\n", 2);
-	parse_free(data, type);
-	exit(system("leaks cub3D"));
+	exit(EXIT_FAILURE);
 }
 
-uint32_t	rgbtohex(t_parse *data, int r, int g, int b)
+void	parse_free(t_parse *data)
+{
+	int	i;
+
+	i = -1;
+	while (data->worldMap[++i] != NULL)
+		free(data->worldMap[i]);
+	free(data->worldMap);
+	i = -1;
+	while (data->textures[++i] != NULL)
+		free(data->textures[i]);
+	free(data);
+}
+
+uint32_t	rgbtohex(int r, int g, int b, int a)
 {
 	if ((r < 0 || r > 255) || (g < 0 || g > 255) || (b < 0 || b > 255))
-		data->error = 1;
+		parse_error("Invalid colour value, must be 0-255");
 	return (((r & 0xff) << 24) + ((g & 0xff) << 16) + ((b & 0xff) << 8) \
-	+ (255 & 0xff));
+	+ (a & 0xff));
 }
 
 void	padding_right(t_parse *data, size_t len, char **new_map)
@@ -63,7 +56,7 @@ void	padding_right(t_parse *data, size_t len, char **new_map)
 		free(temp);
 		while (ft_strlen(new_map[i]) < len + 5)
 			new_map[i] = ft_frstrjoin(new_map[i], " ", 1);
-		ft_printf("%s\n", new_map[i]);
+		printf("%s\n", new_map[i]);
 		i++;
 	}
 	data->mapsizes.x = len + 6;

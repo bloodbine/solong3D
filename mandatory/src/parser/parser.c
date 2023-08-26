@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:26:50 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/23 06:03:41 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/08/23 04:38:27 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,24 @@ t_parse	*parse(int argc, char **argv)
 	found = 0;
 	data = malloc(sizeof(t_parse));
 	if (argc == 1)
-		parse_error(data, "No map path given", 3);
+		parse_error("No map path given");
 	if (argc > 2)
-		parse_error(data, "Too many arguments given", 3);
+		parse_error("Too many arguments given");
 	if (ft_strlen(argv[1]) < 5)
-		parse_error(data, "Map name is too short", 3);
+		parse_error("Map name is too short");
 	if (ft_strncmp((argv[1] + ft_strlen(argv[1]) - 4), ".cub", 5) != 0)
-		parse_error(data, "File extension is invalid", 3);
+		parse_error("File extension is invalid");
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
-		parse_error(data, "Failed to open map file", 3);
+		parse_error("Failed to open map file");
 	sort_data(data, fd, &found, NULL);
 	find_player(data);
 	if (character_check(data->worldMap) == 1)
-		parse_error(data, "Invalid character in map", 2);
+		parse_error("Invalid character in map");
 	data->error = 0;
 	run_dfs(data);
 	// file_check(data);
+	data->worldMap[data->playerPos.y][data->playerPos.x] = '0';
 	return (data);
 }
 

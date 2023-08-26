@@ -6,7 +6,7 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/16 07:35:14 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/08/22 23:25:03 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,13 @@ void	calc_dist_next_side(t_player *player, t_raycaster *rc)
 	}
 }
 
-void	calc_raydist_euclidean(t_raycaster *rc)
+void	calc_raydist(void *param)
 {
+	t_raycaster *rc;
+	t_cupData	*data;
+
+	data = (t_cupData *)param;
+	rc = data->rc;
 	while (!rc->hit)
 	{
 		if (rc->sideDist.x < rc->sideDist.y)
@@ -56,7 +61,7 @@ void	calc_raydist_euclidean(t_raycaster *rc)
 			if (rc->stepY < 0)
 				rc->side = 2;
 		}
-		if (worldMap[rc->map.y][rc->map.x] == 1)
+		if (data->parser->worldMap[rc->map.y][rc->map.x] == '1')
 			rc->hit = 1;
 	}
 }

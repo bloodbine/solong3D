@@ -6,7 +6,7 @@
 #    By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/12 21:35:02 by ffederol          #+#    #+#              #
-#    Updated: 2023/08/23 02:01:02 by gpasztor         ###   ########.fr        #
+#    Updated: 2023/08/22 23:32:52 by ffederol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ RAYCASTER	=	raycaster/raycaster \
 
 GRAPHICS	=	graphics/graphics \
 				graphics/draw_texture \
+				graphics/minimap \
 
 SOURCE		= $(MAIN) $(PARSER) $(RAYCASTER) $(GRAPHICS)
 

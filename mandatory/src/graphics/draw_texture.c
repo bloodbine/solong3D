@@ -6,13 +6,13 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/16 07:28:41 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/08/20 02:33:18 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
 
-//maybe calculate before gamestart
+//maybe calculate before gamestart in parsing 
 uint32_t	convert_to_rgba(uint8_t *pixels)
 {
 	uint32_t	color;
@@ -39,14 +39,14 @@ void	put_line(t_cupData *data, t_lineData *l, t_raycaster *rc)
 	while (i < data->mlx->height)
 	{
 		if (i < l->drawStart)
-			mlx_put_pixel(data->image, rc->x_cam, i, rc->ceiling);
+			mlx_put_pixel(data->image[0], rc->x_cam, i, rc->ceiling);
 		else if (i > l->drawEnd)
-			mlx_put_pixel(data->image, rc->x_cam, i, rc->floor);
+			mlx_put_pixel(data->image[0], rc->x_cam, i, rc->floor);
 		else
 		{
-			l->y += l->yinc;
 			tex_pixel = (int)(l->y) * data->tex[rc->side]->width + l->x_tex;
-			mlx_put_pixel(data->image, rc->x_cam, i, \
+			l->y += l->yinc;
+			mlx_put_pixel(data->image[0], rc->x_cam, i, \
 				convert_to_rgba(&(data->tex[rc->side]->pixels[tex_pixel * 4])));
 		}
 		i++;
@@ -56,26 +56,29 @@ void	put_line(t_cupData *data, t_lineData *l, t_raycaster *rc)
 void	init_line(t_cupData *data, t_lineData *l, t_raycaster *rc)
 {
 	l->lineHeight = (int)(data->mlx->height / rc->camPlane2wallDist);
-	l->drawStart = (-l->lineHeight + data->mlx->height) / 2;
-	l->drawEnd = (l->lineHeight + data->mlx->height) / 2;
+	l->drawStart = -l->lineHeight / 2 + data->mlx->height / 2;
+	l->drawEnd = l->lineHeight / 2 + data->mlx->height / 2;
 	if (l->drawStart < 0)
+	{
 		l->drawStart = 0;
+		l->y = (l->lineHeight - data->mlx->height) / 2 / data->mlx->height * data->tex[rc->side]->height;
+	}
 	if (l->drawEnd >= data->mlx->height)
 		l->drawEnd = data->mlx->height - 1;
 	l->x_tex = round(rc->tilePos * data->tex[rc->side]->width);
 	if (rc->side < 2)
 		l->x_tex = round((1 - rc->tilePos) * data->tex[rc->side]->width);
-	l->yinc = (double) data->tex[rc->side]->height \
-				/ (l->drawEnd - l->drawStart + 1);
-	if (l->yinc < 1)
-		l->yinc = 1/l->yinc;
-	l->y = -l->yinc;
+	l->yinc = (double)data->tex[rc->side]->height / (l->lineHeight + 1);
+	l->y = (l->drawStart - data->mlx->height / 2 + l->lineHeight / 2) * l->yinc;
 }
 
-void	draw_line(t_cupData *data)
+void	draw_line(void *param)
 {
+	t_cupData *data;
 	t_lineData	line;
 
+	data = (t_cupData *)param;
 	init_line(data, &line, data->rc);
 	put_line(data, &line, data->rc);
 }
+
