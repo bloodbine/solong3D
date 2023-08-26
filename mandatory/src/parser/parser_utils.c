@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:37:29 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/23 04:08:41 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/08/26 15:27:10 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	parse_free(t_parse *data)
 	int	i;
 
 	i = -1;
-	while (data->worldMap[++i] != NULL)
-		free(data->worldMap[i]);
-	free(data->worldMap);
+	while (data->worldmap[++i] != NULL)
+		free(data->worldmap[i]);
+	free(data->worldmap);
 	i = -1;
 	while (data->textures[++i] != NULL)
 		free(data->textures[i]);
@@ -61,10 +61,10 @@ void	padding_right(t_parse *data, size_t len, char **new_map)
 	}
 	data->mapsizes.x = len + 6;
 	i = 0;
-	while (data->worldMap[i] != NULL)
-		free(data->worldMap[i++]);
-	free(data->worldMap);
-	data->worldMap = new_map;
+	while (data->worldmap[i] != NULL)
+		free(data->worldmap[i++]);
+	free(data->worldmap);
+	data->worldmap = new_map;
 }
 
 void	padding(t_parse *data, size_t len, size_t col)
@@ -80,7 +80,7 @@ void	padding(t_parse *data, size_t len, size_t col)
 	while (ft_strlen(pad_line) < len + 5)
 		pad_line = ft_frstrjoin(pad_line, " ", 1);
 	pad_line = ft_frstrjoin(pad_line, "\n", 1);
-	data->worldMap[col - 1] = ft_frstrjoin(data->worldMap[col - 1], "\n", 1);
+	data->worldmap[col - 1] = ft_frstrjoin(data->worldmap[col - 1], "\n", 1);
 	i = 0;
 	j = 0;
 	while (i <= (col + 5))
@@ -88,7 +88,7 @@ void	padding(t_parse *data, size_t len, size_t col)
 		if (i < 3 || (i > col + 2 && i != col + 6))
 			new_map[i] = ft_strdup(pad_line);
 		else
-			new_map[i] = ft_strjoin("   ", data->worldMap[j++]);
+			new_map[i] = ft_strjoin("   ", data->worldmap[j++]);
 		i++;
 	}
 	new_map[col + 6] = NULL;

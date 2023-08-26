@@ -1,4 +1,4 @@
-void	draw_wall(t_cupData *data, double y, double x, uint32_t color)
+void	draw_wall(t_cubdata *data, double y, double x, uint32_t color)
 {
 	int i = 0;
 	int j = 0;
@@ -21,9 +21,9 @@ void	draw_wall(t_cupData *data, double y, double x, uint32_t color)
 
 void	ft_minimap(void *param)
 {
-	t_cupData	*data;
+	t_cubdata	*data;
 
-	data = (t_cupData *)param;
+	data = (t_cubdata *)param;
 	int	x_start;
 	int y_start;
 	int	y = 0;
@@ -34,13 +34,13 @@ void	ft_minimap(void *param)
 	ft_memset(data->image[1]->pixels, 0, data->image[1]->width * (data->image[1]->height) * sizeof(int32_t));
 	while (y < 24)
 	{
-		if ((y_start + y >= 0) && (x_start + x >= 0) && (y_start + y < 24) && (x_start + x < 24) && worldMap[y_start + y][x_start + x])
+		if ((y_start + y >= 0) && (x_start + x >= 0) && (y_start + y < 24) && (x_start + x < 24) && worldmap[y_start + y][x_start + x])
 			draw_wall(data, y - fmod(data->player->pos.y, 1), x - fmod(data->player->pos.x, 1), 0x00a0a0ff);
 		else if ((y_start + y >= 0) && (x_start + x >= 0) && (y_start + y < 24) && (x_start + x < 24))
 			draw_wall(data, y - fmod(data->player->pos.y, 1), x - fmod(data->player->pos.x, 1), 0xaff0f0ff);
 		while (x < x_start + 24)
 		{
-			if ((y_start + y >= 0) && (x_start + x >= 0) && (y_start + y < 24) && (x_start + x < 24) && worldMap[y_start + y][x_start + x])
+			if ((y_start + y >= 0) && (x_start + x >= 0) && (y_start + y < 24) && (x_start + x < 24) && worldmap[y_start + y][x_start + x])
 				draw_wall(data, y - fmod(data->player->pos.y, 1), x - fmod(data->player->pos.x, 1), 0x00a0a0ff);
 			else if ((y_start + y >= 0) && (x_start + x >= 0) && (y_start + y < 24) && (x_start + x < 24))
 				draw_wall(data, y - fmod(data->player->pos.y, 1), x - fmod(data->player->pos.x, 1), 0xafff0ff);

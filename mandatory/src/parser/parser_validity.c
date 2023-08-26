@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_validity.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:54:30 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/23 04:09:00 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/08/26 15:27:13 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,15 @@ void	run_dfs(t_parse *data)
 	int		i;
 
 	i = 0;
-	while (data->worldMap[i] != NULL)
+	data->error = 0;
+	while (data->worldmap[i] != NULL)
 		i++;
 	temp_map = malloc((i + 1) * sizeof(char *));
 	i = -1;
-	while (data->worldMap[++i] != NULL)
-		temp_map[i] = ft_strdup(data->worldMap[i]);
+	while (data->worldmap[++i] != NULL)
+		temp_map[i] = ft_strdup(data->worldmap[i]);
 	temp_map[i] = NULL;
-	closed_check(data, temp_map, data->playerPos.y, data->playerPos.x);
+	closed_check(data, temp_map, data->playerpos.y, data->playerpos.x);
 	i = -1;
 	while (temp_map[++i] != NULL)
 		free(temp_map[i]);

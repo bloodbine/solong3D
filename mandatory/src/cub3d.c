@@ -6,27 +6,26 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/23 02:48:33 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/08/26 14:30:09 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	init_player(t_cupData *data)
+void	init_player(t_cubdata *data)
 {
-	data->player->pos.x = data->parser->playerPos.x;
-	data->player->pos.y = data->parser->playerPos.y;
-	data->player->dir.x = data->parser->playerDir.x;
-	data->player->dir.y = data->parser->playerDir.y;
-
+	data->player->pos.x = data->parser->playerpos.x;
+	data->player->pos.y = data->parser->playerpos.y;
+	data->player->dir.x = data->parser->playerdir.x;
+	data->player->dir.y = data->parser->playerdir.y;
 	data->player->cam_plane.x = -0.66 * (fabs(data->player->dir.x) - 1);
 	data->player->cam_plane.y = -0.66 * (fabs(data->player->dir.y) - 1);
 }
 
-void	init_textures(t_cupData *data)
+void	init_textures(t_cubdata *data)
 {
 	int	i;
-	
+
 	i = 0;
 	while (data->parser->textures[i])
 	{
@@ -35,31 +34,27 @@ void	init_textures(t_cupData *data)
 	}
 }
 
-void	init_cupData(t_cupData *data, t_player *player, t_raycaster *rc)
+void	init_cubdata(t_cubdata *data, t_player *player, t_raycaster *rc)
 {
 	data->player = player;
 	data->rc = rc;
-	data->worldMap = data->parser->worldMap;
+	data->worldmap = data->parser->worldmap;
 	init_player(data);
 	init_textures(data);
 }
 
-int main(int argc, char**argv)
+int	main(int argc, char**argv)
 {
-	t_cupData	data;
-	// t_player	player;
-	// t_raycaster rc;
+	t_cubdata	data;
+	t_player	player;
+	t_raycaster	rc;
 
 	data.parser = parse(argc, argv);
-	// init_cupData(&data, &player, &rc);
-	
-	data.parser = parse(argc, argv);
-	init_cupData(&data, &player, &rc);
+	init_cubdata(&data, &player, &rc);
 	if (manage_graphics(&data))
 	{
-		//free stuff
 		return (EXIT_FAILURE);
 	}
-	else //free stuff
+	else
 		return (EXIT_SUCCESS);
 }

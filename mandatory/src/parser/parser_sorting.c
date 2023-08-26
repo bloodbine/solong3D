@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_sorting.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:47:29 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/23 04:08:21 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/08/26 15:27:05 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ void	sort_map(t_parse *data, int fd)
 		col++;
 	}
 	close(fd);
-	// printf("Line Test: %d %d\n", col, maxline);
-	data->worldMap = ft_split(map, '|');
+	data->worldmap = ft_split(map, '|');
 	free(map);
 	padding(data, maxline, col);
 }
@@ -89,29 +88,29 @@ void	sort_data(t_parse *data, int fd, int *found, char *buff)
 
 void	sort_pos(t_parse *data, char type, int i, int j)
 {
-	data->playerPos.x = j;
-	data->playerPos.y = i;
+	data->playerpos.x = j;
+	data->playerpos.y = i;
 	if (type == 'N')
 	{
-		data->playerDir.y = -1;
-		data->playerDir.x = 0;
+		data->playerdir.y = -1;
+		data->playerdir.x = 0;
 	}
 	else if (type == 'E')
 	{
-		data->playerDir.y = 0;
-		data->playerDir.x = 1;
+		data->playerdir.y = 0;
+		data->playerdir.x = 1;
 	}
 	else if (type == 'S')
 	{
-		data->playerDir.y = 1;
-		data->playerDir.x = 0;
+		data->playerdir.y = 1;
+		data->playerdir.x = 0;
 	}
 	else if (type == 'W')
 	{
-		data->playerDir.y = 0;
-		data->playerDir.x = -1;
+		data->playerdir.y = 0;
+		data->playerdir.x = -1;
 	}
-	printf("DEBUG: Player Pos: [%d/%d]\n", data->playerPos.x, data->playerPos.y);
+	printf("DEBUG: Player Pos: [%d/%d]\n", data->playerpos.x, data->playerpos.y);
 	printf("DEBUG: Player Dir: %c\n", type);
 }
 
@@ -124,17 +123,17 @@ void	find_player(t_parse *data)
 	i = -1;
 	j = -1;
 	found = 0;
-	while (data->worldMap[++i] != NULL)
+	while (data->worldmap[++i] != NULL)
 	{
-		while (data->worldMap[i][++j] != '\0')
+		while (data->worldmap[i][++j] != '\0')
 		{
-			if (data->worldMap[i][j] == 'N' && ++found)
+			if (data->worldmap[i][j] == 'N' && ++found)
 				sort_pos(data, 'N', i, j);
-			else if (data->worldMap[i][j] == 'E' && ++found)
+			else if (data->worldmap[i][j] == 'E' && ++found)
 				sort_pos(data, 'E', i, j);
-			else if (data->worldMap[i][j] == 'W' && ++found)
+			else if (data->worldmap[i][j] == 'W' && ++found)
 				sort_pos(data, 'W', i, j);
-			else if (data->worldMap[i][j] == 'S' && ++found)
+			else if (data->worldmap[i][j] == 'S' && ++found)
 				sort_pos(data, 'S', i, j);
 			if (found > 1)
 				parse_error("More than one player found in map");

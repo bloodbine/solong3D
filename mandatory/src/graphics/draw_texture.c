@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/20 02:33:18 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/08/26 15:26:01 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ uint32_t	convert_to_rgba(uint8_t *pixels)
 	return (color);
 }
 
-void	put_line(t_cupData *data, t_lineData *l, t_raycaster *rc)
+void	put_line(t_cubdata *data, t_lineData *l, t_raycaster *rc)
 {
 	int		i;
 	int		tex_pixel;
@@ -38,9 +38,9 @@ void	put_line(t_cupData *data, t_lineData *l, t_raycaster *rc)
 	i = 0;
 	while (i < data->mlx->height)
 	{
-		if (i < l->drawStart)
+		if (i < l->drawstart)
 			mlx_put_pixel(data->image[0], rc->x_cam, i, rc->ceiling);
-		else if (i > l->drawEnd)
+		else if (i > l->drawend)
 			mlx_put_pixel(data->image[0], rc->x_cam, i, rc->floor);
 		else
 		{
@@ -53,32 +53,32 @@ void	put_line(t_cupData *data, t_lineData *l, t_raycaster *rc)
 	}
 }
 
-void	init_line(t_cupData *data, t_lineData *l, t_raycaster *rc)
+void	init_line(t_cubdata *data, t_lineData *l, t_raycaster *rc)
 {
-	l->lineHeight = (int)(data->mlx->height / rc->camPlane2wallDist);
-	l->drawStart = -l->lineHeight / 2 + data->mlx->height / 2;
-	l->drawEnd = l->lineHeight / 2 + data->mlx->height / 2;
-	if (l->drawStart < 0)
+	l->lineheight = (int)(data->mlx->height / rc->camplane2walldist);
+	l->drawstart = -l->lineheight / 2 + data->mlx->height / 2;
+	l->drawend = l->lineheight / 2 + data->mlx->height / 2;
+	if (l->drawstart < 0)
 	{
-		l->drawStart = 0;
-		l->y = (l->lineHeight - data->mlx->height) / 2 / data->mlx->height * data->tex[rc->side]->height;
+		l->drawstart = 0;
+		l->y = (l->lineheight - data->mlx->height) \
+		/ 2 / data->mlx->height * data->tex[rc->side]->height;
 	}
-	if (l->drawEnd >= data->mlx->height)
-		l->drawEnd = data->mlx->height - 1;
-	l->x_tex = round(rc->tilePos * data->tex[rc->side]->width);
+	if (l->drawend >= data->mlx->height)
+		l->drawend = data->mlx->height - 1;
+	l->x_tex = round(rc->tilepos * data->tex[rc->side]->width);
 	if (rc->side < 2)
-		l->x_tex = round((1 - rc->tilePos) * data->tex[rc->side]->width);
-	l->yinc = (double)data->tex[rc->side]->height / (l->lineHeight + 1);
-	l->y = (l->drawStart - data->mlx->height / 2 + l->lineHeight / 2) * l->yinc;
+		l->x_tex = round((1 - rc->tilepos) * data->tex[rc->side]->width);
+	l->yinc = (double)data->tex[rc->side]->height / (l->lineheight + 1);
+	l->y = (l->drawstart - data->mlx->height / 2 + l->lineheight / 2) * l->yinc;
 }
 
 void	draw_line(void *param)
 {
-	t_cupData *data;
+	t_cubdata	*data;
 	t_lineData	line;
 
-	data = (t_cupData *)param;
+	data = (t_cubdata *)param;
 	init_line(data, &line, data->rc);
 	put_line(data, &line, data->rc);
 }
-
