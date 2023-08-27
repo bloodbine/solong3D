@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/26 14:30:09 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/08/27 13:37:03 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ void	my_mouse_func(t_cubdata *data)
 		rotate(data->player, 1);
 	else if (data->x_mouse - x > 0)
 		rotate(data->player, -1);
-	data->x_mouse = x;
-	data->y_mouse = y;
+	data->x_mouse = data->mlx->width / 2;
+	data->y_mouse = data->mlx->height / 2;
+	mlx_set_mouse_pos(data->mlx, data->mlx->width / 2, data->mlx->height / 2);
 }
 
 void	ft_hook(void *param)

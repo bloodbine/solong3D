@@ -1,13 +1,11 @@
-NO ./textures/stonewall_grayscale.png
-SO ./textures/stonewall_normal.png
-WE ./textures/stonewall000.png
-EA ./textures/stonewall001.png
+NO ./textures/dungeontile.png
+SO ./textures/dungeontile.png
+WE ./textures/dungeontile.png
+EA ./textures/dungeontile.png
 
-F 220,100,0
-C 225,30,255
+F 42,42,42
+C 42,42,42
 
 11111111111
 1N000000001
 11111111111
-
-

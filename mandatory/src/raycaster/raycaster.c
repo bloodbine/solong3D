@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/26 15:26:01 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/08/27 14:25:40 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	init_raycaster(t_cubdata *data)
 	data->rc->side = 0;
 	data->rc->deltadist.x = fabs(1 / data->rc->ray.x);
 	data->rc->deltadist.y = fabs(1 / data->rc->ray.y);
-	data->rc->floor = 0x7a00c80f;
-	data->rc->ceiling = 0x7a70c83f;
+	data->rc->floor = data->parser->floor;
+	data->rc->ceiling = data->parser->roof;
 }
 
 void	ft_raycast(void *param)
