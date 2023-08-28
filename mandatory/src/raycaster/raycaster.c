@@ -6,7 +6,7 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/22 23:21:03 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/08/28 17:29:51 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ void	init_raycaster(t_cupData *data)
 	data->rc->side = 0;
 	data->rc->deltaDist.x = fabs(1 / data->rc->ray.x);
 	data->rc->deltaDist.y = fabs(1 / data->rc->ray.y);
-	data->rc->floor = 0x7a00c80f;
-	data->rc->ceiling = 0x7a70c83f;
 }
 
 void	ft_raycast(void *param)
@@ -48,4 +46,4 @@ void	ft_raycast(void *param)
 		data->rc->x_cam++;
 	}
 	// ft_memset(data->image[1]->pixels, 255, data->image[1]->width * (data->image[1]->height) * sizeof(int32_t));
-}
+} 

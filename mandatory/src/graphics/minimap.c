@@ -6,7 +6,7 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/23 06:48:04 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/08/28 21:53:46 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@ void	draw_wall(t_cupData *data, int y, int x, uint32_t color)
 {
 	int i = 0;
 	int j = 0;
-	
+
 	x = (int)(x * 10 - (int)(fmod(data->player->pos.x, 1) * 10.0));
 	y = (int)(y * 10 - (int)(fmod(data->player->pos.y, 1) * 10.0)) ;
+
 	while (j < 10)
 	{
 		while (i < 10)
@@ -32,16 +33,27 @@ void	draw_wall(t_cupData *data, int y, int x, uint32_t color)
 	}
 }
 
-void	draw_player(t_cupData *data, int y, int x, uint32_t color)
+void	draw_player(t_cupData *data)
 {
 	int i = 0;
 	int j = 0;
-
-	while (j < 10)
+	int tex_pixel;
+	int x;
+	int y;
+	int dir;
+	
+	while (j < 16)
 	{
-		while (i < 10)
+		while (i < 16)
 		{
-			mlx_put_pixel(data->image[1], i + x * 10 - 5, j + y * 10 - 5, color);
+			tex_pixel = j * 16 + i;
+			dir = -1;
+			if (data->player->dir.x < 0)
+				 dir = 1;
+			x = roundf(((i - 7.5) * cos(acos(data->player->dir.y) * dir) - (j - 7.5) * sin(acos(data->player->dir.y) * dir)) + 7.5);
+			y = roundf(((i - 7.5) * sin(acos(data->player->dir.y) * dir) + (j - 7.5) * cos(acos(data->player->dir.y) * dir)) + 7.5);
+			mlx_put_pixel(data->image[2], x + 4, y + 4, \
+					convert_to_rgba(&(data->tex[4]->pixels[tex_pixel * 4])));
 			i++;
 		}
 		i = 0;
@@ -83,5 +95,5 @@ void	ft_minimap(void *param)
 		x = 0;
 		y++;
 	}
-	draw_player(data, 12, 12, 0xff8000ff);
+	draw_player(data);
 }
