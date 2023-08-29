@@ -6,7 +6,7 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/28 21:53:46 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/08/29 17:52:27 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,16 @@ void	draw_player(t_cupData *data)
 	int y;
 	int dir;
 	
-	while (j < 16)
+	while (j < 22)
 	{
-		while (i < 16)
+		while (i < 22)
 		{
-			tex_pixel = j * 16 + i;
+			tex_pixel = j * 22 + i;
 			dir = -1;
 			if (data->player->dir.x < 0)
 				 dir = 1;
-			x = roundf(((i - 7.5) * cos(acos(data->player->dir.y) * dir) - (j - 7.5) * sin(acos(data->player->dir.y) * dir)) + 7.5);
-			y = roundf(((i - 7.5) * sin(acos(data->player->dir.y) * dir) + (j - 7.5) * cos(acos(data->player->dir.y) * dir)) + 7.5);
+			x = roundf(((i - 10.5) * cos(acos(data->player->dir.y) * dir) - (j - 10.5) * sin(acos(data->player->dir.y) * dir)) + 10.5);
+			y = roundf(((i - 10.5) * sin(acos(data->player->dir.y) * dir) + (j - 10.5) * cos(acos(data->player->dir.y) * dir)) + 10.5);
 			mlx_put_pixel(data->image[2], x + 4, y + 4, \
 					convert_to_rgba(&(data->tex[4]->pixels[tex_pixel * 4])));
 			i++;

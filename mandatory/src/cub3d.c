@@ -6,7 +6,7 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/28 21:27:20 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/08/29 17:49:11 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	init_textures(t_cupData *data)
 		data->tex[i] = mlx_load_png(data->parser->textures[i]);
 		i++;
 	}
-	data->tex[i] = mlx_load_png("./textures/unnamed.png");
+	data->tex[i] = mlx_load_png("./textures/unnamed-1.png");
 }
 
 void	init_cupData(t_cupData *data, t_player *player, t_raycaster *rc)

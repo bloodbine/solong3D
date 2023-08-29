@@ -6,7 +6,7 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/28 19:28:49 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/08/29 17:52:10 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ int	init_graphics(t_cupData *data)
 	//segfault when trying to resize window with mouse
 	if (!(data->image[0] = mlx_new_image(data->mlx, data->mlx->width, data->mlx->height)) || \
 		!(data->image[1] = mlx_new_image(data->mlx, data->mlx->width / 8, data->mlx->height / 4.5)) || \
-		!(data->image[2] = mlx_new_image(data->mlx, 22, 22)))
+		!(data->image[2] = mlx_new_image(data->mlx, 30, 30)))
 		return(mlx_close_window(data->mlx), puts(mlx_strerror(mlx_errno)), EXIT_FAILURE);
 	if (mlx_image_to_window(data->mlx, data->image[0], 0, 0) == -1 || \
 		mlx_image_to_window(data->mlx, data->image[1], 10, 10) == -1 || \
-		mlx_image_to_window(data->mlx, data->image[2], 118, 118) == -1)
+		mlx_image_to_window(data->mlx, data->image[2], 115, 115) == -1)
 		return(mlx_close_window(data->mlx), puts(mlx_strerror(mlx_errno)), EXIT_FAILURE);
 	
 	return (EXIT_SUCCESS);
