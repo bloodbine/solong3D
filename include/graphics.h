@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 22:38:40 by ffederol          #+#    #+#             */
-/*   Updated: 2023/08/26 15:20:25 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/08/23 07:34:54 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 
 # include <math.h>
 
-int		manage_graphics(void *param);
-void	draw_line(void *param);
-void	ft_minimap(void *param);
+int			manage_graphics(void *param);
+void		draw_line(void *param);
+void		ft_minimap(void *param);
+uint32_t	convert_to_rgba(uint8_t *pixels);
 
 #endif

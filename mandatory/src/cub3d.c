@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/26 14:30:09 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/08/29 17:49:11 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	init_textures(t_cubdata *data)
 		data->tex[i] = mlx_load_png(data->parser->textures[i]);
 		i++;
 	}
+	data->tex[i] = mlx_load_png("./textures/unnamed-1.png");
 }
 
 void	init_cubdata(t_cubdata *data, t_player *player, t_raycaster *rc)

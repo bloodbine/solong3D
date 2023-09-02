@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/26 14:30:09 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/08/29 17:52:27 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	draw_wall(t_cubdata *data, int y, int x, uint32_t color)
 	j = 0;
 	x = (int)(x * 10 - (int)(fmod(data->player->pos.x, 1) * 10.0));
 	y = (int)(y * 10 - (int)(fmod(data->player->pos.y, 1) * 10.0)) ;
+
 	while (j < 10)
 	{
 		while (i < 10)
@@ -34,19 +35,27 @@ void	draw_wall(t_cubdata *data, int y, int x, uint32_t color)
 	}
 }
 
-void	draw_player(t_cubdata *data, int y, int x, uint32_t color)
+void	draw_player(t_cupData *data)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (j < 10)
+	int i = 0;
+	int j = 0;
+	int tex_pixel;
+	int x;
+	int y;
+	int dir;
+	
+	while (j < 22)
 	{
-		while (i < 10)
+		while (i < 22)
 		{
-			mlx_put_pixel(data->image[1], i + x * 10 - 5, \
-			j + y * 10 - 5, color);
+			tex_pixel = j * 22 + i;
+			dir = -1;
+			if (data->player->dir.x < 0)
+				 dir = 1;
+			x = roundf(((i - 10.5) * cos(acos(data->player->dir.y) * dir) - (j - 10.5) * sin(acos(data->player->dir.y) * dir)) + 10.5);
+			y = roundf(((i - 10.5) * sin(acos(data->player->dir.y) * dir) + (j - 10.5) * cos(acos(data->player->dir.y) * dir)) + 10.5);
+			mlx_put_pixel(data->image[2], x + 4, y + 4, \
+					convert_to_rgba(&(data->tex[4]->pixels[tex_pixel * 4])));
 			i++;
 		}
 		i = 0;
@@ -89,5 +98,5 @@ void	ft_minimap(void *param)
 		x = 0;
 		y++;
 	}
-	draw_player(data, 12, 12, 0xff8000ff);
+	draw_player(data);
 }

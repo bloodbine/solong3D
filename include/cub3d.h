@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 22:38:40 by ffederol          #+#    #+#             */
-/*   Updated: 2023/08/26 15:19:52 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/08/23 08:26:18 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@
 typedef struct s_cubdata
 {
 	mlx_t			*mlx;
-	mlx_image_t		*image[2];
+	mlx_image_t		*image[3];
 	t_parse			*parser;
 	t_player		*player;
 	t_raycaster		*rc;
-	mlx_texture_t	*tex[5];
-	char			**worldmap;
+	mlx_texture_t	*tex[6]; //{N,E,S,W,D}
+	char			**worldMap;
 	int				x_mouse;
 	int				y_mouse;
 }			t_cubdata;
