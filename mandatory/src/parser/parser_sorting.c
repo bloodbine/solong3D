@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:47:29 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/26 15:27:05 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/03 14:14:07 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void	sort_data(t_parse *data, int fd, int *found, char *buff)
 			data->textures[2] = ft_strtrim(buff + 2, " \n");
 		else if (ft_strncmp(buff, "WE", 2) == 0 && ++(*found))
 			data->textures[3] = ft_strtrim(buff + 2, " \n");
+		else if (ft_strncmp(buff, "D", 1) == 0 && ++(*found))
+			data->textures[4] = ft_strtrim(buff + 2, " \n");
 		else if (ft_strncmp(buff, "F", 1) == 0 && ++(*found))
 			data->floor = sort_rgba(buff);
 		else if (ft_strncmp(buff, "C", 1) == 0 && ++(*found))
@@ -80,8 +82,12 @@ void	sort_data(t_parse *data, int fd, int *found, char *buff)
 		free(buff);
 		buff = get_next_line(fd);
 	}
-	data->textures[4] = NULL;
-	if (*found != 6 || buff == NULL)
+	printf("Kurva: %d | %s\n", *found, data->textures[4]);
+	if (*found == 6)
+		data->textures[4] = NULL;
+	else if (*found == 7)
+		data->textures[5] = NULL;
+	if ((*found != 6 && *found != 7) || buff == NULL)
 		parse_error("Incorrect variables");
 	sort_map(data, fd);
 }

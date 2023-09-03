@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/28 17:03:05 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/09/02 15:13:28 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ uint32_t	convert_to_rgba(uint8_t *pixels)
 	return (color);
 }
 
-void	put_line(t_cubdata *data, t_lineData *l, t_raycaster *rc)
+void	put_line(t_cubdata *data, t_linedata *l, t_raycaster *rc)
 {
 	int		i;
 	int		tex_pixel;
@@ -38,9 +38,9 @@ void	put_line(t_cubdata *data, t_lineData *l, t_raycaster *rc)
 	i = 0;
 	while (i < data->mlx->height)
 	{
-		if (i < l->drawStart)
+		if (i < l->drawstart)
 			mlx_put_pixel(data->image[0], rc->x_cam, i, data->parser->roof);
-		else if (i > l->drawEnd)
+		else if (i > l->drawend)
 			mlx_put_pixel(data->image[0], rc->x_cam, i, data->parser->floor);
 		else
 		{
@@ -53,7 +53,7 @@ void	put_line(t_cubdata *data, t_lineData *l, t_raycaster *rc)
 	}
 }
 
-void	init_line(t_cubdata *data, t_lineData *l, t_raycaster *rc)
+void	init_line(t_cubdata *data, t_linedata *l, t_raycaster *rc)
 {
 	l->lineheight = (int)(data->mlx->height / rc->camplane2walldist);
 	l->drawstart = -l->lineheight / 2 + data->mlx->height / 2;
@@ -76,7 +76,7 @@ void	init_line(t_cubdata *data, t_lineData *l, t_raycaster *rc)
 void	draw_line(void *param)
 {
 	t_cubdata	*data;
-	t_lineData	line;
+	t_linedata	line;
 
 	data = (t_cubdata *)param;
 	init_line(data, &line, data->rc);

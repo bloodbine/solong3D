@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 22:38:40 by ffederol          #+#    #+#             */
-/*   Updated: 2023/08/23 08:26:18 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/09/03 14:06:41 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ typedef struct s_cubdata
 	t_parse			*parser;
 	t_player		*player;
 	t_raycaster		*rc;
-	mlx_texture_t	*tex[6]; //{N,E,S,W,D}
-	char			**worldMap;
+	mlx_texture_t	*tex[6]; //{N,E,S,W,D,P}
+	char			**worldmap;
 	int				x_mouse;
 	int				y_mouse;
 }			t_cubdata;
@@ -47,6 +47,6 @@ typedef struct s_lineData
 	int		x_tex;
 	double	y;
 	double	yinc;
-}			t_lineData;
+}			t_linedata;
 
 #endif

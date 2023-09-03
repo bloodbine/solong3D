@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 22:38:40 by ffederol          #+#    #+#             */
-/*   Updated: 2023/08/26 14:30:09 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/03 14:06:48 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 # include "vector.h"
 # include <fcntl.h>
 
-// textures: N, E, S, W, NULL
+// textures: N, E, S, W, D, NULL
 // directions: (x|y)  N = (0|-1), E = (1|0), S = (0|1), W = (-1|0)
 typedef struct s_parse
 {
-	char			*textures[5];
+	char			*textures[6];
 	char			**worldmap;
 	int				error;
 	uint32_t		floor;

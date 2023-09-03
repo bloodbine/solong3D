@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/29 17:49:11 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/09/03 13:30:25 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	init_player(t_cubdata *data)
 {
-	data->player->pos.x = data->parser->playerpos.x;
-	data->player->pos.y = data->parser->playerpos.y;
+	data->player->pos.x = data->parser->playerpos.x + 0.5;
+	data->player->pos.y = data->parser->playerpos.y + 0.5;
 	data->player->dir.x = data->parser->playerdir.x;
 	data->player->dir.y = data->parser->playerdir.y;
 	data->player->cam_plane.x = -0.66 * (fabs(data->player->dir.x) - 1);
@@ -30,8 +30,10 @@ void	init_textures(t_cubdata *data)
 	while (data->parser->textures[i])
 	{
 		data->tex[i] = mlx_load_png(data->parser->textures[i]);
+		printf("Tex : %s\n", data->parser->textures[i]);
 		i++;
 	}
+	printf("Tex : %s\n", data->parser->textures[i]);
 	data->tex[i] = mlx_load_png("./textures/unnamed-1.png");
 }
 

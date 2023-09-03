@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/29 17:52:27 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/09/02 14:07:29 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,15 @@ void	draw_wall(t_cubdata *data, int y, int x, uint32_t color)
 	}
 }
 
-void	draw_player(t_cupData *data)
+void	draw_player(t_cubdata *data)
 {
-	int i = 0;
-	int j = 0;
-	int tex_pixel;
-	int x;
-	int y;
-	int dir;
-	
+	int	i = 0;
+	int	j = 0;
+	int	tex_pixel;
+	int	x;
+	int	y;
+	int	dir;
+
 	while (j < 22)
 	{
 		while (i < 22)
@@ -51,7 +51,7 @@ void	draw_player(t_cupData *data)
 			tex_pixel = j * 22 + i;
 			dir = -1;
 			if (data->player->dir.x < 0)
-				 dir = 1;
+				dir = 1;
 			x = roundf(((i - 10.5) * cos(acos(data->player->dir.y) * dir) - (j - 10.5) * sin(acos(data->player->dir.y) * dir)) + 10.5);
 			y = roundf(((i - 10.5) * sin(acos(data->player->dir.y) * dir) + (j - 10.5) * cos(acos(data->player->dir.y) * dir)) + 10.5);
 			mlx_put_pixel(data->image[2], x + 4, y + 4, \
