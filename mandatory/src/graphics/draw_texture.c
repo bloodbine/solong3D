@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/02 15:13:28 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/04 14:55:39 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,13 @@ void	put_line(t_cubdata *data, t_linedata *l, t_raycaster *rc)
 			mlx_put_pixel(data->image[0], rc->x_cam, i, data->parser->roof);
 		else if (i > l->drawend)
 			mlx_put_pixel(data->image[0], rc->x_cam, i, data->parser->floor);
+		else if (data->rc->hit == 2)
+		{
+			tex_pixel = (int)(l->y) * data->tex[4]->width + l->x_tex;
+			l->y += l->yinc;
+			mlx_put_pixel(data->image[0], rc->x_cam, i, \
+				convert_to_rgba(&(data->tex[4]->pixels[tex_pixel * 4])));
+		}
 		else
 		{
 			tex_pixel = (int)(l->y) * data->tex[rc->side]->width + l->x_tex;

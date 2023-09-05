@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:47:29 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/03 14:14:07 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/03 14:29:39 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,7 @@ void	sort_data(t_parse *data, int fd, int *found, char *buff)
 		buff = get_next_line(fd);
 	}
 	printf("Kurva: %d | %s\n", *found, data->textures[4]);
-	if (*found == 6)
-		data->textures[4] = NULL;
-	else if (*found == 7)
-		data->textures[5] = NULL;
+	data->textures[5] = NULL;
 	if ((*found != 6 && *found != 7) || buff == NULL)
 		parse_error("Incorrect variables");
 	sort_map(data, fd);

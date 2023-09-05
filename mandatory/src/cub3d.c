@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/03 13:30:25 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/04 14:24:49 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,12 @@ void	init_player(t_cubdata *data)
 
 void	init_textures(t_cubdata *data)
 {
-	int	i;
-
-	i = 0;
-	while (data->parser->textures[i])
-	{
-		data->tex[i] = mlx_load_png(data->parser->textures[i]);
-		printf("Tex : %s\n", data->parser->textures[i]);
-		i++;
-	}
-	printf("Tex : %s\n", data->parser->textures[i]);
-	data->tex[i] = mlx_load_png("./textures/unnamed-1.png");
+	data->tex[0] = mlx_load_png(data->parser->textures[0]);
+	data->tex[1] = mlx_load_png(data->parser->textures[1]);
+	data->tex[2] = mlx_load_png(data->parser->textures[2]);
+	data->tex[3] = mlx_load_png(data->parser->textures[3]);
+	data->tex[4] = mlx_load_png(data->parser->textures[4]);
+	data->tex[5] = mlx_load_png("./textures/unnamed-1.png");
 }
 
 void	init_cubdata(t_cubdata *data, t_player *player, t_raycaster *rc)

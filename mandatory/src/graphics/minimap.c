@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/02 14:07:29 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/03 16:53:00 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	draw_player(t_cubdata *data)
 			x = roundf(((i - 10.5) * cos(acos(data->player->dir.y) * dir) - (j - 10.5) * sin(acos(data->player->dir.y) * dir)) + 10.5);
 			y = roundf(((i - 10.5) * sin(acos(data->player->dir.y) * dir) + (j - 10.5) * cos(acos(data->player->dir.y) * dir)) + 10.5);
 			mlx_put_pixel(data->image[2], x + 4, y + 4, \
-					convert_to_rgba(&(data->tex[4]->pixels[tex_pixel * 4])));
+					convert_to_rgba(&(data->tex[5]->pixels[tex_pixel * 4])));
 			i++;
 		}
 		i = 0;

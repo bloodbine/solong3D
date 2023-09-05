@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:54:30 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/03 14:04:22 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/04 14:41:32 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	character_check(char **map)
 	j = 0;
 	while (map[i])
 	{
-		printf("Index: %d\n", i);
 		while (map[i][j] != '\0')
 		{
 			if (map[i][j] != '1' && map[i][j] != '0' && map[i][j] != ' ' && \

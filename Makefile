@@ -6,7 +6,7 @@
 #    By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/12 21:35:02 by ffederol          #+#    #+#              #
-#    Updated: 2023/09/03 13:40:39 by gpasztor         ###   ########.fr        #
+#    Updated: 2023/09/04 14:53:15 by gpasztor         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ CC		= cc
 RMF		= rm -f
 RMRF	= rm -rf
 RMDIR	= rmdir
-CFLAGS	= -Wall -Wextra -Werror -fsanitize=address -g -Ofast 
+CFLAGS	= -Wall -Wextra -Werror -g -Ofast 
 FFLAGS	= -lglfw 
 
 $(OBJDIR)%.o: $(SRCDIR)%.c
