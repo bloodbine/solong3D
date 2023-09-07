@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:26:50 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/26 14:30:09 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/07 16:12:08 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ t_parse	*parse(int argc, char **argv)
 }
 
 	// printf("TEST Found: %d\n", found);
-	// printf("TEST NO: %s\n", parsed_data.textures[0]);
-	// printf("TEST EA: %s\n", parsed_data.textures[1]);
-	// printf("TEST SO: %s\n", parsed_data.textures[2]);
-	// printf("TEST WE: %s\n", parsed_data.textures[3]);
-	// printf("TEST F: 0x%06X\n", parsed_data.floor);
-	// printf("TEST C: 0x%06X\n", parsed_data.roof);
+	// printf("TEST NO: %s\n", data->textures[0]);
+	// printf("TEST EA: %s\n", data->textures[1]);
+	// printf("TEST SO: %s\n", data->textures[2]);
+	// printf("TEST WE: %s\n", data->textures[3]);
+	// printf("TEST F: 0x%06X\n", data->floor);
+	// printf("TEST C: 0x%06X\n", data->roof);

@@ -1,11 +1,11 @@
-NO ./textures/8x8bricks.png
-SO ./textures/8x8bricks.png
-WE ./textures/8x8bricks.png
-EA ./textures/8x8bricks.png
+NO ./textures/bricks.png
+SO ./textures/bricks.png
+WE ./textures/bricks.png
+EA ./textures/bricks.png
 D ./textures/Door.png
 
-F 42,42,42
-C 42,42,42
+F 0,0,0
+C 0,0,0
 
 11111111111
 10000000001

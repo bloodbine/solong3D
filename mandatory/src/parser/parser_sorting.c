@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:47:29 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/03 14:29:39 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/07 16:11:49 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,12 @@ void	sort_map(t_parse *data, int fd)
 
 void	sort_data(t_parse *data, int fd, int *found, char *buff)
 {
+	int	limit;
+
+	limit = 6;
 	buff = get_next_line(fd);
 	while (buff != NULL)
 	{
-		if (*found == 6)
-			break ;
 		if (ft_strncmp(buff, "NO", 2) == 0 && ++(*found))
 			data->textures[0] = ft_strtrim(buff + 2, " \n");
 		else if (ft_strncmp(buff, "EA", 2) == 0 && ++(*found))
@@ -74,15 +75,19 @@ void	sort_data(t_parse *data, int fd, int *found, char *buff)
 		else if (ft_strncmp(buff, "WE", 2) == 0 && ++(*found))
 			data->textures[3] = ft_strtrim(buff + 2, " \n");
 		else if (ft_strncmp(buff, "D", 1) == 0 && ++(*found))
+		{
 			data->textures[4] = ft_strtrim(buff + 2, " \n");
+			limit = 7;
+		}
 		else if (ft_strncmp(buff, "F", 1) == 0 && ++(*found))
 			data->floor = sort_rgba(buff);
 		else if (ft_strncmp(buff, "C", 1) == 0 && ++(*found))
 			data->roof = sort_rgba(buff);
 		free(buff);
+		if (*found == limit)
+			break ;
 		buff = get_next_line(fd);
 	}
-	printf("Kurva: %d | %s\n", *found, data->textures[4]);
 	data->textures[5] = NULL;
 	if ((*found != 6 && *found != 7) || buff == NULL)
 		parse_error("Incorrect variables");
