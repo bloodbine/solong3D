@@ -6,7 +6,7 @@
 #    By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/12 21:35:02 by ffederol          #+#    #+#              #
-#    Updated: 2023/09/04 14:53:15 by gpasztor         ###   ########.fr        #
+#    Updated: 2023/09/08 10:52:06 by gpasztor         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,20 +19,21 @@ LIBFT   = ./lib/libft/libft.a
 LIBMLX42_DIR = ./lib/MLX42/build/
 LIBMLX42 = $(LIBMLX42_DIR)libmlx42.a
 
-MAIN	=	cub3d \
-			movement \
-			
-PARSER		=	parser/parser \
-				parser/parser_utils \
-				parser/parser_validity \
+MAIN	=	cub3d		\
+			movement	\
+			door
+
+PARSER		=	parser/parser			\
+				parser/parser_utils		\
+				parser/parser_validity	\
 				parser/parser_sorting
 
-RAYCASTER	=	raycaster/raycaster \
+RAYCASTER	=	raycaster/raycaster	\
 				raycaster/ray_calculations
 
-GRAPHICS	=	graphics/graphics \
-				graphics/draw_texture \
-				graphics/minimap \
+GRAPHICS	=	graphics/graphics		\
+				graphics/draw_texture	\
+				graphics/minimap
 
 SOURCE		= $(MAIN) $(PARSER) $(RAYCASTER) $(GRAPHICS)
 
