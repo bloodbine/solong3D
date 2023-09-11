@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/04 14:55:39 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/11 15:52:57 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,13 @@ void	put_line(t_cubdata *data, t_linedata *l, t_raycaster *rc)
 			l->y += l->yinc;
 			mlx_put_pixel(data->image[0], rc->x_cam, i, \
 				convert_to_rgba(&(data->tex[4]->pixels[tex_pixel * 4])));
+		}
+		else if (data->rc->hit == 3)
+		{
+			tex_pixel = (int)(l->y) * data->test[0]->width + l->x_tex;
+			l->y += l->yinc;
+			mlx_put_pixel(data->image[0], rc->x_cam, i, \
+				convert_to_rgba(&(data->test[0]->pixels[tex_pixel * 4])));
 		}
 		else
 		{

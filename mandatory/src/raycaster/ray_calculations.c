@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/04 14:34:06 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/11 15:52:08 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void	calc_raydist(void *param)
 			data->rc->hit = 1;
 		if (data->parser->worldmap[data->rc->map.y][data->rc->map.x] == 'D')
 			data->rc->hit = 2;
+		if (data->parser->worldmap[data->rc->map.y][data->rc->map.x] == 'P')
+			data->rc->hit = 3;
 	}
 }
 

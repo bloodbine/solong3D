@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:54:30 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/04 14:41:32 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/11 15:44:26 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	character_check(char **map)
 		{
 			if (map[i][j] != '1' && map[i][j] != '0' && map[i][j] != ' ' && \
 			map[i][j] != 'N' && map[i][j] != 'S' && map[i][j] != 'W' && \
-			map[i][j] != 'E' && map[i][j] != 'D')
+			map[i][j] != 'E' && map[i][j] != 'D' && map[i][j] != 'P')
 				return (1);
 			j++;
 		}
