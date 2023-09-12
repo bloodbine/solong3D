@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/11 15:52:57 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/12 11:34:34 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ uint32_t	convert_to_rgba(uint8_t *pixels)
 
 void	put_line(t_cubdata *data, t_linedata *l, t_raycaster *rc)
 {
-	int		i;
-	int		tex_pixel;
+	int			i;
+	int			tex_pixel;
 
 	i = 0;
 	while (i < data->mlx->height)
@@ -51,10 +51,10 @@ void	put_line(t_cubdata *data, t_linedata *l, t_raycaster *rc)
 		}
 		else if (data->rc->hit == 3)
 		{
-			tex_pixel = (int)(l->y) * data->test[0]->width + l->x_tex;
+			tex_pixel = (int)(l->y) * data->ptex[data->prot]->width + l->x_tex;
 			l->y += l->yinc;
 			mlx_put_pixel(data->image[0], rc->x_cam, i, \
-				convert_to_rgba(&(data->test[0]->pixels[tex_pixel * 4])));
+				convert_to_rgba(&(data->ptex[data->prot]->pixels[tex_pixel * 4])));
 		}
 		else
 		{

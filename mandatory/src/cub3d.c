@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/11 15:43:53 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/11 16:45:15 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ void	init_textures(t_cubdata *data)
 	data->tex[3] = mlx_load_png(data->parser->textures[3]);
 	data->tex[4] = mlx_load_png(data->parser->textures[4]);
 	data->tex[5] = mlx_load_png("./textures/unnamed-1.png");
-	data->test[0] = mlx_load_png("./textures/portal/portal1.png");
-	data->test[1] = mlx_load_png("./textures/portal/portal2.png");
-	data->test[2] = mlx_load_png("./textures/portal/portal3.png");
-	data->test[3] = mlx_load_png("./textures/portal/portal4.png");
-	data->test[4] = mlx_load_png("./textures/portal/portal5.png");
-	data->test[5] = mlx_load_png("./textures/portal/portal6.png");
-	// printf("%p %p %p %p %p %p\n", data->test[0], data->test[1], data->test[2], data->test[3], data->test[4], data->test[5]);
+	data->ptex[0] = mlx_load_png("./textures/portal/portal1.png");
+	data->ptex[1] = mlx_load_png("./textures/portal/portal2.png");
+	data->ptex[2] = mlx_load_png("./textures/portal/portal3.png");
+	data->ptex[3] = mlx_load_png("./textures/portal/portal4.png");
+	data->ptex[4] = mlx_load_png("./textures/portal/portal5.png");
+	data->ptex[5] = mlx_load_png("./textures/portal/portal6.png");
+	// printf("%p %p %p %p %p %p\n", data->ptex[0], data->ptex[1], data->ptex[2], data->ptex[3], data->ptex[4], data->ptex[5]);
 }
 
 void	init_cubdata(t_cubdata *data, t_player *player, t_raycaster *rc)

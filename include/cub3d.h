@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 22:38:40 by ffederol          #+#    #+#             */
-/*   Updated: 2023/09/11 15:38:11 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/12 12:20:54 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include "raycaster.h"
 # include "movement.h"
 # include "graphics.h"
-# include "portal.h"
 
 # define SCREENWIDTH 960
 # define SCREENHEIGHT 640
@@ -35,8 +34,10 @@ typedef struct s_cubdata
 	t_player		*player;
 	t_raycaster		*rc;
 	mlx_texture_t	*tex[6]; //{N,E,S,W,D,P}
-	mlx_texture_t	*test[6]; //{N,E,S,W,D,P}
-	// t_portal		*portal;
+	mlx_texture_t	*ptex[6];
+	t_int_vector	ppos[2];
+	int				prot;
+	int				pcount;
 	char			**worldmap;
 	int				x_mouse;
 	int				y_mouse;

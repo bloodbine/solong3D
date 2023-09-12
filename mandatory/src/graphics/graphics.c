@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/05 17:58:38 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/12 12:19:39 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,16 +74,34 @@ int	init_graphics(t_cubdata *data)
 	return (EXIT_SUCCESS);
 }
 
+void	port_counter(void *param)
+{
+	t_cubdata	*data;
+	static int	i = 0;
+
+	data = (t_cubdata *)(param);
+	i++;
+	if (i == 7)
+	{
+		data->prot++;
+		i = 0;
+	}
+	if (data->prot == 6)
+		data->prot = 0;
+}
+
 int	manage_graphics(void *param)
 {
 	t_cubdata	*data;
 
 	data = (t_cubdata *)param;
+	data->prot = 0;
 	if (init_graphics(data))
 		return (EXIT_FAILURE);
 	mlx_loop_hook(data->mlx, ft_raycast, data);
 	mlx_loop_hook(data->mlx, ft_minimap, data);
 	mlx_loop_hook(data->mlx, ft_hook, data);
+	mlx_loop_hook(data->mlx, port_counter, data);
 	mlx_key_hook(data->mlx, open_close, data);
 	mlx_loop(data->mlx);
 	mlx_terminate(data->mlx);
