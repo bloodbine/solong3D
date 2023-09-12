@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 22:38:40 by ffederol          #+#    #+#             */
-/*   Updated: 2023/09/05 15:51:08 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/12 18:44:02 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 void	rotate(t_player *player, int id);
 void	move_straight(t_player *player, int id, char **worldmap);
 void	move_side(t_player *player, int id, char **worldmap);
-void	open_close(mlx_key_data_t keydata, void* param);
+void	interact(mlx_key_data_t keydata, void *param);
+char	get_dir(t_player *player);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/12 21:35:02 by ffederol          #+#    #+#              #
-#    Updated: 2023/09/08 10:52:06 by gpasztor         ###   ########.fr        #
+#    Updated: 2023/09/12 18:43:34 by gpasztor         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ LIBMLX42 = $(LIBMLX42_DIR)libmlx42.a
 
 MAIN	=	cub3d		\
 			movement	\
-			door
+			door		\
+			portal
 
 PARSER		=	parser/parser			\
 				parser/parser_utils		\

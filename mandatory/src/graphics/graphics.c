@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/12 12:19:39 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/12 16:46:13 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	manage_graphics(void *param)
 	mlx_loop_hook(data->mlx, ft_minimap, data);
 	mlx_loop_hook(data->mlx, ft_hook, data);
 	mlx_loop_hook(data->mlx, port_counter, data);
-	mlx_key_hook(data->mlx, open_close, data);
+	mlx_key_hook(data->mlx, interact, data);
 	mlx_loop(data->mlx);
 	mlx_terminate(data->mlx);
 	return (EXIT_SUCCESS);

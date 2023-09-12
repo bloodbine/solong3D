@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 22:38:40 by ffederol          #+#    #+#             */
-/*   Updated: 2023/09/03 14:23:46 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/12 18:08:43 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct s_parse
 	t_int_vector	mapsizes;
 	t_int_vector	playerpos;
 	t_int_vector	playerdir;
+	t_int_vector	ppos[2];
+	int				pcount;
 }				t_parse;
 
 void		parse_free(t_parse *data);
@@ -37,7 +39,7 @@ void		sort_map(t_parse *data, int fd);
 void		sort_data(t_parse *data, int fd, int *found, char *buff);
 void		find_player(t_parse *data);
 void		file_check(t_parse *data);
-int			character_check(char **map);
+int			character_check(t_parse *data, char **map);
 void		padding(t_parse *data, size_t len, size_t col);
 t_parse		*parse(int argc, char **argv);
 void		parse_error(char *error_message);

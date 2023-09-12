@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:54:30 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/11 15:44:26 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/12 19:21:16 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,14 @@ void	file_check(t_parse *data)
 	}
 }
 
-int	character_check(char **map)
+int	character_check(t_parse *data, char **map)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
+	data->pcount = 0;
 	while (map[i])
 	{
 		while (map[i][j] != '\0')
@@ -43,7 +44,15 @@ int	character_check(char **map)
 			map[i][j] != 'E' && map[i][j] != 'D' && map[i][j] != 'P')
 				return (1);
 			j++;
+			if (map[i][j] == 'P')
+			{
+				data->ppos[data->pcount].y = i;
+				data->ppos[data->pcount].x = j;
+				data->pcount++;
+			}
 		}
+		if (data->pcount > 2)
+			return (1);
 		j = 0;
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 22:38:40 by ffederol          #+#    #+#             */
-/*   Updated: 2023/09/12 12:20:54 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/12 18:44:09 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ typedef struct s_cubdata
 	t_raycaster		*rc;
 	mlx_texture_t	*tex[6]; //{N,E,S,W,D,P}
 	mlx_texture_t	*ptex[6];
-	t_int_vector	ppos[2];
 	int				prot;
 	int				pcount;
 	char			**worldmap;
@@ -52,5 +51,7 @@ typedef struct s_lineData
 	double	y;
 	double	yinc;
 }			t_linedata;
+
+void	teleport_check(t_cubdata *data, t_player *player, char dir);
 
 #endif

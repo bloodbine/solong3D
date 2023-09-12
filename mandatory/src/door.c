@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 10:41:52 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/08 12:05:24 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/12 18:42:39 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	toggle_door(t_cubdata *data, t_player *player, char dir)
 		switch_door_tile(data, x - 1, y);
 }
 
-void	open_close(mlx_key_data_t keydata, void *param)
+void	interact(mlx_key_data_t keydata, void *param)
 {
 	t_cubdata	*data;
 	char		**map;
@@ -66,4 +66,5 @@ void	open_close(mlx_key_data_t keydata, void *param)
 	if (keydata.action != MLX_RELEASE || keydata.key != MLX_KEY_E)
 		return ;
 	toggle_door(data, player, get_dir(player));
+	teleport_check(data, player, get_dir(player));
 }
