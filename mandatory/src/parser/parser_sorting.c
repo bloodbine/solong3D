@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:47:29 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/15 11:46:57 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/16 16:13:15 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,27 @@ void	sort_map(t_parse *data, int fd)
 	padding(data, maxline, col);
 }
 
+void	filter(t_parse *data, char *buff, int *found, int *limit)
+{
+	if (ft_strncmp(buff, "NO", 2) == 0 && ++(*found))
+		data->textures[0] = ft_strtrim(buff + 2, " \n");
+	else if (ft_strncmp(buff, "EA", 2) == 0 && ++(*found))
+		data->textures[1] = ft_strtrim(buff + 2, " \n");
+	else if (ft_strncmp(buff, "SO", 2) == 0 && ++(*found))
+		data->textures[2] = ft_strtrim(buff + 2, " \n");
+	else if (ft_strncmp(buff, "WE", 2) == 0 && ++(*found))
+		data->textures[3] = ft_strtrim(buff + 2, " \n");
+	else if (ft_strncmp(buff, "D", 1) == 0 && ++(*found))
+	{
+		data->textures[4] = ft_strtrim(buff + 2, " \n");
+		*limit = 7;
+	}
+	else if (ft_strncmp(buff, "F", 1) == 0 && ++(*found))
+		data->floor = sort_rgba(buff);
+	else if (ft_strncmp(buff, "C", 1) == 0 && ++(*found))
+		data->roof = sort_rgba(buff);
+}
+
 void	sort_data(t_parse *data, int fd, int *found, char *buff)
 {
 	int	limit;
@@ -66,23 +87,7 @@ void	sort_data(t_parse *data, int fd, int *found, char *buff)
 	buff = get_next_line(fd);
 	while (buff != NULL)
 	{
-		if (ft_strncmp(buff, "NO", 2) == 0 && ++(*found))
-			data->textures[0] = ft_strtrim(buff + 2, " \n");
-		else if (ft_strncmp(buff, "EA", 2) == 0 && ++(*found))
-			data->textures[1] = ft_strtrim(buff + 2, " \n");
-		else if (ft_strncmp(buff, "SO", 2) == 0 && ++(*found))
-			data->textures[2] = ft_strtrim(buff + 2, " \n");
-		else if (ft_strncmp(buff, "WE", 2) == 0 && ++(*found))
-			data->textures[3] = ft_strtrim(buff + 2, " \n");
-		else if (ft_strncmp(buff, "D", 1) == 0 && ++(*found))
-		{
-			data->textures[4] = ft_strtrim(buff + 2, " \n");
-			limit = 7;
-		}
-		else if (ft_strncmp(buff, "F", 1) == 0 && ++(*found))
-			data->floor = sort_rgba(buff);
-		else if (ft_strncmp(buff, "C", 1) == 0 && ++(*found))
-			data->roof = sort_rgba(buff);
+		filter(data, buff, found, &limit);
 		free(buff);
 		if (*found == limit)
 			break ;
@@ -91,58 +96,4 @@ void	sort_data(t_parse *data, int fd, int *found, char *buff)
 	if ((*found != 6 && *found != 7) || buff == NULL)
 		parse_error("Incorrect variables");
 	sort_map(data, fd);
-}
-
-void	sort_pos(t_parse *data, char type, int i, int j)
-{
-	data->playerpos.x = j;
-	data->playerpos.y = i;
-	if (type == 'N')
-	{
-		data->playerdir.y = -1;
-		data->playerdir.x = 0;
-	}
-	else if (type == 'E')
-	{
-		data->playerdir.y = 0;
-		data->playerdir.x = 1;
-	}
-	else if (type == 'S')
-	{
-		data->playerdir.y = 1;
-		data->playerdir.x = 0;
-	}
-	else if (type == 'W')
-	{
-		data->playerdir.y = 0;
-		data->playerdir.x = -1;
-	}
-}
-
-void	find_player(t_parse *data)
-{
-	int	i;
-	int	j;
-	int	found;
-
-	i = -1;
-	j = -1;
-	found = 0;
-	while (data->worldmap[++i] != NULL)
-	{
-		while (data->worldmap[i][++j] != '\0')
-		{
-			if (data->worldmap[i][j] == 'N' && ++found)
-				sort_pos(data, 'N', i, j);
-			else if (data->worldmap[i][j] == 'E' && ++found)
-				sort_pos(data, 'E', i, j);
-			else if (data->worldmap[i][j] == 'W' && ++found)
-				sort_pos(data, 'W', i, j);
-			else if (data->worldmap[i][j] == 'S' && ++found)
-				sort_pos(data, 'S', i, j);
-			if (found > 1)
-				parse_error("More than one player found in map");
-		}
-		j = -1;
-	}
 }
