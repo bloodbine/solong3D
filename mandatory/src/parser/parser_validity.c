@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:54:30 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/12 19:21:16 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/16 14:15:08 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,8 @@ void	file_check(t_parse *data)
 	}
 }
 
-int	character_check(t_parse *data, char **map)
+int	character_check(t_parse *data, char **map, int i, int j)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
 	data->pcount = 0;
 	while (map[i])
 	{

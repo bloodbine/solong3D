@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:26:50 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/12 18:43:00 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/16 14:23:03 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,10 @@ t_parse	*parse(int argc, char **argv)
 		parse_error("Failed to open map file");
 	sort_data(data, fd, &found, NULL);
 	find_player(data);
-	if (character_check(data, data->worldmap) == 1)
+	if (character_check(data, data->worldmap, 0, 0) == 1)
 		parse_error("Invalid character in map");
 	run_dfs(data);
 	file_check(data);
 	data->worldmap[data->playerpos.y][data->playerpos.x] = '0';
 	return (data);
 }
-
-	// printf("TEST Found: %d\n", found);
-	// printf("TEST NO: %s\n", data->textures[0]);
-	// printf("TEST EA: %s\n", data->textures[1]);
-	// printf("TEST SO: %s\n", data->textures[2]);
-	// printf("TEST WE: %s\n", data->textures[3]);
-	// printf("TEST F: 0x%06X\n", data->floor);
-	// printf("TEST C: 0x%06X\n", data->roof);

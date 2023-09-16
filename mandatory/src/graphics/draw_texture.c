@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/12 11:34:34 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/16 14:51:44 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,38 +32,30 @@ uint32_t	convert_to_rgba(uint8_t *pixels)
 
 void	put_line(t_cubdata *data, t_linedata *l, t_raycaster *rc)
 {
-	int			i;
-	int			tex_pixel;
+	int				tex_pixel;
+	mlx_texture_t	*tex;
+	int				i;
 
-	i = 0;
-	while (i < data->mlx->height)
+	i = -1;
+	while (++i < data->mlx->height)
 	{
 		if (i < l->drawstart)
 			mlx_put_pixel(data->image[0], rc->x_cam, i, data->parser->roof);
 		else if (i > l->drawend)
 			mlx_put_pixel(data->image[0], rc->x_cam, i, data->parser->floor);
-		else if (data->rc->hit == 2)
-		{
-			tex_pixel = (int)(l->y) * data->tex[4]->width + l->x_tex;
-			l->y += l->yinc;
-			mlx_put_pixel(data->image[0], rc->x_cam, i, \
-				convert_to_rgba(&(data->tex[4]->pixels[tex_pixel * 4])));
-		}
-		else if (data->rc->hit == 3)
-		{
-			tex_pixel = (int)(l->y) * data->ptex[data->prot]->width + l->x_tex;
-			l->y += l->yinc;
-			mlx_put_pixel(data->image[0], rc->x_cam, i, \
-				convert_to_rgba(&(data->ptex[data->prot]->pixels[tex_pixel * 4])));
-		}
 		else
 		{
+			if (data->rc->hit == 2)
+				tex = data->tex[4];
+			else if (data->rc->hit == 3)
+				tex = data->ptex[data->prot];
+			else
+				tex = data->tex[rc->side];
 			tex_pixel = (int)(l->y) * data->tex[rc->side]->width + l->x_tex;
 			l->y += l->yinc;
 			mlx_put_pixel(data->image[0], rc->x_cam, i, \
-				convert_to_rgba(&(data->tex[rc->side]->pixels[tex_pixel * 4])));
+				convert_to_rgba(&(tex->pixels[tex_pixel * 4])));
 		}
-		i++;
 	}
 }
 

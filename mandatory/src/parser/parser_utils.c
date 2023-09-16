@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:37:29 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/03 13:49:09 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/16 13:58:26 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	parse_error(char *error_message)
 	write(STDERR_FILENO, "Error\n", 7);
 	write(STDERR_FILENO, error_message, ft_strlen(error_message));
 	write(STDERR_FILENO, "\n", 2);
-	exit(EXIT_FAILURE);
+	exit(system("leaks cub3D"));
 }
 
 void	parse_free(t_parse *data)
@@ -80,7 +80,6 @@ void	padding(t_parse *data, size_t len, size_t col)
 	while (ft_strlen(pad_line) < len + 5)
 		pad_line = ft_frstrjoin(pad_line, " ", 1);
 	pad_line = ft_frstrjoin(pad_line, "\n", 1);
-	printf("Col: %zu\n", col);
 	data->worldmap[col - 1] = ft_frstrjoin(data->worldmap[col - 1], "\n", 1);
 	i = 0;
 	j = 0;

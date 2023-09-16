@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 12:25:04 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/14 14:02:34 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/14 15:05:05 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	second_teleport_check(t_cubdata *data, int x, int y, char dir)
 
 void	teleport_check(t_cubdata *data, t_player *player, char dir)
 {
-	if (dir == '0')
+	if (dir == '0' || data->parser->pcount < 2)
 		return ;
 	if (dir == 'N')
 		second_teleport_check(data, player->pos.x, player->pos.y - 1, dir);

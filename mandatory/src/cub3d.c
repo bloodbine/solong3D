@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/11 16:45:15 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/16 14:07:45 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ void	init_player(t_cubdata *data)
 
 void	init_textures(t_cubdata *data)
 {
+	int	i;
+
+	i = 0;
 	data->tex[0] = mlx_load_png(data->parser->textures[0]);
 	data->tex[1] = mlx_load_png(data->parser->textures[1]);
 	data->tex[2] = mlx_load_png(data->parser->textures[2]);
@@ -36,7 +39,15 @@ void	init_textures(t_cubdata *data)
 	data->ptex[3] = mlx_load_png("./textures/portal/portal4.png");
 	data->ptex[4] = mlx_load_png("./textures/portal/portal5.png");
 	data->ptex[5] = mlx_load_png("./textures/portal/portal6.png");
-	// printf("%p %p %p %p %p %p\n", data->ptex[0], data->ptex[1], data->ptex[2], data->ptex[3], data->ptex[4], data->ptex[5]);
+	while (i < 6)
+	{
+		if (!data->tex[i] || !data->ptex[i])
+		{
+			parse_free(data->parser);
+			parse_error("failed to load image");
+		}
+		i++;
+	}
 }
 
 void	init_cubdata(t_cubdata *data, t_player *player, t_raycaster *rc)
@@ -57,7 +68,7 @@ int	main(int argc, char**argv)
 	data.parser = parse(argc, argv);
 	init_cubdata(&data, &player, &rc);
 	if (manage_graphics(&data))
-		return (EXIT_FAILURE);
+		return (system("leaks cub3D"));
 	else
-		return (EXIT_SUCCESS);
+		return (system("leaks cub3D"));
 }

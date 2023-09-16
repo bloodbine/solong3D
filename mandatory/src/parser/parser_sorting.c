@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:47:29 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/07 16:11:49 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/15 11:46:57 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ void	sort_data(t_parse *data, int fd, int *found, char *buff)
 			break ;
 		buff = get_next_line(fd);
 	}
-	data->textures[5] = NULL;
 	if ((*found != 6 && *found != 7) || buff == NULL)
 		parse_error("Incorrect variables");
 	sort_map(data, fd);
@@ -118,8 +117,6 @@ void	sort_pos(t_parse *data, char type, int i, int j)
 		data->playerdir.y = 0;
 		data->playerdir.x = -1;
 	}
-	printf("DEBUG: Player Pos: [%d/%d]\n", data->playerpos.x, data->playerpos.y);
-	printf("DEBUG: Player Dir: %c\n", type);
 }
 
 void	find_player(t_parse *data)
