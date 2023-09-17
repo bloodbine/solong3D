@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/16 14:07:45 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/17 15:53:16 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,7 @@ void	init_textures(t_cubdata *data)
 	while (i < 6)
 	{
 		if (!data->tex[i] || !data->ptex[i])
-		{
-			parse_free(data->parser);
 			parse_error("failed to load image");
-		}
 		i++;
 	}
 }

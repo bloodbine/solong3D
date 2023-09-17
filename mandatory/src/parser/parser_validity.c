@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:54:30 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/16 16:12:30 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/17 12:05:58 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	closed_check(t_parse *data, char **map, int y, int x)
 		return ;
 	if (map[y][x] == ' ')
 	{
+		printf("Not closed at: [%d/%d]\n", x - 3, y - 3);
 		data->error = 1;
 		return ;
 	}
@@ -97,6 +98,10 @@ void	run_dfs(t_parse *data)
 		temp_map[i] = ft_strdup(data->worldmap[i]);
 	temp_map[i] = NULL;
 	closed_check(data, temp_map, data->playerpos.y, data->playerpos.x);
+	if (data->pcount > 0)
+		closed_check(data, temp_map, data->ppos[0].y, data->ppos[0].x);
+	if (data->pcount > 1)
+		closed_check(data, temp_map, data->ppos[1].y, data->ppos[1].x);
 	i = -1;
 	while (temp_map[++i] != NULL)
 		free(temp_map[i]);

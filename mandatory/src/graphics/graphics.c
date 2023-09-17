@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/12 16:46:13 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/17 15:41:48 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	ft_hook(void *param)
 		rotate(data->player, -1);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
 		rotate(data->player, 1);
-	// printf("FPS: %f\n", (1 / data->mlx->delta_time));
 }
 
 int	init_graphics(t_cubdata *data)
@@ -105,5 +104,6 @@ int	manage_graphics(void *param)
 	mlx_key_hook(data->mlx, interact, data);
 	mlx_loop(data->mlx);
 	mlx_terminate(data->mlx);
+	parse_free(data->parser);
 	return (EXIT_SUCCESS);
 }
