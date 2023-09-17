@@ -6,7 +6,7 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/29 17:52:27 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/09/14 21:54:14 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	draw_player(t_cupData *data)
 	int x;
 	int y;
 	int dir;
-	
+
 	while (j < 22)
 	{
 		while (i < 22)
@@ -50,8 +50,8 @@ void	draw_player(t_cupData *data)
 			dir = -1;
 			if (data->player->dir.x < 0)
 				 dir = 1;
-			x = roundf(((i - 10.5) * cos(acos(data->player->dir.y) * dir) - (j - 10.5) * sin(acos(data->player->dir.y) * dir)) + 10.5);
-			y = roundf(((i - 10.5) * sin(acos(data->player->dir.y) * dir) + (j - 10.5) * cos(acos(data->player->dir.y) * dir)) + 10.5);
+			x = (int)roundf(((i - 10.5) * cos(acos(data->player->dir.y) * dir) - (j - 10.5) * sin(acos(data->player->dir.y) * dir)) + 10.5);
+			y = (int)roundf(((i - 10.5) * sin(acos(data->player->dir.y) * dir) + (j - 10.5) * cos(acos(data->player->dir.y) * dir)) + 10.5);
 			mlx_put_pixel(data->image[2], x + 4, y + 4, \
 					convert_to_rgba(&(data->tex[4]->pixels[tex_pixel * 4])));
 			i++;
@@ -60,6 +60,7 @@ void	draw_player(t_cupData *data)
 		j++;
 	}
 }
+
 
 void	ft_minimap(void *param)
 {

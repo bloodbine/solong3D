@@ -6,7 +6,7 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 22:38:40 by ffederol          #+#    #+#             */
-/*   Updated: 2023/08/23 08:26:18 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/09/14 21:56:51 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ typedef struct s_lineData
 	int drawStart;
 	int drawEnd;
 	int	x_tex;
-	double	y;
-	double	yinc;
+	float	y;
+	float	yinc;
 	
 }			t_lineData;
 

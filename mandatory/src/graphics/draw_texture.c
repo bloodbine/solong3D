@@ -6,7 +6,7 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/28 17:03:05 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/09/14 21:53:33 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,18 @@ void	put_line(t_cupData *data, t_lineData *l, t_raycaster *rc)
 	int		i;
 	int		tex_pixel;
 
-	i = 0;
-	while (i < data->mlx->height)
+	i = l->drawStart;
+	while (i <= l->drawEnd)
 	{
-		if (i < l->drawStart)
-			mlx_put_pixel(data->image[0], rc->x_cam, i, data->parser->roof);
-		else if (i > l->drawEnd)
-			mlx_put_pixel(data->image[0], rc->x_cam, i, data->parser->floor);
-		else
-		{
-			tex_pixel = (int)(l->y) * data->tex[rc->side]->width + l->x_tex;
-			l->y += l->yinc;
-			mlx_put_pixel(data->image[0], rc->x_cam, i, \
-				convert_to_rgba(&(data->tex[rc->side]->pixels[tex_pixel * 4])));
-		}
+		// if (i < l->drawStart)
+		// 	mlx_put_pixel(data->image[0], rc->x_cam, i, data->parser->roof);
+		// else if (i > l->drawEnd)
+		// 	mlx_put_pixel(data->image[0], rc->x_cam, i, data->parser->floor);
+		// else
+		tex_pixel = (int)(l->y) * data->tex[rc->side]->width + l->x_tex;
+		l->y += l->yinc;
+		mlx_put_pixel(data->image[0], rc->x_cam, i, \
+			convert_to_rgba(&(data->tex[rc->side]->pixels[tex_pixel * 4])));
 		i++;
 	}
 }
@@ -65,10 +63,10 @@ void	init_line(t_cupData *data, t_lineData *l, t_raycaster *rc)
 	}
 	if (l->drawEnd >= data->mlx->height)
 		l->drawEnd = data->mlx->height - 1;
-	l->x_tex = round(rc->tilePos * data->tex[rc->side]->width);
+	l->x_tex = roundf(rc->tilePos * data->tex[rc->side]->width);
 	if (rc->side < 2)
-		l->x_tex = round((1 - rc->tilePos) * data->tex[rc->side]->width);
-	l->yinc = (double)data->tex[rc->side]->height / (l->lineHeight + 1);
+		l->x_tex = roundf((1 - rc->tilePos) * data->tex[rc->side]->width);
+	l->yinc = (float)data->tex[rc->side]->height / (l->lineHeight + 1);
 	l->y = (l->drawStart - data->mlx->height / 2 + l->lineHeight / 2) * l->yinc;
 }
 

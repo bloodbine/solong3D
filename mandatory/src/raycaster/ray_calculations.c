@@ -6,7 +6,7 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/08/22 23:25:03 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/09/14 21:55:16 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ void	get_tilepos(t_player *player, t_raycaster *rc)
 {	
 	if (rc->side % 2)
 		rc->tilePos = \
-			fmod(player->pos.y + rc->ray.y * rc->camPlane2wallDist, 1);
+			(float)fmod(player->pos.y + rc->ray.y * rc->camPlane2wallDist, 1);
 	else
 		rc->tilePos = \
-			fmod(player->pos.x + rc->ray.x * rc->camPlane2wallDist, 1);
+			(float)fmod(player->pos.x + rc->ray.x * rc->camPlane2wallDist, 1);
 }
