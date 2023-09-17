@@ -6,7 +6,7 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/14 22:46:43 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/09/17 18:49:12 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void ft_hook(void* param)
 	t_cupData *data;
 
 	data = (t_cupData *)param;
-	my_mouse_func(data);
+	//my_mouse_func(data);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(data->mlx);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
@@ -47,7 +47,7 @@ void ft_hook(void* param)
 		rotate(data->player, -1);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
 		rotate(data->player, 1);
-	printf("FPS: %f\n", 1/data->mlx->delta_time);
+	//printf("FPS: %f\n", 1/data->mlx->delta_time);
 }
 
 int	init_graphics(t_cupData *data)
@@ -70,7 +70,6 @@ int	init_graphics(t_cupData *data)
 		mlx_image_to_window(data->mlx, data->image[1], 10, 10) == -1 || \
 		mlx_image_to_window(data->mlx, data->image[2], 115, 115) == -1)
 		return(mlx_close_window(data->mlx), puts(mlx_strerror(mlx_errno)), EXIT_FAILURE);
-	
 	return (EXIT_SUCCESS);
 }
 

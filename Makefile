@@ -6,7 +6,7 @@
 #    By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/12 21:35:02 by ffederol          #+#    #+#              #
-#    Updated: 2023/08/22 23:32:52 by ffederol         ###   ########.fr        #
+#    Updated: 2023/09/17 22:07:33 by ffederol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ CC		= cc
 RMF		= rm -f
 RMRF	= rm -rf
 RMDIR	= rmdir
-CFLAGS	= -Wall -Wextra -Werror -Ofast 
+CFLAGS	= -Wall -Wextra -Werror #-Ofast 
 FFLAGS	= -lglfw 
 
 $(OBJDIR)%.o: $(SRCDIR)%.c

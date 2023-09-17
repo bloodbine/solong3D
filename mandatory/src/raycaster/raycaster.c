@@ -6,7 +6,7 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/14 22:50:21 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/09/17 18:34:42 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,16 @@ void flr(t_cupData *data)
         	flr.cell.x = (int)(flr.floor.x);
         	flr.cell.y = (int)(flr.floor.y);
        		flr.tex.x = (int)(data->tex[0]->width * (flr.floor.x - flr.cell.x)) & (data->tex[0]->width - 1);
-       		flr.tex.y = (int)(data->tex[0]->height * (flr.floor.y - flr.cell.y)) & (data->tex[0]->height - 1);
+       		flr.tex.y = (int)(data->tex[0]->height * (flr.floor.y - flr.cell.y)) & (data->tex[0]->width - 1);
         	flr.floor.x += flr.floor_step.x;
         	flr.floor.y += flr.floor_step.y;
-	        int floorTexture = 3;
-    	    int ceilingTexture = 2;
+	        int floorTexture = 0;
+    	    int ceilingTexture = 0;
 		    flr.tex_pixel = &data->tex[floorTexture]->pixels[(data->tex[floorTexture]->width * flr.tex.y + flr.tex.x) * 4];
 			mlx_put_pixel(data->image[0], flr.x, flr.y, \
 						convert_to_rgba(flr.tex_pixel));
+			// flr.tex.x = (int)(data->tex[0]->width * (flr.floor.x - flr.cell.x)) & (data->tex[0]->width - 1);
+       		// flr.tex.y = (int)(data->tex[0]->height * (flr.floor.y - flr.cell.y)) & (data->tex[0]->height - 1);
 			flr.tex_pixel = &data->tex[ceilingTexture]->pixels[(data->tex[ceilingTexture]->width * flr.tex.y + flr.tex.x) * 4];
 			mlx_put_pixel(data->image[0], flr.x, data->mlx->height - flr.y - 1, \
 						convert_to_rgba(flr.tex_pixel));

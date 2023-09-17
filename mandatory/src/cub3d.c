@@ -6,7 +6,7 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/14 23:01:54 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/09/17 22:02:22 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ void	init_player(t_cupData *data)
 	data->player->dir.x = data->parser->playerDir.x;
 	data->player->dir.y = data->parser->playerDir.y;
 
-	data->player->cam_plane.x = -0.66 * ((float)fabs(data->player->dir.x) - 1);
-	data->player->cam_plane.y = -0.66 * ((float)fabs(data->player->dir.y) - 1);
+	printf("test %f\n", data->player->dir.x/(float)fabs(data->player->dir.x));
+	data->player->cam_plane.x = 0.66 * ((float)fabs(data->player->dir.x) - 1) * (float)(data->player->dir.y/fabs(data->player->dir.y));
+	data->player->cam_plane.y = -0.66 * ((float)fabs(data->player->dir.y) - 1) * (float)(data->player->dir.x/fabs(data->player->dir.x));
 }
 
 void	init_textures(t_cupData *data)
@@ -54,7 +55,8 @@ int main(int argc, char**argv)
 	data.parser = parse(argc, argv);
 	printf("test\n");
 	init_cupData(&data, &player, &rc);
-	printf("test\n");
+	printf("dir.x %f\n", data.player->dir.x);
+	printf("dir.y %f\n", data.player->dir.y);
 	if (manage_graphics(&data))
 	{
 		//free stuff
