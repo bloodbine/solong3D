@@ -63,6 +63,7 @@ void	draw_player(t_cubdata *data)
 	}
 }
 
+
 void	ft_minimap(void *param)
 {
 	t_cubdata	*data;

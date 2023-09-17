@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/15 12:09:31 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/17 16:21:31 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	rotate(t_player *player, int id)
 {
-	double	olddirx;
+	float	olddirx;
 
 	olddirx = player->dir.x;
 	player->dir.x = player->dir.x * cos(0.05 * id) - player->dir.y * sin(0.05 * id);
@@ -23,7 +23,7 @@ void	rotate(t_player *player, int id)
 		player->dir.x = 1.0;
 	if (player->dir.y < -1.0)
 		player->dir.y = -1.0;
-	double oldPlaneX = player->cam_plane.x;
+	float oldPlaneX = player->cam_plane.x;
 	player->cam_plane.x = player->cam_plane.x * cos(0.05 * id) - player->cam_plane.y * sin(0.05 * id);
 	player->cam_plane.y = oldPlaneX * sin(0.05 * id) + player->cam_plane.y * cos(0.05 * id);
 }

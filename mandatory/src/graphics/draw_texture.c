@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/16 14:51:44 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/17 16:43:02 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,26 +36,20 @@ void	put_line(t_cubdata *data, t_linedata *l, t_raycaster *rc)
 	mlx_texture_t	*tex;
 	int				i;
 
-	i = -1;
-	while (++i < data->mlx->height)
+	i = l->drawstart;
+	while (i <= l->drawend)
 	{
-		if (i < l->drawstart)
-			mlx_put_pixel(data->image[0], rc->x_cam, i, data->parser->roof);
-		else if (i > l->drawend)
-			mlx_put_pixel(data->image[0], rc->x_cam, i, data->parser->floor);
+		if (data->rc->hit == 2)
+			tex = data->tex[4];
+		else if (data->rc->hit == 3)
+			tex = data->ptex[data->prot];
 		else
-		{
-			if (data->rc->hit == 2)
-				tex = data->tex[4];
-			else if (data->rc->hit == 3)
-				tex = data->ptex[data->prot];
-			else
-				tex = data->tex[rc->side];
-			tex_pixel = (int)(l->y) * data->tex[rc->side]->width + l->x_tex;
-			l->y += l->yinc;
-			mlx_put_pixel(data->image[0], rc->x_cam, i, \
-				convert_to_rgba(&(tex->pixels[tex_pixel * 4])));
-		}
+			tex = data->tex[rc->side];
+		tex_pixel = (int)(l->y) * data->tex[rc->side]->width + l->x_tex;
+		mlx_put_pixel(data->image[0], rc->x_cam, i, \
+			convert_to_rgba(&(tex->pixels[tex_pixel * 4])));
+		l->y += l->yinc;
+		i++;
 	}
 }
 
@@ -75,7 +69,7 @@ void	init_line(t_cubdata *data, t_linedata *l, t_raycaster *rc)
 	l->x_tex = round(rc->tilepos * data->tex[rc->side]->width);
 	if (rc->side < 2)
 		l->x_tex = round((1 - rc->tilepos) * data->tex[rc->side]->width);
-	l->yinc = (double)data->tex[rc->side]->height / (l->lineheight + 1);
+	l->yinc = (float)data->tex[rc->side]->height / (l->lineheight + 1);
 	l->y = (l->drawstart - data->mlx->height / 2 + l->lineheight / 2) * l->yinc;
 }
 

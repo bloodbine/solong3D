@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/17 15:53:16 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/17 16:32:33 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	init_textures(t_cubdata *data)
 	data->tex[2] = mlx_load_png(data->parser->textures[2]);
 	data->tex[3] = mlx_load_png(data->parser->textures[3]);
 	data->tex[4] = mlx_load_png(data->parser->textures[4]);
-	data->tex[5] = mlx_load_png("./textures/unnamed-1.png");
+	data->tex[5] = mlx_load_png("./textures/player.png");
 	data->ptex[0] = mlx_load_png("./textures/portal/portal1.png");
 	data->ptex[1] = mlx_load_png("./textures/portal/portal2.png");
 	data->ptex[2] = mlx_load_png("./textures/portal/portal3.png");
