@@ -6,7 +6,7 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/18 15:35:39 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/09/18 16:17:06 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	init_flr(t_cubdata *data, t_raycaster_floor *flr)
 
 void	update_flr_data_x(t_cubdata *data, t_raycaster_floor *flr)
 {
-	int floortexture = 3;
+	//int floortexture = 3;
 	flr->cell.x = (int)(flr->floor.x);
 	flr->cell.y = (int)(flr->floor.y);
 	flr->tex.x = (int)(data->tex[0]->width * (flr->floor.x - flr->cell.x));
@@ -54,7 +54,7 @@ void	update_flr_data_x(t_cubdata *data, t_raycaster_floor *flr)
 		flr->tex.y = 0;
 	flr->floor.x += flr->floor_step.x;
 	flr->floor.y += flr->floor_step.y;
-	flr->tex_pixel = &data->tex[floortexture]->pixels[(data->tex[floortexture]->width * flr->tex.y + flr->tex.x) * 4];
+	flr->tex_pixel = &data->roof->pixels[(data->roof->width * flr->tex.y + flr->tex.x) * 4];
 }
 
 void	update_flr_data_y(t_cubdata *data, t_raycaster_floor *flr)
@@ -82,7 +82,6 @@ void	flr(t_cubdata *data)
 		while (flr.x < data->mlx->width)
 		{
 			update_flr_data_x(data, &flr);
-			int ceilingtexture = 2;
 			mlx_put_pixel(data->image[0], flr.x, flr.y, \
 							convert_to_rgba(flr.tex_pixel));
 			flr.tex_pixel = &data->roof->pixels[(data->roof->width * flr.tex.y + flr.tex.x) * 4];
@@ -100,7 +99,7 @@ void	ft_raycast(void *param)
 
 	data = (t_cubdata *)param;
 	data->rc->x_cam = 0;
-	flr(data);
+	//flr(data);
 	while (data->rc->x_cam < data->mlx->width)
 	{
 		init_raycaster(data);
