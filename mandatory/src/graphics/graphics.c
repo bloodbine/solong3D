@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/18 03:51:35 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/09/18 16:21:44 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,6 @@ int	manage_graphics(void *param)
 	mlx_loop(data->mlx);
 	mlx_terminate(data->mlx);
 	parse_free(data->parser);
+	texture_free(data);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:37:29 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/18 15:15:46 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/18 15:35:08 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	parse_error(char *error_message)
 	write(STDERR_FILENO, "Error\n", 7);
 	write(STDERR_FILENO, error_message, ft_strlen(error_message));
 	write(STDERR_FILENO, "\n", 2);
-	exit(system("leaks cub3D"));
+	exit(EXIT_FAILURE);
 }
 
 void	parse_free(t_parse *data)
