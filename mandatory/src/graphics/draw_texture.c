@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/17 16:43:02 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/18 15:27:03 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ uint32_t	convert_to_rgba(uint8_t *pixels)
 
 void	put_line(t_cubdata *data, t_linedata *l, t_raycaster *rc)
 {
-	int				tex_pixel;
+	long long		tex_pixel;
 	mlx_texture_t	*tex;
 	int				i;
 
