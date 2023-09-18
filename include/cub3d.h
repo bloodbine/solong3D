@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 22:38:40 by ffederol          #+#    #+#             */
 /*   Updated: 2023/09/18 16:21:44 by gpasztor         ###   ########.fr       */
@@ -46,12 +46,13 @@ typedef struct s_cubdata
 
 typedef struct s_lineData
 {
-	int		lineheight;
-	int		drawstart;
-	int		drawend;
-	int		x_tex;
-	double	y;
-	double	yinc;
+	int				lineheight;
+	int				drawstart;
+	int				drawend;
+	int				x_tex;
+	double			y;
+	double			yinc;
+	mlx_texture_t	*tex;
 }			t_linedata;
 
 void	texture_free(t_cubdata *data);

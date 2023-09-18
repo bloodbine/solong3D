@@ -1,7 +1,7 @@
-NO ./textures/bricks.png
-SO ./textures/bricks.png
-WE ./textures/bricks.png
-EA ./textures/bricks.png
+NO ./textures/stonewall_normal.png
+SO ./textures/stonewall_normal.png
+WE ./textures/stonewall_normal.png
+EA ./textures/stonewall_normal.png
 D ./textures/Door.png
 
 F ./textures/dungeontile.png

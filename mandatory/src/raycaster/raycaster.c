@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/18 15:06:17 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/18 16:17:06 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,35 @@ void	init_raycaster(t_cubdata *data)
 
 void	init_flr(t_cubdata *data, t_raycaster_floor *flr)
 {
-	flr->x = 0;
-	flr->curr_line = flr->y - data->mlx->height / 2;
+	flr->y = data->mlx->height / 2;
 	flr->ray_l.x = data->player->dir.x - data->player->cam_plane.x;
 	flr->ray_l.y = data->player->dir.y - data->player->cam_plane.y;
 	flr->ray_r.x = data->player->dir.x + data->player->cam_plane.x;
 	flr->ray_r.y = data->player->dir.y + data->player->cam_plane.y;
 	flr->posZ = 0.5 * data->mlx->height;
+	
+}
+
+void	update_flr_data_x(t_cubdata *data, t_raycaster_floor *flr)
+{
+	//int floortexture = 3;
+	flr->cell.x = (int)(flr->floor.x);
+	flr->cell.y = (int)(flr->floor.y);
+	flr->tex.x = (int)(data->tex[0]->width * (flr->floor.x - flr->cell.x));
+	if (flr->tex.x >= (int)data->tex[0]->width || flr->tex.x < 0)
+		flr->tex.x = 0;
+	flr->tex.y = (int)(data->tex[0]->height * (flr->floor.y - flr->cell.y));
+	if (flr->tex.y >= (int)data->tex[0]->height  || flr->tex.y < 0)
+		flr->tex.y = 0;
+	flr->floor.x += flr->floor_step.x;
+	flr->floor.y += flr->floor_step.y;
+	flr->tex_pixel = &data->roof->pixels[(data->roof->width * flr->tex.y + flr->tex.x) * 4];
+}
+
+void	update_flr_data_y(t_cubdata *data, t_raycaster_floor *flr)
+{
+	flr->x = 0;
+	flr->curr_line = flr->y - data->mlx->height / 2;
 	flr->row_dist = flr->posZ / flr->curr_line;
 	flr->floor_step.x = flr->row_dist * (flr->ray_r.x - flr->ray_l.x) \
 							/ data->mlx->width;
@@ -53,18 +75,13 @@ void	flr(t_cubdata *data)
 	t_raycaster_floor	flr;
 
 	flr.y = data->mlx->height / 2;
+	init_flr(data, &flr);
 	while (flr.y < data->mlx->height)
 	{
-		init_flr(data, &flr);
+		update_flr_data_y(data, &flr);
 		while (flr.x < data->mlx->width)
 		{
-			flr.cell.x = (int)(flr.floor.x);
-			flr.cell.y = (int)(flr.floor.y);
-			flr.tex.x = (int)(data->tex[0]->width * (flr.floor.x - flr.cell.x)) & (data->tex[0]->width - 1);
-			flr.tex.y = (int)(data->tex[0]->height * (flr.floor.y - flr.cell.y)) & (data->tex[0]->height - 1);
-			flr.floor.x += flr.floor_step.x;
-			flr.floor.y += flr.floor_step.y;
-			flr.tex_pixel = &data->roof->pixels[(data->roof->width * flr.tex.y + flr.tex.x) * 4];
+			update_flr_data_x(data, &flr);
 			mlx_put_pixel(data->image[0], flr.x, flr.y, \
 							convert_to_rgba(flr.tex_pixel));
 			flr.tex_pixel = &data->roof->pixels[(data->roof->width * flr.tex.y + flr.tex.x) * 4];
@@ -82,7 +99,7 @@ void	ft_raycast(void *param)
 
 	data = (t_cubdata *)param;
 	data->rc->x_cam = 0;
-	flr(data);
+	//flr(data);
 	while (data->rc->x_cam < data->mlx->width)
 	{
 		init_raycaster(data);
@@ -94,5 +111,3 @@ void	ft_raycast(void *param)
 		data->rc->x_cam++;
 	}
 }
-// ft_memset(data->image[1]->pixels, 255, \
-// data->image[1]->width * (data->image[1]->height) * sizeof(int32_t));
