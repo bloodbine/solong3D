@@ -6,7 +6,7 @@
 #    By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/12 21:35:02 by ffederol          #+#    #+#              #
-#    Updated: 2023/09/18 14:58:01 by ffederol         ###   ########.fr        #
+#    Updated: 2023/09/18 15:35:02 by ffederol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ MAIN	=	cub3d		\
 PARSER		=	parser/parser			\
 				parser/parser_utils		\
 				parser/parser_validity	\
-				parser/parser_sorting
+				parser/parser_sorting	\
+				parser/parser_sort_type
 
 RAYCASTER	=	raycaster/raycaster	\
 				raycaster/ray_calculations

@@ -6,7 +6,7 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/18 15:27:30 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/09/18 15:35:39 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	flr(t_cubdata *data)
 			int ceilingtexture = 2;
 			mlx_put_pixel(data->image[0], flr.x, flr.y, \
 							convert_to_rgba(flr.tex_pixel));
-			flr.tex_pixel = &data->tex[ceilingtexture]->pixels[(data->tex[ceilingtexture]->width * flr.tex.y + flr.tex.x) * 4];
+			flr.tex_pixel = &data->roof->pixels[(data->roof->width * flr.tex.y + flr.tex.x) * 4];
 			mlx_put_pixel(data->image[0], flr.x, data->mlx->height - flr.y - 1, \
 							convert_to_rgba(flr.tex_pixel));
 			flr.x++;

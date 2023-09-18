@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 22:38:40 by ffederol          #+#    #+#             */
-/*   Updated: 2023/09/16 14:23:16 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/18 14:32:05 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ typedef struct s_parse
 	char			*textures[6];
 	char			**worldmap;
 	int				error;
+	char			*floortex;
+	char			*rooftex;
 	uint32_t		floor;
 	uint32_t		roof;
 	t_int_vector	mapsizes;
@@ -30,6 +32,7 @@ typedef struct s_parse
 	t_int_vector	playerdir;
 	t_int_vector	ppos[2];
 	int				pcount;
+	int				limit;
 }				t_parse;
 
 void		parse_free(t_parse *data);
@@ -38,6 +41,7 @@ uint32_t	sort_rgba(char	*line);
 void		sort_map(t_parse *data, int fd);
 void		sort_data(t_parse *data, int fd, int *found, char *buff);
 void		find_player(t_parse *data);
+void		sort_floor_roof(t_parse *data, char *buff, char type);
 void		file_check(t_parse *data);
 int			character_check(t_parse *data, char **map, int i, int j);
 void		padding(t_parse *data, size_t len, size_t col);
