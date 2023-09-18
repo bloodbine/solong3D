@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:37:29 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/17 15:45:36 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/18 15:15:46 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ void	parse_free(t_parse *data)
 	while (data->textures[++i] != NULL)
 		free(data->textures[i]);
 	free(data);
+	if (data->floortex != NULL)
+		free(data->floortex);
+	if (data->rooftex != NULL)
+		free(data->rooftex);
 }
 
 uint32_t	rgbtohex(int r, int g, int b, int a)

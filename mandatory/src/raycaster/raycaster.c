@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/18 03:33:37 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/09/18 15:06:17 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,10 @@ void	flr(t_cubdata *data)
 			flr.tex.y = (int)(data->tex[0]->height * (flr.floor.y - flr.cell.y)) & (data->tex[0]->height - 1);
 			flr.floor.x += flr.floor_step.x;
 			flr.floor.y += flr.floor_step.y;
-			int floortexture = 3;
-			int ceilingtexture = 2;
-			flr.tex_pixel = &data->tex[floortexture]->pixels[(data->tex[floortexture]->width * flr.tex.y + flr.tex.x) * 4];
+			flr.tex_pixel = &data->roof->pixels[(data->roof->width * flr.tex.y + flr.tex.x) * 4];
 			mlx_put_pixel(data->image[0], flr.x, flr.y, \
 							convert_to_rgba(flr.tex_pixel));
-			flr.tex_pixel = &data->tex[ceilingtexture]->pixels[(data->tex[ceilingtexture]->width * flr.tex.y + flr.tex.x) * 4];
+			flr.tex_pixel = &data->roof->pixels[(data->roof->width * flr.tex.y + flr.tex.x) * 4];
 			mlx_put_pixel(data->image[0], flr.x, data->mlx->height - flr.y - 1, \
 							convert_to_rgba(flr.tex_pixel));
 			flr.x++;
