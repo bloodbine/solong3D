@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 22:38:40 by ffederol          #+#    #+#             */
-/*   Updated: 2023/09/17 16:24:16 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/18 16:48:22 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ void	calc_dist_next_side(t_player *player, t_raycaster *rc);
 void	calc_raydist(void *param);
 void	calc_raydist_perp(t_raycaster *rc);
 void	get_tilepos(t_player *player, t_raycaster *rc);
+void	flr(void *param);
 
 #endif

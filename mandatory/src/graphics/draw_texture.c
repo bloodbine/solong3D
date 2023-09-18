@@ -6,7 +6,7 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/18 16:17:33 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/09/18 16:44:47 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,31 +30,9 @@ uint32_t	convert_to_rgba(uint8_t *pixels)
 	return (color);
 }
 
-// void	put_line(t_cubdata *data, t_linedata *l, t_raycaster *rc)
-// {
-// 	int		i;
-// 	int		tex_pixel;
-
-// 	i = l->drawstart;
-// 	while (i <= l->drawend)
-// 	{
-// 		// if (i < l->drawStart)
-// 		// 	mlx_put_pixel(data->image[0], rc->x_cam, i, data->parser->roof);
-// 		// else if (i > l->drawEnd)
-// 		// 	mlx_put_pixel(data->image[0], rc->x_cam, i, data->parser->floor);
-// 		// else
-// 		tex_pixel = (int)(l->y) * data->tex[rc->side]->width + l->x_tex;
-// 		l->y += l->yinc;
-// 		mlx_put_pixel(data->image[0], rc->x_cam, i, \
-// 			convert_to_rgba(&(data->tex[rc->side]->pixels[tex_pixel * 4])));
-// 		i++;
-// 	}
-// }
-
 void	put_line(t_cubdata *data, t_linedata *l, t_raycaster *rc)
 {
 	long long		tex_pixel;
-	
 	int				i;
 
 	i = l->drawstart;
@@ -82,7 +60,8 @@ void	init_line(t_cubdata *data, t_linedata *l, t_raycaster *rc)
 	if (l->drawstart < 0)
 	{
 		l->drawstart = 0;
-		l->y = (l->lineheight - data->mlx->height) / 2 / data->mlx->height * l->tex->height;
+		l->y = (l->lineheight - data->mlx->height) / 2 \
+				/ data->mlx->height * l->tex->height;
 	}
 	if (l->drawend >= data->mlx->height)
 		l->drawend = data->mlx->height - 1;
