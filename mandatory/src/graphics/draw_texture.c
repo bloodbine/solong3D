@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/18 16:54:55 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/09/18 18:28:44 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	put_line(t_cubdata *data, t_linedata *l, t_raycaster *rc)
 void	init_line(t_cubdata *data, t_linedata *l, t_raycaster *rc)
 {
 	if (data->rc->hit == 2)
-		l->tex = data->tex[4];
+		l->tex = data->door;
 	else if (data->rc->hit == 3)
 		l->tex = data->ptex[data->prot];
 	else
@@ -84,21 +84,32 @@ void	draw_line(void *param)
 
 void	texture_free(t_cubdata *data)
 {
-	mlx_delete_texture(data->tex[0]);
-	mlx_delete_texture(data->tex[1]);
-	mlx_delete_texture(data->tex[2]);
-	mlx_delete_texture(data->tex[3]);
-	if (data->tex[4] != NULL)
+	if (data->tex[0] != NULL)
+		mlx_delete_texture(data->tex[0]);
+	if (data->tex[1] != NULL)
+		mlx_delete_texture(data->tex[1]);
+	if (data->tex[2])
+		mlx_delete_texture(data->tex[2]);
+	if (data->tex[3])
+		mlx_delete_texture(data->tex[3]);
+	if (data->tex[4])
 		mlx_delete_texture(data->tex[4]);
-	mlx_delete_texture(data->tex[5]);
-	mlx_delete_texture(data->ptex[0]);
-	mlx_delete_texture(data->ptex[1]);
-	mlx_delete_texture(data->ptex[2]);
-	mlx_delete_texture(data->ptex[3]);
-	mlx_delete_texture(data->ptex[4]);
-	mlx_delete_texture(data->ptex[5]);
-	if (data->parser->floortex != NULL)
+	if (data->ptex[0])
+		mlx_delete_texture(data->ptex[0]);
+	if (data->ptex[1])
+		mlx_delete_texture(data->ptex[1]);
+	if (data->ptex[2])
+		mlx_delete_texture(data->ptex[2]);
+	if (data->ptex[3])
+		mlx_delete_texture(data->ptex[3]);
+	if (data->ptex[4])
+		mlx_delete_texture(data->ptex[4]);
+	if (data->ptex[5])
+		mlx_delete_texture(data->ptex[5]);
+	if (data->parser->doortex != NULL && data->door != NULL)
+		mlx_delete_texture(data->door);
+	if (data->parser->floortex != NULL && data->floor != NULL)
 		mlx_delete_texture(data->floor);
-	if (data->parser->rooftex != NULL)
+	if (data->parser->rooftex != NULL && data->roof != NULL)
 		mlx_delete_texture(data->roof);
 }

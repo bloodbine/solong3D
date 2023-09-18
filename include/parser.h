@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 22:38:40 by ffederol          #+#    #+#             */
-/*   Updated: 2023/09/18 14:32:05 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/18 18:19:27 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_parse
 	int				error;
 	char			*floortex;
 	char			*rooftex;
+	char			*doortex;
 	uint32_t		floor;
 	uint32_t		roof;
 	t_int_vector	mapsizes;

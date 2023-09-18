@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 22:38:40 by ffederol          #+#    #+#             */
-/*   Updated: 2023/09/18 16:21:44 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/18 17:59:55 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_cubdata
 	mlx_texture_t	*ptex[6];
 	mlx_texture_t	*floor;
 	mlx_texture_t	*roof;
+	mlx_texture_t	*door;
 	int				prot;
 	char			**worldmap;
 	int				x_mouse;

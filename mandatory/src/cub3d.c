@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/18 15:38:49 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/18 18:22:44 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,44 +26,59 @@ void	init_player(t_cubdata *data)
 
 void	init_textures(t_cubdata *data)
 {
-	int	i;
-
-	i = 0;
 	data->tex[0] = mlx_load_png(data->parser->textures[0]);
 	data->tex[1] = mlx_load_png(data->parser->textures[1]);
 	data->tex[2] = mlx_load_png(data->parser->textures[2]);
 	data->tex[3] = mlx_load_png(data->parser->textures[3]);
-	if (data->parser->textures[4] != NULL)
-		data->tex[4] = mlx_load_png(data->parser->textures[4]);
-	data->tex[5] = mlx_load_png("./textures/player.png");
+	data->tex[4] = mlx_load_png("./textures/player.png");
 	data->ptex[0] = mlx_load_png("./textures/portal/portal1.png");
 	data->ptex[1] = mlx_load_png("./textures/portal/portal2.png");
 	data->ptex[2] = mlx_load_png("./textures/portal/portal3.png");
 	data->ptex[3] = mlx_load_png("./textures/portal/portal4.png");
 	data->ptex[4] = mlx_load_png("./textures/portal/portal5.png");
 	data->ptex[5] = mlx_load_png("./textures/portal/portal6.png");
+	if (data->parser->doortex != NULL)
+		data->door = mlx_load_png(data->parser->doortex);
 	if (data->parser->floortex != NULL)
 		data->floor = mlx_load_png(data->parser->floortex);
 	if (data->parser->rooftex != NULL)
 		data->roof = mlx_load_png(data->parser->rooftex);
+}
+
+void	check_textures(t_cubdata *data)
+{
+	int	i;
+
+	i = 0;
+	if ((data->parser->rooftex != NULL && data->roof == NULL) \
+	|| (data->parser->floortex != NULL && data->floor == NULL))
+	{
+		texture_free(data);
+		exit(EXIT_FAILURE);
+	}
 	while (i < 6)
 	{
-		if (i == 4 && data->parser->limit == 6)
-			i++;
-		if (!data->tex[i] || !data->ptex[i])
-			parse_error("failed to load image");
+		if ((i < 5 && !data->tex[i]) || !data->ptex[i])
+		{
+			texture_free(data);
+			exit(EXIT_FAILURE);
+		}
 		i++;
 	}
 }
 
 void	init_cubdata(t_cubdata *data, t_player *player, t_raycaster *rc)
 {
+	int	i;
+
+	i = 0;
 	data->player = player;
 	data->rc = rc;
 	data->worldmap = data->parser->worldmap;
 	data->modus = 0;
 	init_player(data);
 	init_textures(data);
+	check_textures(data);
 }
 
 int	main(int argc, char**argv)

@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:47:29 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/18 14:32:33 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/18 18:24:42 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	filter(t_parse *data, char *buff, int *found, int *limit)
 		data->textures[2] = ft_strtrim(buff + 2, " \n");
 	else if (ft_strncmp(buff, "WE", 2) == 0 && ++(*found) && !data->textures[3])
 		data->textures[3] = ft_strtrim(buff + 2, " \n");
-	else if (ft_strncmp(buff, "D", 1) == 0 && ++(*found) && !data->textures[4])
+	else if (ft_strncmp(buff, "D", 1) == 0 && ++(*found) && !data->doortex)
 	{
-		data->textures[4] = ft_strtrim(buff + 2, " \n");
+		data->doortex = ft_strtrim(buff + 2, " \n");
 		*limit = 7;
 	}
 	else if (ft_strncmp(buff, "F", 1) == 0 && ++(*found))
@@ -41,6 +41,7 @@ void	sort_data(t_parse *data, int fd, int *found, char *buff)
 	data->textures[2] = NULL;
 	data->textures[3] = NULL;
 	data->textures[4] = NULL;
+	data->doortex = NULL;
 	data->floortex = NULL;
 	data->rooftex = NULL;
 	buff = get_next_line(fd);
