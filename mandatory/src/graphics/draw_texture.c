@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/17 16:43:02 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/18 16:21:44 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,15 @@ void	put_line(t_cubdata *data, t_linedata *l, t_raycaster *rc)
 	int				i;
 
 	i = l->drawstart;
+	if (data->rc->hit == 2)
+		tex = data->tex[4];
+	else if (data->rc->hit == 3)
+		tex = data->ptex[data->prot];
+	else
+		tex = data->tex[rc->side];
 	while (i <= l->drawend)
 	{
-		if (data->rc->hit == 2)
-			tex = data->tex[4];
-		else if (data->rc->hit == 3)
-			tex = data->ptex[data->prot];
-		else
-			tex = data->tex[rc->side];
-		tex_pixel = (int)(l->y) * data->tex[rc->side]->width + l->x_tex;
+		tex_pixel = (int)(l->y) * tex->width + l->x_tex;
 		mlx_put_pixel(data->image[0], rc->x_cam, i, \
 			convert_to_rgba(&(tex->pixels[tex_pixel * 4])));
 		l->y += l->yinc;
@@ -81,4 +81,25 @@ void	draw_line(void *param)
 	data = (t_cubdata *)param;
 	init_line(data, &line, data->rc);
 	put_line(data, &line, data->rc);
+}
+
+void	texture_free(t_cubdata *data)
+{
+	mlx_delete_texture(data->tex[0]);
+	mlx_delete_texture(data->tex[1]);
+	mlx_delete_texture(data->tex[2]);
+	mlx_delete_texture(data->tex[3]);
+	if (data->tex[4] != NULL)
+		mlx_delete_texture(data->tex[4]);
+	mlx_delete_texture(data->tex[5]);
+	mlx_delete_texture(data->ptex[0]);
+	mlx_delete_texture(data->ptex[1]);
+	mlx_delete_texture(data->ptex[2]);
+	mlx_delete_texture(data->ptex[3]);
+	mlx_delete_texture(data->ptex[4]);
+	mlx_delete_texture(data->ptex[5]);
+	if (data->parser->floortex != NULL)
+		mlx_delete_texture(data->floor);
+	if (data->parser->rooftex != NULL)
+		mlx_delete_texture(data->roof);
 }

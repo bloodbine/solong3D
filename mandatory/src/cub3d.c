@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/18 15:08:21 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/18 15:38:49 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	main(int argc, char**argv)
 	data.parser = parse(argc, argv);
 	init_cubdata(&data, &player, &rc);
 	if (manage_graphics(&data))
-		return (system("leaks cub3D"));
+		return (EXIT_FAILURE);
 	else
-		return (system("leaks cub3D"));
+		return (EXIT_SUCCESS);
 }

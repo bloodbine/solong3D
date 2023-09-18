@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 22:38:40 by ffederol          #+#    #+#             */
-/*   Updated: 2023/09/18 12:41:03 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/18 16:21:44 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_lineData
 	double	yinc;
 }			t_linedata;
 
+void	texture_free(t_cubdata *data);
 void	teleport_check(t_cubdata *data, t_player *player, char dir);
 
 #endif
