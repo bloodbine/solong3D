@@ -3,29 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/17 15:41:48 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/18 03:51:35 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
 
-// -----------------------------------------------------------------------------
 void	my_mouse_func(t_cubdata *data)
 {
 	int	x;
 	int	y;
 
+	if (data->modus > 1)
+	{
+		mlx_set_mouse_pos(data->mlx, data->x_mouse, data->y_mouse);
+		data->modus--;
+		return ;
+	}
 	mlx_get_mouse_pos(data->mlx, &x, &y);
-	if (data->x_mouse - x < 0)
-		rotate(data->player, 1);
-	else if (data->x_mouse - x > 0)
-		rotate(data->player, -1);
-	data->x_mouse = data->mlx->width / 2;
-	data->y_mouse = data->mlx->height / 2;
-	mlx_set_mouse_pos(data->mlx, data->mlx->width / 2, data->mlx->height / 2);
+	rotate(data->player, -(data->x_mouse - x) / 75.0);
+	mlx_set_mouse_pos(data->mlx, data->x_mouse, data->y_mouse);
 }
 
 void	ft_hook(void *param)
@@ -33,44 +33,53 @@ void	ft_hook(void *param)
 	t_cubdata	*data;
 
 	data = (t_cubdata *)param;
-	my_mouse_func(data);
 	if (mlx_is_key_down(data->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(data->mlx);
-	if (mlx_is_key_down(data->mlx, MLX_KEY_W))
-		move_straight(data->player, 1, data->worldmap);
-	if (mlx_is_key_down(data->mlx, MLX_KEY_S))
-		move_straight(data->player, -1, data->worldmap);
-	if (mlx_is_key_down(data->mlx, MLX_KEY_A))
-		move_side(data->player, 1, data->worldmap);
-	if (mlx_is_key_down(data->mlx, MLX_KEY_D))
-		move_side(data->player, -1, data->worldmap);
-	if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
-		rotate(data->player, -1);
-	if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
-		rotate(data->player, 1);
+	if (data->modus)
+	{
+		my_mouse_func(data);
+		if (mlx_is_key_down(data->mlx, MLX_KEY_W))
+			move_straight(data->player, 1, data->worldmap);
+		if (mlx_is_key_down(data->mlx, MLX_KEY_S))
+			move_straight(data->player, -1, data->worldmap);
+		if (mlx_is_key_down(data->mlx, MLX_KEY_A))
+			move_side(data->player, 1, data->worldmap);
+		if (mlx_is_key_down(data->mlx, MLX_KEY_D))
+			move_side(data->player, -1, data->worldmap);
+		if (mlx_is_key_down(data->mlx, MLX_KEY_LEFT))
+			rotate(data->player, -1);
+		if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
+			rotate(data->player, 1);
+	}
 }
 
 int	init_graphics(t_cubdata *data)
 {
-	data->mlx = mlx_init(SCREENWIDTH, SCREENHEIGHT, "cup3d", 1);
-	if (!data->mlx)
-		return (puts(mlx_strerror(mlx_errno)), EXIT_FAILURE);
-	mlx_get_mouse_pos(data->mlx, &data->x_mouse, &data->y_mouse);
-	mlx_get_monitor_size(0, &data->mlx->width, &data->mlx->height);
-	mlx_set_window_size(data->mlx, data->mlx->width * 0.75, \
-						data->mlx->height * 0.75);
-	printf("width %d	height %d\n", data->mlx->width, data->mlx->height);
-	mlx_set_window_pos(data->mlx, data->mlx->width / 6, data->mlx->height / 6);
-	//segfault when trying to resize window with mouse
-	if (!(data->image[0] = mlx_new_image(data->mlx, data->mlx->width, data->mlx->height)) || \
-		!(data->image[1] = mlx_new_image(data->mlx, data->mlx->width / 8, data->mlx->height / 4.5)) || \
-		!(data->image[2] = mlx_new_image(data->mlx, 30, 30)))
-		return(mlx_close_window(data->mlx), puts(mlx_strerror(mlx_errno)), EXIT_FAILURE);
-	if (mlx_image_to_window(data->mlx, data->image[0], 0, 0) == -1 || \
-		mlx_image_to_window(data->mlx, data->image[1], 10, 10) == -1 || \
-		mlx_image_to_window(data->mlx, data->image[2], 115, 115) == -1)
-		return(mlx_close_window(data->mlx), puts(mlx_strerror(mlx_errno)), EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+	mlx_t	*mlx;
+
+	mlx = mlx_init(SCREENWIDTH, SCREENHEIGHT, "cup3d", 1);
+	if (!mlx)
+		return (puts(mlx_strerror(mlx_errno)), 1);
+	data->mlx = mlx;
+	mlx_get_monitor_size(0, &mlx->width, &mlx->height);
+	mlx_set_window_size(mlx, mlx->width * 0.75, \
+						mlx->height * 0.75);
+	data->x_mouse = mlx->width / 2;
+	data->y_mouse = mlx->height / 2;
+	mlx_set_cursor_mode(mlx, MLX_MOUSE_DISABLED);
+	mlx_set_window_pos(mlx, mlx->width / 6, mlx->height / 6);
+	mlx_set_window_limit(mlx, mlx->width, mlx->height, mlx->width, mlx->height);
+	data->image[0] = mlx_new_image(mlx, mlx->width, mlx->height);
+	data->image[1] = mlx_new_image(mlx, mlx->width / 8, mlx->height / 4.5);
+	data->image[2] = mlx_new_image(mlx, 30, 30);
+	if (!data->image[0] || !data->image[1] || !data->image[2])
+		return (mlx_close_window(mlx), puts(mlx_strerror(mlx_errno)), 1);
+	if (mlx_image_to_window(mlx, data->image[0], 0, 0) == -1 || \
+		mlx_image_to_window(mlx, data->image[1], 10, 10) == -1 || \
+		mlx_image_to_window(mlx, data->image[2], 115, 115) == -1)
+		return (mlx_close_window(mlx), puts(mlx_strerror(mlx_errno)), 1);
+	data->modus = 10;
+	return (0);
 }
 
 void	port_counter(void *param)

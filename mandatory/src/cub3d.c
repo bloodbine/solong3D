@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/17 16:32:33 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/18 03:49:58 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ void	init_player(t_cubdata *data)
 	data->player->pos.y = data->parser->playerpos.y + 0.5;
 	data->player->dir.x = data->parser->playerdir.x;
 	data->player->dir.y = data->parser->playerdir.y;
-	data->player->cam_plane.x = -0.66 * (fabs(data->player->dir.x) - 1);
-	data->player->cam_plane.y = -0.66 * (fabs(data->player->dir.y) - 1);
+	data->player->cam_plane.x = 0.66 * (fabs(data->player->dir.x) - 1) \
+				* (float)(data->player->dir.y / fabs(data->player->dir.y));
+	data->player->cam_plane.y = -0.66 * (fabs(data->player->dir.y) - 1) \
+				* (float)(data->player->dir.x / fabs(data->player->dir.x));
 }
 
 void	init_textures(t_cubdata *data)
@@ -52,6 +54,7 @@ void	init_cubdata(t_cubdata *data, t_player *player, t_raycaster *rc)
 	data->player = player;
 	data->rc = rc;
 	data->worldmap = data->parser->worldmap;
+	data->modus = 0;
 	init_player(data);
 	init_textures(data);
 }

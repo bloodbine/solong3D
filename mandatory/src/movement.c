@@ -3,36 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/17 16:21:31 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/18 03:52:33 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	rotate(t_player *player, int id)
+void	rotate(t_player *player, float id)
 {
-	float	olddirx;
+	float	old_dir_x;
+	float	old_plane_x;
 
-	olddirx = player->dir.x;
-	player->dir.x = player->dir.x * cos(0.05 * id) - player->dir.y * sin(0.05 * id);
-	player->dir.y = olddirx * sin(0.05 * id) + player->dir.y * cos(0.05 * id);
+	old_plane_x = player->cam_plane.x;
+	old_dir_x = player->dir.x;
+	player->dir.x = player->dir.x * cos(0.05 * id) \
+						- player->dir.y * sin(0.05 * id);
+	player->dir.y = old_dir_x * sin(0.05 * id) + player->dir.y * cos(0.05 * id);
 	if (player->dir.x > 1.0)
 		player->dir.x = 1.0;
 	if (player->dir.y < -1.0)
 		player->dir.y = -1.0;
-	float oldPlaneX = player->cam_plane.x;
-	player->cam_plane.x = player->cam_plane.x * cos(0.05 * id) - player->cam_plane.y * sin(0.05 * id);
-	player->cam_plane.y = oldPlaneX * sin(0.05 * id) + player->cam_plane.y * cos(0.05 * id);
+	player->cam_plane.x = player->cam_plane.x * cos(0.05 * id) \
+							- player->cam_plane.y * sin(0.05 * id);
+	player->cam_plane.y = old_plane_x * sin(0.05 * id) \
+							+ player->cam_plane.y * cos(0.05 * id);
 }
 
 void	move_straight(t_player *player, int id, char **worldmap)
 {
 	float	movespeed;
 
-	movespeed = 0.1;
+	movespeed = 0.075;
 	if (worldmap[(int)(player->pos.y)] \
 	[(int)(player->pos.x + player->dir.x * movespeed * id)] == '0')
 		player->pos.x += player->dir.x * movespeed * id;

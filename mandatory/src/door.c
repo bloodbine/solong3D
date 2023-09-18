@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 10:41:52 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/12 18:42:39 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/18 02:47:58 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,15 @@ void	interact(mlx_key_data_t keydata, void *param)
 	data = (t_cubdata *)param;
 	map = data->worldmap;
 	player = data->player;
+	if (keydata.key == MLX_KEY_TAB && keydata.action == 1)
+	{
+		mlx_set_mouse_pos(data->mlx, data->x_mouse, data->y_mouse);
+		data->modus = abs(data->modus - 1);
+		if (data->modus)
+			mlx_set_cursor_mode(data->mlx, MLX_MOUSE_HIDDEN);
+		else
+			mlx_set_cursor_mode(data->mlx, MLX_MOUSE_NORMAL);
+	}
 	if (keydata.action != MLX_RELEASE || keydata.key != MLX_KEY_E)
 		return ;
 	toggle_door(data, player, get_dir(player));
