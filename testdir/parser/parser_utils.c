@@ -6,11 +6,11 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:37:29 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/21 22:57:09 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/09/21 22:08:45 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/cub3d.h"
+#include "../include/cub3d.h"
 
 void	parse_error(char *error_message)
 {
@@ -62,7 +62,7 @@ void	padding_right(t_parse *data, size_t len, char **new_map)
 		free(new_map[i]);
 		new_map[i] = ft_strdup(temp);
 		free(temp);
-		while (ft_strlen(new_map[i]) < len + 5)
+		while (ft_strlen(new_map[i]) < len + 5) 
 			new_map[i] = ft_frstrjoin(new_map[i], " ", 1); //leak (malloc :63)
 		printf("%s\n", new_map[i]);
 		i++;

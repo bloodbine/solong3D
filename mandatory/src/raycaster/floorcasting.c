@@ -6,20 +6,50 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/21 19:27:20 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/09/21 22:51:11 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cub3d.h"
 
-void	init_flr(t_cubdata *data, t_raycaster_floor *flr)
+void	print_no_tex(t_cubdata *data)
 {
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (y < data->mlx->height)
+	{
+		while (x < data->mlx->width)
+		{
+			if (y < data->mlx->height / 2)
+				mlx_put_pixel(data->image[0], x, data->mlx->height - y - 1, \
+								data->parser->roof);
+			else
+				mlx_put_pixel(data->image[0], x, data->mlx->height - y - 1, \
+								data->parser->floor);
+			x++;
+		}
+		x = 0;
+		y++;
+	}
+}
+
+int	init_flr(t_cubdata *data, t_raycaster_floor *flr)
+{
+	if (!data->floor)
+	{
+		print_no_tex(data);
+		return (0);
+	}
 	flr->y = data->mlx->height / 2;
 	flr->ray_l.x = data->player->dir.x - data->player->cam_plane.x;
 	flr->ray_l.y = data->player->dir.y - data->player->cam_plane.y;
 	flr->ray_r.x = data->player->dir.x + data->player->cam_plane.x;
 	flr->ray_r.y = data->player->dir.y + data->player->cam_plane.y;
 	flr->posZ = 0.5 * data->mlx->height;
+	return (1);
 }
 
 void	update_flr_data_x(t_raycaster_floor *flr, mlx_texture_t *tex)
@@ -48,43 +78,14 @@ void	update_flr_data_y(t_cubdata *data, t_raycaster_floor *flr)
 	flr->floor.y = data->player->pos.y + flr->row_dist * flr->ray_l.y;
 }
 
-void	print_no_tex(t_cubdata *data)
-{
-	int	x;
-	int y;
-
-	x = 0;
-	y = 0;
-	while (y < data->mlx->height)
-	{
-		while(x < data->mlx->width)
-		{
-			if (y < data->mlx->height / 2)
-				mlx_put_pixel(data->image[0], x, data->mlx->height - y - 1, \
-								data->parser->roof);
-			else
-				mlx_put_pixel(data->image[0], x, data->mlx->height - y - 1, \
-								data->parser->floor);
-			x++;
-		}
-		x = 0;
-		y++;
-	}
-}
-
 void	flr(void *param)
 {
 	t_raycaster_floor	flr;
 	t_cubdata			*data;
 
-	
 	data = (t_cubdata *)param;
-	if (!data->floor)
-	{
-		print_no_tex(data);
+	if (!init_flr(data, &flr))
 		return ;
-	}
-	init_flr(data, &flr);
 	while (flr.y < data->mlx->height)
 	{
 		update_flr_data_y(data, &flr);

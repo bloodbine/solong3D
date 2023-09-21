@@ -6,11 +6,11 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:47:29 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/21 22:57:34 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/09/21 22:08:48 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/cub3d.h"
+#include "../include/cub3d.h"
 
 void	filter(t_parse *data, char *buff, int *found, int *limit)
 {
@@ -36,7 +36,7 @@ void	filter(t_parse *data, char *buff, int *found, int *limit)
 void	sort_data(t_parse *data, int fd, int *found, char *buff)
 {
 	data->limit = 6;
-
+	
 	ft_memset(data->textures, 0, sizeof(data->textures));
 	data->textures[5] = "./textures/player.png";
 	data->textures[6] = "./textures/portal/portal1.png";

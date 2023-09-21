@@ -6,7 +6,7 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/21 20:27:23 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/09/21 22:59:37 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,12 @@ void	put_line(t_cubdata *data, t_linedata *l, t_raycaster *rc)
 	int				i;
 
 	i = l->drawstart;
-	
-	
 	while (i <= l->drawend)
 	{
 		tex_pixel = (int)(l->y) * l->tex->width + l->x_tex;
-		//printf("test3\n");
-		//printf("x_cam: %d draw_start %d x_tex: %d y_tex %d\n", rc->x_cam, l->drawstart, l->x_tex, (int)l->y);
 		mlx_put_pixel(data->image[0], rc->x_cam, i, \
 			convert_to_rgba(&(l->tex->pixels[tex_pixel * 4])));
 		l->y += l->yinc;
-		if (l->y >= data->mlx->height - 1)
-			l->y = data->mlx->height - 1;
 		i++;
 	}
 }
@@ -86,7 +80,6 @@ void	draw_line(void *param)
 	t_linedata	line;
 
 	data = (t_cubdata *)param;
-
 	init_line(data, &line, data->rc);
 	put_line(data, &line, data->rc);
 }

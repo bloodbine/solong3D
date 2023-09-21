@@ -6,11 +6,11 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:34:36 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/21 21:52:18 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/09/21 22:08:52 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/cub3d.h"
+#include "../include/cub3d.h"
 
 uint32_t	sort_rgba(char	*line)
 {
