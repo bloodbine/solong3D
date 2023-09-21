@@ -6,7 +6,7 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 22:38:40 by ffederol          #+#    #+#             */
-/*   Updated: 2023/09/18 16:21:44 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/21 21:04:32 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ typedef struct s_cubdata
 	t_parse			*parser;
 	t_player		*player;
 	t_raycaster		*rc;
-	mlx_texture_t	*tex[6];
-	mlx_texture_t	*ptex[6];
+	mlx_texture_t	*tex[13];
 	mlx_texture_t	*floor;
 	mlx_texture_t	*roof;
 	int				prot;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_sorting.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:47:29 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/18 14:32:33 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/20 19:26:52 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,20 @@ void	filter(t_parse *data, char *buff, int *found, int *limit)
 void	sort_data(t_parse *data, int fd, int *found, char *buff)
 {
 	data->limit = 6;
-	data->textures[0] = NULL;
-	data->textures[1] = NULL;
-	data->textures[2] = NULL;
-	data->textures[3] = NULL;
-	data->textures[4] = NULL;
+	
+	ft_memset(data->textures, 0, sizeof(data->textures));
+	// data->textures[0] = NULL;
+	// data->textures[1] = NULL;
+	// data->textures[2] = NULL;
+	// data->textures[3] = NULL;
+	// data->textures[4] = NULL;
+	data->textures[5] = "./textures/player.png";
+	data->textures[6] = "./textures/portal/portal1.png";
+	data->textures[7] = "./textures/portal/portal2.png";
+	data->textures[8] = "./textures/portal/portal3.png";
+	data->textures[9] = "./textures/portal/portal4.png";
+	data->textures[10] = "./textures/portal/portal5.png";
+	data->textures[11] = "./textures/portal/portal6.png";
 	data->floortex = NULL;
 	data->rooftex = NULL;
 	buff = get_next_line(fd);
@@ -50,8 +59,10 @@ void	sort_data(t_parse *data, int fd, int *found, char *buff)
 		free(buff);
 		if (*found == data->limit)
 			break ;
+		// printf("found %d limit %d\n", *found, data->limit);
 		buff = get_next_line(fd);
 	}
+	// printf ("found %d buff %s\n", *found, buff);
 	if ((*found != 6 && *found != 7) || buff == NULL)
 		parse_error("Incorrect variables");
 	sort_map(data, fd);

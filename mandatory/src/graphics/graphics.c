@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/18 16:21:44 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/21 21:35:02 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	ft_hook(void *param)
 		if (mlx_is_key_down(data->mlx, MLX_KEY_RIGHT))
 			rotate(data->player, 1);
 	}
+	printf("FPS: %f \n", 1/data->mlx->delta_time);
 }
 
 int	init_graphics(t_cubdata *data)
@@ -82,20 +83,21 @@ int	init_graphics(t_cubdata *data)
 	return (0);
 }
 
-void	port_counter(void *param)
+void	texture_free(t_cubdata *data)
 {
-	t_cubdata	*data;
-	static int	i = 0;
+	int	i;
 
-	data = (t_cubdata *)(param);
-	i++;
-	if (i == 7)
+	i = 0;
+	while (i < 12)
 	{
-		data->prot++;
-		i = 0;
+			if (data->tex[i])
+				mlx_delete_texture(data->tex[i]);
+			i++;
 	}
-	if (data->prot == 6)
-		data->prot = 0;
+	if (data->parser->floortex)
+		mlx_delete_texture(data->floor);
+	if (data->parser->rooftex)
+		mlx_delete_texture(data->roof);
 }
 
 int	manage_graphics(void *param)
@@ -104,16 +106,17 @@ int	manage_graphics(void *param)
 
 	data = (t_cubdata *)param;
 	data->prot = 0;
-	if (init_graphics(data))
-		return (EXIT_FAILURE);
-	mlx_loop_hook(data->mlx, ft_raycast, data);
-	mlx_loop_hook(data->mlx, ft_minimap, data);
-	mlx_loop_hook(data->mlx, ft_hook, data);
-	mlx_loop_hook(data->mlx, port_counter, data);
-	mlx_key_hook(data->mlx, interact, data);
-	mlx_loop(data->mlx);
-	mlx_terminate(data->mlx);
-	parse_free(data->parser);
+	// if (init_graphics(data))
+	// 	return (EXIT_FAILURE);
+	// mlx_loop_hook(data->mlx, ft_raycast, data);
+	// mlx_loop_hook(data->mlx, ft_minimap, data);
+	// mlx_loop_hook(data->mlx, ft_hook, data);
+	// mlx_loop_hook(data->mlx, port_counter, data);
+	// mlx_key_hook(data->mlx, interact, data);
+	// mlx_loop(data->mlx);
+	// mlx_terminate(data->mlx);
 	texture_free(data);
+	parse_free(data->parser);
+	printf("test\n");
 	return (EXIT_SUCCESS);
 }

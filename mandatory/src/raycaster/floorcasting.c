@@ -6,7 +6,7 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/18 16:51:13 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/09/21 19:27:20 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,42 @@ void	update_flr_data_y(t_cubdata *data, t_raycaster_floor *flr)
 	flr->floor.y = data->player->pos.y + flr->row_dist * flr->ray_l.y;
 }
 
+void	print_no_tex(t_cubdata *data)
+{
+	int	x;
+	int y;
+
+	x = 0;
+	y = 0;
+	while (y < data->mlx->height)
+	{
+		while(x < data->mlx->width)
+		{
+			if (y < data->mlx->height / 2)
+				mlx_put_pixel(data->image[0], x, data->mlx->height - y - 1, \
+								data->parser->roof);
+			else
+				mlx_put_pixel(data->image[0], x, data->mlx->height - y - 1, \
+								data->parser->floor);
+			x++;
+		}
+		x = 0;
+		y++;
+	}
+}
+
 void	flr(void *param)
 {
 	t_raycaster_floor	flr;
 	t_cubdata			*data;
 
+	
 	data = (t_cubdata *)param;
+	if (!data->floor)
+	{
+		print_no_tex(data);
+		return ;
+	}
 	init_flr(data, &flr);
 	while (flr.y < data->mlx->height)
 	{

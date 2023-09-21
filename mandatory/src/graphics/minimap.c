@@ -6,7 +6,7 @@
 /*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/18 03:17:24 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/09/21 20:35:53 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	draw_player(t_cubdata *data)
 		while (i < 22)
 		{
 			dir = -data->player->dir.x / fabs(data->player->dir.x);
+			dir = dir / abs(dir);
 			x = roundf(((i - 10.5) * cos(acos(data->player->dir.y) * dir) \
 				- (j - 10.5) * sin(acos(data->player->dir.y) * dir)) + 10.5);
 			y = roundf(((i - 10.5) * sin(acos(data->player->dir.y) * dir) \

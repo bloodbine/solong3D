@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:37:29 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/18 15:35:08 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/21 21:16:07 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,18 @@ void	parse_free(t_parse *data)
 	while (data->worldmap[++i] != NULL)
 		free(data->worldmap[i]);
 	free(data->worldmap);
-	i = -1;
-	while (data->textures[++i] != NULL)
-		free(data->textures[i]);
-	free(data);
+	i = 0;
+	while (i < 5)
+	{
+		if (data->textures[i] != NULL)
+			free(data->textures[i]);
+		i++;
+	}
 	if (data->floortex != NULL)
 		free(data->floortex);
 	if (data->rooftex != NULL)
 		free(data->rooftex);
+	free(data);
 }
 
 uint32_t	rgbtohex(int r, int g, int b, int a)
@@ -58,8 +62,8 @@ void	padding_right(t_parse *data, size_t len, char **new_map)
 		free(new_map[i]);
 		new_map[i] = ft_strdup(temp);
 		free(temp);
-		while (ft_strlen(new_map[i]) < len + 5)
-			new_map[i] = ft_frstrjoin(new_map[i], " ", 1);
+		while (ft_strlen(new_map[i]) < len + 5) 
+			new_map[i] = ft_frstrjoin(new_map[i], " ", 1); //leak (malloc :63)
 		printf("%s\n", new_map[i]);
 		i++;
 	}
@@ -78,7 +82,7 @@ void	padding(t_parse *data, size_t len, size_t col)
 	size_t		i;
 	size_t		j;
 
-	new_map = malloc((col + 7) * sizeof(char *));
+	new_map = malloc((col + 7) * sizeof(char *)); //leak
 	data->mapsizes.y = col + 6;
 	pad_line = ft_strdup("");
 	while (ft_strlen(pad_line) < len + 5)

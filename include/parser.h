@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 22:38:40 by ffederol          #+#    #+#             */
-/*   Updated: 2023/09/18 14:32:05 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/20 18:46:08 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 // directions: (x|y)  N = (0|-1), E = (1|0), S = (0|1), W = (-1|0)
 typedef struct s_parse
 {
-	char			*textures[6];
+	char			*textures[13];
 	char			**worldmap;
 	int				error;
 	char			*floortex;

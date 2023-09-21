@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   portal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 12:25:04 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/14 15:05:05 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/21 20:28:48 by ffederol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,20 @@ void	teleport_check(t_cubdata *data, t_player *player, char dir)
 		second_teleport_check(data, player->pos.x + 1, player->pos.y, dir);
 	else if (dir == 'W')
 		second_teleport_check(data, player->pos.x - 1, player->pos.y, dir);
+}
+
+void	port_counter(void *param)
+{
+	t_cubdata	*data;
+	static int	i = 0;
+
+	data = (t_cubdata *)(param);
+	i++;
+	if (i == 7)
+	{
+		data->prot++;
+		i = 0;
+	}
+	if (data->prot == 6)
+		data->prot = 0;
 }
