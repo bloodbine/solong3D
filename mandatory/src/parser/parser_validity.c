@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:54:30 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/23 17:35:37 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/23 18:36:44 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,20 @@ void	file_check(t_parse *data)
 	int	i;
 
 	i = -1;
+	if (data->door == 1)
+	{
+		fd = open(data->textures[4], O_RDONLY);
+		if (fd == -1)
+			return (parse_free(data), parse_error("Invalid door texture file"));
+		close(fd);
+	}
 	while (++i < 12)
 	{
+		if (i == 4)
+			i++;
 		fd = open(data->textures[i], O_RDONLY);
 		if (fd == -1)
-			return(parse_free(data), parse_error("Invalid texture file"));
+			return (parse_free(data), parse_error("Invalid texture file"));
 		close(fd);
 	}
 }
@@ -45,6 +54,8 @@ int	character_check(t_parse *data, char **map, int i, int j)
 				data->ppos[data->pcount].x = j;
 				data->pcount++;
 			}
+			if (map[i][j] == 'D')
+				data->door = 1;
 		}
 		if (data->pcount > 2)
 			return (1);

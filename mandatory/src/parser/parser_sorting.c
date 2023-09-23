@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:47:29 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/23 17:08:04 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/23 18:30:19 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	sort_data(t_parse *data, int fd, int *found, char *buff)
 	data->floortex = NULL;
 	data->rooftex = NULL;
 	data->worldmap = NULL;
+	data->door = 0;
 	buff = get_next_line(fd);
 	while (buff != NULL)
 	{
