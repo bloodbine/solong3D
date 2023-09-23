@@ -3,40 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   parser_sorting.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 17:47:29 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/21 22:08:48 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/09/23 17:08:04 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	filter(t_parse *data, char *buff, int *found, int *limit)
+void	filter(t_parse *data, char *buff, int *f, int *limit)
 {
-	if (ft_strncmp(buff, "NO", 2) == 0 && ++(*found) && !data->textures[0])
-		data->textures[0] = ft_strtrim(buff + 2, " \n"); //leak
-	else if (ft_strncmp(buff, "EA", 2) == 0 && ++(*found) && !data->textures[1])
-		data->textures[1] = ft_strtrim(buff + 2, " \n"); //leak
-	else if (ft_strncmp(buff, "SO", 2) == 0 && ++(*found) && !data->textures[2])
-		data->textures[2] = ft_strtrim(buff + 2, " \n"); //leak
-	else if (ft_strncmp(buff, "WE", 2) == 0 && ++(*found) && !data->textures[3])
-		data->textures[3] = ft_strtrim(buff + 2, " \n"); //leak
-	else if (ft_strncmp(buff, "D", 1) == 0 && ++(*found) && !data->textures[4])
+	if (ft_strncmp(buff, "NO ", 3) == 0 && ++(*f) && !data->textures[0])
+		data->textures[0] = ft_strtrim(buff + 2, " \n");
+	else if (ft_strncmp(buff, "EA ", 3) == 0 && ++(*f) && !data->textures[1])
+		data->textures[1] = ft_strtrim(buff + 2, " \n");
+	else if (ft_strncmp(buff, "SO ", 3) == 0 && ++(*f) && !data->textures[2])
+		data->textures[2] = ft_strtrim(buff + 2, " \n");
+	else if (ft_strncmp(buff, "WE ", 3) == 0 && ++(*f) && !data->textures[3])
+		data->textures[3] = ft_strtrim(buff + 2, " \n");
+	else if (ft_strncmp(buff, "D ", 2) == 0 && ++(*f) && !data->textures[4])
 	{
 		data->textures[4] = ft_strtrim(buff + 2, " \n");
 		*limit = 7;
 	}
-	else if (ft_strncmp(buff, "F", 1) == 0 && ++(*found))
-		sort_floor_roof(data, buff + 2, 'F');
-	else if (ft_strncmp(buff, "C", 1) == 0 && ++(*found))
-		sort_floor_roof(data, buff + 2, 'C');
+	else if (ft_strncmp(buff, "F ", 2) == 0 && ++(*f))
+		sort_floor_roof(data, buff, 'F');
+	else if (ft_strncmp(buff, "C ", 2) == 0 && ++(*f))
+		sort_floor_roof(data, buff, 'C');
 }
 
 void	sort_data(t_parse *data, int fd, int *found, char *buff)
 {
 	data->limit = 6;
-	
 	ft_memset(data->textures, 0, sizeof(data->textures));
 	data->textures[5] = "./textures/player.png";
 	data->textures[6] = "./textures/portal/portal1.png";
@@ -47,6 +46,7 @@ void	sort_data(t_parse *data, int fd, int *found, char *buff)
 	data->textures[11] = "./textures/portal/portal6.png";
 	data->floortex = NULL;
 	data->rooftex = NULL;
+	data->worldmap = NULL;
 	buff = get_next_line(fd);
 	while (buff != NULL)
 	{
@@ -57,6 +57,6 @@ void	sort_data(t_parse *data, int fd, int *found, char *buff)
 		buff = get_next_line(fd);
 	}
 	if ((*found != 6 && *found != 7) || buff == NULL)
-		parse_error("Incorrect variables");
+		return (parse_free(data), parse_error("Incorrect variables"));
 	sort_map(data, fd);
 }

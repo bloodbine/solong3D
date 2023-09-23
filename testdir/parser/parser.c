@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:26:50 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/21 22:08:36 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/09/23 16:53:11 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ void	find_player(t_parse *data)
 				sort_pos(data, 'W', i, j);
 			else if (data->worldmap[i][j] == 'S' && ++found)
 				sort_pos(data, 'S', i, j);
-			if (found > 1)
-				parse_error("More than one player found in map");
 		}
 		j = -1;
 	}
+	if (found != 1)
+		return (parse_free(data), parse_error("Player count != 1"));
 }
 
 t_parse	*parse(int argc, char **argv)
@@ -88,7 +88,7 @@ t_parse	*parse(int argc, char **argv)
 	sort_data(data, fd, &found, NULL);
 	find_player(data);
 	if (character_check(data, data->worldmap, 0, 0) == 1)
-		parse_error("Invalid character in map");
+		return (parse_free(data), parse_error("Invalid character in map"), NULL);
 	run_dfs(data);
 	file_check(data);
 	data->worldmap[data->playerpos.y][data->playerpos.x] = '0';

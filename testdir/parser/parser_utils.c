@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:37:29 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/21 22:08:45 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/09/23 16:51:11 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	parse_free(t_parse *data)
 	int	i;
 
 	i = -1;
-	while (data->worldmap[++i] != NULL)
+	while (data->worldmap && data->worldmap[++i])
 		free(data->worldmap[i]);
 	free(data->worldmap);
 	i = 0;
@@ -42,12 +42,19 @@ void	parse_free(t_parse *data)
 	free(data);
 }
 
-uint32_t	rgbtohex(int r, int g, int b, int a)
+uint32_t	rgbtohex(t_parse *data, int rgb[3])
 {
+	int	r;
+	int	g;
+	int	b;
+
+	r = rgb[0];
+	g = rgb[1];
+	b = rgb[2];
 	if ((r < 0 || r > 255) || (g < 0 || g > 255) || (b < 0 || b > 255))
-		parse_error("Invalid colour value, must be 0-255");
+		return (parse_free(data), parse_error("Colour value must be 0-255"), 0);
 	return (((r & 0xff) << 24) + ((g & 0xff) << 16) + ((b & 0xff) << 8) \
-	+ (a & 0xff));
+	+ (255 & 0xff));
 }
 
 void	padding_right(t_parse *data, size_t len, char **new_map)

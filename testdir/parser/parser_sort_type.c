@@ -3,29 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   parser_sort_type.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:34:36 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/21 22:08:52 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/09/23 17:04:49 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-uint32_t	sort_rgba(char	*line)
+uint32_t	sort_rgba(t_parse *data, char *line)
 {
-	char		**rgb;
+	char		**rgbc;
 	uint32_t	rgba;
+	int			rgb[3];
 	int			i;
 
-	rgb = ft_split(line, ',');
-	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2] || rgb[3])
-		parse_error("Invalid value in RGB values");
-	rgba = rgbtohex(ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2]), 255);
+	rgbc = ft_split(line + 2, ',');
+	if (!rgbc || !rgbc[0] || !rgbc[1] || !rgbc[2] || rgbc[3])
+	{
+		i = -1;
+		while (rgbc[++i] != NULL)
+			free(rgbc[i]);
+		free(rgbc);
+		free(line);
+		return (parse_free(data), \
+		parse_error("Invalid value in RGB values"), 0);
+	}
+	rgb[0] = ft_atoi(rgbc[0]);
+	rgb[1] = ft_atoi(rgbc[1]);
+	rgb[2] = ft_atoi(rgbc[2]);
+	rgba = rgbtohex(data, rgb);
 	i = -1;
-	while (rgb[++i] != NULL)
-		free(rgb[i]);
-	free(rgb);
+	while (rgbc[++i] != NULL)
+		free(rgbc[i]);
+	free(rgbc);
 	return (rgba);
 }
 
@@ -63,17 +75,17 @@ void	sort_floor_roof(t_parse *data, char *buff, char type)
 	if (type == 'F')
 	{
 		printf("Floor: %s\n", buff);
-		if (ft_isdigit(buff[0]) == 1)
-			data->floor = sort_rgba(buff);
+		if (ft_isdigit(buff[2]) == 1)
+			data->floor = sort_rgba(data, buff);
 		else
-			data->floortex = ft_strtrim(buff, " \n"); //leak
+			data->floortex = ft_strtrim(buff + 2, " \n"); //leak
 	}
 	else
 	{
 		printf("Roof: %s\n", buff);
-		if (ft_isdigit(buff[0]) == 1)
-			data->roof = sort_rgba(buff);
+		if (ft_isdigit(buff[2]) == 1)
+			data->roof = sort_rgba(data, buff);
 		else
-			data->rooftex = ft_strtrim(buff, " \n"); //leak
+			data->rooftex = ft_strtrim(buff + 2, " \n"); //leak
 	}
 }

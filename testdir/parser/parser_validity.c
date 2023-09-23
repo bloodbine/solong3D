@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_validity.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:54:30 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/21 22:08:41 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/09/23 16:46:43 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	file_check(t_parse *data)
 	{
 		fd = open(data->textures[i], O_RDONLY);
 		if (fd == -1)
-			parse_error("Invalid texture file");
+			return(parse_free(data), parse_error("Invalid texture file"));
 		close(fd);
 	}
 }
@@ -107,5 +107,5 @@ void	run_dfs(t_parse *data)
 		free(temp_map[i]);
 	free(temp_map);
 	if (data->error == 1)
-		parse_error("Map is not closed");
+		return(parse_free(data), parse_error("Map is not closed"));
 }
