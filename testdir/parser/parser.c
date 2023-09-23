@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:26:50 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/23 17:50:28 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/23 17:52:09 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ t_parse	*parse(int argc, char **argv)
 	found = 0;
 	data = malloc(sizeof(t_parse)); //leak
 	if (argc == 1)
-		parse_error("No map path given");
+		return (free(data), parse_error("No map path given"), NULL);
 	if (argc > 2)
-		parse_error("Too many arguments given");
+		return (free(data), parse_error("Too many arguments given"), NULL);
 	if (ft_strlen(argv[1]) < 5)
 		return (free(data), parse_error("Map name is too short"), NULL);
 	if (ft_strncmp((argv[1] + ft_strlen(argv[1]) - 4), ".cub", 5) != 0)
