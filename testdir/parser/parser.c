@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:26:50 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/23 16:53:11 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/23 17:50:28 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,12 @@ t_parse	*parse(int argc, char **argv)
 	if (argc > 2)
 		parse_error("Too many arguments given");
 	if (ft_strlen(argv[1]) < 5)
-		parse_error("Map name is too short");
+		return (free(data), parse_error("Map name is too short"), NULL);
 	if (ft_strncmp((argv[1] + ft_strlen(argv[1]) - 4), ".cub", 5) != 0)
 		parse_error("File extension is invalid");
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
-		parse_error("Failed to open map file");
+		return (free(data), parse_error("Failed to open map file"), NULL);
 	sort_data(data, fd, &found, NULL);
 	find_player(data);
 	if (character_check(data, data->worldmap, 0, 0) == 1)
