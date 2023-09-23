@@ -6,7 +6,7 @@
 #    By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/12 21:35:02 by ffederol          #+#    #+#              #
-#    Updated: 2023/09/21 22:02:39 by ffederol         ###   ########.fr        #
+#    Updated: 2023/09/23 16:59:09 by ffederol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,5 +77,7 @@ fclean: clean
 re: fclean all
 
 all: $(NAME)
+
+bonus: re
 
 .PHONY: all clean fclean re libmake
