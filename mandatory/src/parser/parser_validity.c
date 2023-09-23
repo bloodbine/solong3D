@@ -6,11 +6,11 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:54:30 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/18 12:14:16 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/23 17:35:37 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/cub3d.h"
+#include "../include/cub3d.h"
 
 void	file_check(t_parse *data)
 {
@@ -18,11 +18,11 @@ void	file_check(t_parse *data)
 	int	i;
 
 	i = -1;
-	while (++i < 4)
+	while (++i < 12)
 	{
 		fd = open(data->textures[i], O_RDONLY);
 		if (fd == -1)
-			parse_error("Invalid texture file");
+			return(parse_free(data), parse_error("Invalid texture file"));
 		close(fd);
 	}
 }
@@ -107,5 +107,5 @@ void	run_dfs(t_parse *data)
 		free(temp_map[i]);
 	free(temp_map);
 	if (data->error == 1)
-		parse_error("Map is not closed");
+		return(parse_free(data), parse_error("Map is not closed"));
 }
