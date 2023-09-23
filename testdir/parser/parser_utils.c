@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:37:29 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/23 16:51:11 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/23 17:39:56 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	parse_free(t_parse *data)
 	free(data);
 }
 
-uint32_t	rgbtohex(t_parse *data, int rgb[3])
+uint32_t	rgbtohex(t_parse *data, int rgb[3], char *buff)
 {
 	int	r;
 	int	g;
@@ -52,7 +52,8 @@ uint32_t	rgbtohex(t_parse *data, int rgb[3])
 	g = rgb[1];
 	b = rgb[2];
 	if ((r < 0 || r > 255) || (g < 0 || g > 255) || (b < 0 || b > 255))
-		return (parse_free(data), parse_error("Colour value must be 0-255"), 0);
+		return (free(buff), parse_free(data), \
+		parse_error("Colour value must be 0-255"), 0);
 	return (((r & 0xff) << 24) + ((g & 0xff) << 16) + ((b & 0xff) << 8) \
 	+ (255 & 0xff));
 }

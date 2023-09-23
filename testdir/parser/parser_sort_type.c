@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:34:36 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/23 17:04:49 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/23 17:38:53 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ uint32_t	sort_rgba(t_parse *data, char *line)
 	rgb[0] = ft_atoi(rgbc[0]);
 	rgb[1] = ft_atoi(rgbc[1]);
 	rgb[2] = ft_atoi(rgbc[2]);
-	rgba = rgbtohex(data, rgb);
 	i = -1;
 	while (rgbc[++i] != NULL)
 		free(rgbc[i]);
 	free(rgbc);
+	rgba = rgbtohex(data, rgb, line);
 	return (rgba);
 }
 

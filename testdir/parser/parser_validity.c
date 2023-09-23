@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:54:30 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/23 16:46:43 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/23 17:35:37 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	file_check(t_parse *data)
 	int	i;
 
 	i = -1;
-	while (++i < 4)
+	while (++i < 12)
 	{
 		fd = open(data->textures[i], O_RDONLY);
 		if (fd == -1)
