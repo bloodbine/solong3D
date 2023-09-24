@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 12:34:36 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/23 17:38:53 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/24 12:02:14 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ void	sort_floor_roof(t_parse *data, char *buff, char type)
 		if (ft_isdigit(buff[2]) == 1)
 			data->floor = sort_rgba(data, buff);
 		else
-			data->floortex = ft_strtrim(buff + 2, " \n"); //leak
+			data->floortex = ft_strtrim(buff + 2, " \n");
+		printf("Floortex: %s\n", data->floortex);
 	}
 	else
 	{
@@ -86,6 +87,7 @@ void	sort_floor_roof(t_parse *data, char *buff, char type)
 		if (ft_isdigit(buff[2]) == 1)
 			data->roof = sort_rgba(data, buff);
 		else
-			data->rooftex = ft_strtrim(buff + 2, " \n"); //leak
+			data->rooftex = ft_strtrim(buff + 2, " \n");
+		printf("Rooftex: %s\n", data->rooftex);
 	}
 }

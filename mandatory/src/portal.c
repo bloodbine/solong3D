@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   portal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/10 12:25:04 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/21 20:28:48 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/09/24 11:09:18 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,6 @@ void	teleport(t_cubdata *data, t_int_vector ppos, char dir)
 
 void	second_teleport_check(t_cubdata *data, int x, int y, char dir)
 {
-	t_player		*player;
-
-	player = data->player;
 	if (x == data->parser->ppos[0].x && y == data->parser->ppos[0].y)
 		teleport(data, data->parser->ppos[1], dir);
 	else if (x == data->parser->ppos[1].x && y == data->parser->ppos[1].y)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 10:41:52 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/18 02:47:58 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/09/24 11:08:44 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,9 @@ void	toggle_door(t_cubdata *data, t_player *player, char dir)
 void	interact(mlx_key_data_t keydata, void *param)
 {
 	t_cubdata	*data;
-	char		**map;
 	t_player	*player;
 
 	data = (t_cubdata *)param;
-	map = data->worldmap;
 	player = data->player;
 	if (keydata.key == MLX_KEY_TAB && keydata.action == 1)
 	{

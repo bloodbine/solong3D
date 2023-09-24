@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 14:26:50 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/23 17:52:09 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/24 11:55:13 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_parse	*parse(int argc, char **argv)
 	int		fd;
 
 	found = 0;
-	data = malloc(sizeof(t_parse)); //leak
+	data = malloc(sizeof(t_parse));
 	if (argc == 1)
 		return (free(data), parse_error("No map path given"), NULL);
 	if (argc > 2)
