@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/21 22:58:40 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/09/25 11:47:30 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,8 @@ void	init_player(t_cubdata *data)
 				* (float)(data->player->dir.x / fabs(data->player->dir.x));
 }
 
-void	init_textures(t_cubdata *data)
+void	init_textures(t_cubdata *data, int i)
 {
-	int	i;
-
-	i = -1;
 	while (++i < 12)
 	{
 		if (data->parser->textures[i])
@@ -65,7 +62,7 @@ void	init_cubdata(t_cubdata *data, t_player *player, t_raycaster *rc)
 	data->roof = NULL;
 	data->floor = NULL;
 	init_player(data);
-	init_textures(data);
+	init_textures(data, -1);
 }
 
 int	main(int argc, char**argv)

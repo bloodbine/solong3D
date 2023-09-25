@@ -1,11 +1,11 @@
-NO ./textures/Rickrolling-PNG-Transparent-Image.png
-SO ./textures/Rickrolling-PNG-Transparent-Image.png
-WE ./textures/Rickrolling-PNG-Transparent-Image.png
-EA ./textures/Rickrolling-PNG-Transparent-Image.png
+NO ./textures/bricks.png
+SO ./textures/bricks.png
+WE ./textures/bricks.png
+EA ./textures/bricks.png
 D ./textures/Door.png
 
-F 220,50,50
-C 0,0,0
+F ./textures/bricks.png
+C 42,42,42
 
 111111111111111111111111111111  111111111111111111111111111111  111111111111111111111111111111
 10000000000000W000000000000001  100000000000000000000000000001  100000000000000000000000000001

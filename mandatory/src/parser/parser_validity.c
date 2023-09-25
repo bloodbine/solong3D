@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 12:54:30 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/23 18:36:44 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/25 11:50:43 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,5 +118,5 @@ void	run_dfs(t_parse *data)
 		free(temp_map[i]);
 	free(temp_map);
 	if (data->error == 1)
-		return(parse_free(data), parse_error("Map is not closed"));
+		return (parse_free(data), parse_error("Map is not closed"));
 }

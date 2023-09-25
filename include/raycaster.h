@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ffederol <ffederol@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 22:38:40 by ffederol          #+#    #+#             */
-/*   Updated: 2023/09/18 16:48:22 by ffederol         ###   ########.fr       */
+/*   Updated: 2023/09/25 12:08:24 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ typedef struct s_raycaster_floor
 	int				curr_line;
 	int				x;
 	int				y;
-	float			posZ;
+	float			posz;
 	float			row_dist;
 }				t_raycaster_floor;
 
-void	ft_raycast(void* param);
+void	ft_raycast(void *param);
 void	calc_dist_next_side(t_player *player, t_raycaster *rc);
 void	calc_raydist(void *param);
 void	calc_raydist_perp(t_raycaster *rc);

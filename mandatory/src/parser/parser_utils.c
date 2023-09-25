@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 11:37:29 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/23 17:39:56 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/25 11:50:24 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ void	padding_right(t_parse *data, size_t len, char **new_map)
 		free(new_map[i]);
 		new_map[i] = ft_strdup(temp);
 		free(temp);
-		while (ft_strlen(new_map[i]) < len + 5) 
-			new_map[i] = ft_frstrjoin(new_map[i], " ", 1); //leak (malloc :63)
+		while (ft_strlen(new_map[i]) < len + 5)
+			new_map[i] = ft_frstrjoin(new_map[i], " ", 1);
 		printf("%s\n", new_map[i]);
 		i++;
 	}
@@ -90,7 +90,7 @@ void	padding(t_parse *data, size_t len, size_t col)
 	size_t		i;
 	size_t		j;
 
-	new_map = malloc((col + 7) * sizeof(char *)); //leak
+	new_map = malloc((col + 7) * sizeof(char *));
 	data->mapsizes.y = col + 6;
 	pad_line = ft_strdup("");
 	while (ft_strlen(pad_line) < len + 5)

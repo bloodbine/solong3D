@@ -6,7 +6,7 @@
 /*   By: gpasztor <gpasztor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:25:10 by gpasztor          #+#    #+#             */
-/*   Updated: 2023/09/24 14:44:35 by gpasztor         ###   ########.fr       */
+/*   Updated: 2023/09/25 12:08:12 by gpasztor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	init_flr(t_cubdata *data, t_raycaster_floor *flr)
 	flr->ray_l.y = data->player->dir.y - data->player->cam_plane.y;
 	flr->ray_r.x = data->player->dir.x + data->player->cam_plane.x;
 	flr->ray_r.y = data->player->dir.y + data->player->cam_plane.y;
-	flr->posZ = 0.5 * data->mlx->height;
+	flr->posz = 0.5 * data->mlx->height;
 	return (1);
 }
 
@@ -40,7 +40,7 @@ void	update_flr_data_y(t_cubdata *data, t_raycaster_floor *flr)
 {
 	flr->x = 0;
 	flr->curr_line = flr->y - data->mlx->height / 2;
-	flr->row_dist = flr->posZ / flr->curr_line;
+	flr->row_dist = flr->posz / flr->curr_line;
 	flr->floor_step.x = flr->row_dist * (flr->ray_r.x - flr->ray_l.x) \
 							/ data->mlx->width;
 	flr->floor_step.y = flr->row_dist * (flr->ray_r.y - flr->ray_l.y) \
